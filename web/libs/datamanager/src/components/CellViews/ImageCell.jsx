@@ -1,5 +1,6 @@
 import { getRoot } from "mobx-state-tree";
 import { AnnotationPreview } from "../Common/AnnotationPreview/AnnotationPreview";
+import { t } from "@humansignal/i18n";
 
 const imgDefaultProps = { crossOrigin: "anonymous" };
 
@@ -21,7 +22,7 @@ export const ImageCell = (column) => {
       {...imgDefaultProps}
       key={imgSrc}
       src={imgSrc}
-      alt="Data"
+      alt={t("dm.components.cell_views.image_cell.data")}
       style={{
         maxHeight: "100%",
         maxWidth: "100px",

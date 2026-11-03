@@ -17,6 +17,7 @@ import { getRoot } from "mobx-state-tree";
 import { AgreementSelected } from "../../../CellViews/AgreementSelected";
 import { IconChevronDown } from "@humansignal/icons";
 import { isActive, FF_AGREEMENT_FILTERED } from "@humansignal/core/lib/utils/feature-flags";
+import { t } from "@humansignal/i18n";
 
 const tableHeadCN = cn("table-head");
 
@@ -35,7 +36,7 @@ const DropdownWrapper = observer(({ column, cellViews, children, onChange }) => 
   return (
     <Dropdown.Trigger
       content={
-        <Menu title="Display as" size="compact" selectedKeys={[column.currentType]}>
+        <Menu title={t("dm.table.table_head.table_head.display_as")} size="compact" selectedKeys={[column.currentType]}>
           {types.map((type) => {
             return (
               <Menu.Item key={type} onClick={() => onChange?.(column, type)}>

@@ -8,6 +8,7 @@ import { Dropdown } from "@humansignal/ui";
 import Input from "../Input/Input";
 import "./Tabs.scss";
 import { TabsMenu } from "./TabsMenu";
+import { t } from "@humansignal/i18n";
 
 const TabsContext = createContext();
 export const tabsCN = cn("tabs-dm");
@@ -61,14 +62,14 @@ export const Tabs = ({
             </Droppable>
           </DragDropContext>
           {allowedActions.add !== false && (
-            <Tooltip title="Open New Tab">
+            <Tooltip title={t("dm.common.tabs.tabs.open_new_tab")}>
               <Button
                 className={tabsCN.elem("add").toClassName()}
                 size="smaller"
                 look="outline"
                 variant="neutral"
                 onClick={onAdd}
-                aria-label="Open New Tab"
+                aria-label={t("dm.common.tabs.tabs.open_new_tab")}
                 data-leave
               >
                 <IconPlus width={12} height={12} aria-hidden="true" />
@@ -199,7 +200,7 @@ export const TabsItem = observer(
               size="small"
               autoFocus={true}
               value={currentTitle}
-              aria-label="Tab name"
+              aria-label={t("dm.common.tabs.tabs.tab_name")}
               onKeyDown={saveTabTitle}
               onBlur={saveTabTitle}
               onChange={(ev) => {
@@ -247,7 +248,7 @@ export const TabsItem = observer(
               }
             >
               <div className={tabsCN.elem("item-right-button").toClassName()}>
-                <Button look="outline" size="smaller" variant="neutral" aria-label="Tab options">
+                <Button look="outline" size="smaller" variant="neutral" aria-label={t("dm.common.tabs.tabs.tab_options")}>
                   <IconEllipsisVertical className="w-4 h-4" aria-hidden="true" />
                 </Button>
               </div>

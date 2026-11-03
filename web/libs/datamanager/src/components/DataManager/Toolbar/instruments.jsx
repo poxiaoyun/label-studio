@@ -16,6 +16,7 @@ import { LoadingPossum } from "./LoadingPossum";
 import { OrderButton } from "./OrderButton";
 import { RefreshButton } from "./RefreshButton";
 import { ViewToggle } from "./ViewToggle";
+import { t } from "@humansignal/i18n";
 
 const style = {
   minWidth: "80px",
@@ -27,7 +28,7 @@ const style = {
  * If expired it renders disabled Import button with a tooltip.
  */
 const ImportButtonWithChecks = ({ size }) => {
-  const simpleButton = <ImportButton size={size}>Import</ImportButton>;
+  const simpleButton = <ImportButton size={size}>{t("dm.data_manager.toolbar.instruments.import")}</ImportButton>;
   const isOpenSource = !window.APP_SETTINGS.billing;
   // Check if user is on Starter Cloud plan
   const isStarterCloud = isStarterCloudPlan();
@@ -51,7 +52,7 @@ const ImportButtonWithChecks = ({ size }) => {
   // Disabled buttons ignore hover, so we use wrapper to properly handle a tooltip
   return (
     <Tooltip
-      title="You must upgrade your plan to import data"
+      title={t("dm.data_manager.toolbar.instruments.you_must_upgrade_your_plan")}
       style={{
         maxWidth: 200,
         textAlign: "center",
@@ -59,7 +60,7 @@ const ImportButtonWithChecks = ({ size }) => {
     >
       <div className={cn("button-wrapper").toClassName()}>
         <ImportButton disabled size={size}>
-          Import
+          {t("dm.data_manager.toolbar.instruments.import")}
         </ImportButton>
       </div>
     </Tooltip>
@@ -125,7 +126,7 @@ export const instruments = {
   "export-button": ({ size }) => {
     return (
       <Interface name="export">
-        <ExportButton size={size}>Export</ExportButton>
+        <ExportButton size={size}>{t("dm.data_manager.toolbar.instruments.export")}</ExportButton>
       </Interface>
     );
   },

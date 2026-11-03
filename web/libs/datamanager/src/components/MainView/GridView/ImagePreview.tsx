@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, type CSSProperties, useCallback } from "re
 import { observer } from "mobx-react";
 import styles from "./GridPreview.module.scss";
 import { cn } from "@humansignal/ui";
+import { t } from "@humansignal/i18n";
 
 const MAX_ZOOM = 20;
 const ZOOM_FACTOR = 0.01;
@@ -217,7 +218,7 @@ const ImagePreview = observer(({ task, field }: ImagePreviewProps) => {
         <img
           ref={imageRef}
           src={src}
-          alt="Task Preview"
+          alt={t("dm.main_view.grid_view.image_preview.task_preview")}
           style={imageStyle}
           className={styles.image}
           onLoad={handleImageLoad}

@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { IconChevronDown } from "@humansignal/icons";
 import { Dropdown } from "@humansignal/ui";
 import { Menu } from "../../Common/Menu/Menu";
+import { t } from "@humansignal/i18n";
 
 const injector = inject(({ store }) => {
   const { dataStore, currentView } = store;
@@ -94,14 +95,14 @@ export const LabelButton = injector(({ store, canLabel, size, target, selectedCo
             style={primaryStyle}
             onClick={onLabelAll}
           >
-            Label {selectedCount ? selectedCount : "All"} Task
+            {t("dm.data_manager.toolbar.label_button.label")} {selectedCount ? selectedCount : "All"} {t("dm.data_manager.toolbar.label_button.task")}
             {!selectedCount || selectedCount > 1 ? "s" : ""}
           </Button>
           <Dropdown.Trigger
             alignment="bottom-right"
             content={
               <Menu size="compact">
-                <Menu.Item onClick={onLabelVisible}>Label Tasks As Displayed</Menu.Item>
+                <Menu.Item onClick={onLabelVisible}>{t("dm.data_manager.toolbar.label_button.label_tasks_as_displayed")}</Menu.Item>
               </Menu>
             }
           >

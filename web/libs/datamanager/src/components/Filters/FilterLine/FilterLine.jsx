@@ -9,6 +9,7 @@ import { FilterOperation } from "./FilterOperation";
 import { Icon } from "../../Common/Icon/Icon";
 import { filterFieldSearchHandler, findSelectedOption } from "../filter-helpers";
 import { RECENT_VALUE_PREFIX } from "../useRecentFilters";
+import { t } from "@humansignal/i18n";
 
 const RECENTS_AUTOSAVE_DELAY_MS = 500;
 
@@ -142,7 +143,7 @@ export const FilterLine = observer(
           {/* Main filter row */}
           <div className={cn("filterLine").elem("column").mix("conjunction").toClassName()}>
             {index === 0 ? (
-              <span style={{ fontSize: 12, paddingRight: 5 }}>Where</span>
+              <span style={{ fontSize: 12, paddingRight: 5 }}>{t("dm.filters.filter_line.filter_line.where")}</span>
             ) : (
               <Conjunction index={index} view={view} />
             )}
@@ -150,7 +151,7 @@ export const FilterLine = observer(
 
           <div className={cn("filterLine").elem("column").mix("field").toClassName()}>
             <FilterDropdown
-              placeholder="Column"
+              placeholder={t("dm.filters.filter_line.filter_line.column")}
               defaultValue={filter.filter.id}
               items={availableFilters}
               dropdownClassName={dropdownClassName}
@@ -241,7 +242,7 @@ export const FilterLine = observer(
       <div className={cn("filterLine").mod({ hasChild: !!childFilter }).toClassName()}>
         <div className={cn("filterLine").elem("column").mix("conjunction").toClassName()}>
           {index === 0 ? (
-            <span style={{ fontSize: 12, paddingRight: 5 }}>Where</span>
+            <span style={{ fontSize: 12, paddingRight: 5 }}>{t("dm.filters.filter_line.filter_line.where")}</span>
           ) : (
             <Conjunction index={index} view={view} />
           )}
@@ -249,7 +250,7 @@ export const FilterLine = observer(
 
         <div className={cn("filterLine").elem("column").mix("field").toClassName()}>
           <FilterDropdown
-            placeholder="Column"
+            placeholder={t("dm.filters.filter_line.filter_line.column")}
             defaultValue={filter.filter.id}
             items={availableFilters}
             width={80}

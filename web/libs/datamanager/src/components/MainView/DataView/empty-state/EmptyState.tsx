@@ -13,6 +13,7 @@ import {
 import { Button, IconExternal, Typography, Tooltip } from "@humansignal/ui";
 import { getDocsUrl } from "../../../../../../editor/src/utils/docs";
 import { ABILITY, useAuth } from "@humansignal/core/providers/AuthProvider";
+import { t } from "@humansignal/i18n";
 
 declare global {
   interface Window {
@@ -137,23 +138,23 @@ const renderEmptyStateLayout = ({
 // Storage provider icons component
 const StorageProviderIcons = () => (
   <div className="flex items-center justify-center gap-base mb-wide" data-testid="dm-storage-provider-icons">
-    <Tooltip title="Amazon S3">
-      <div className="flex items-center justify-center p-2" aria-label="Amazon S3">
+    <Tooltip title={t("dm.data_view.empty_state.empty_state.amazon_s3")}>
+      <div className="flex items-center justify-center p-2" aria-label={t("dm.data_view.empty_state.empty_state.amazon_s3")}>
         <IconCloudProviderS3 width={32} height={32} className="text-neutral-content-subtler" />
       </div>
     </Tooltip>
-    <Tooltip title="Google Cloud Storage">
-      <div className="flex items-center justify-center p-2" aria-label="Google Cloud Storage">
+    <Tooltip title={t("dm.data_view.empty_state.empty_state.google_cloud_storage")}>
+      <div className="flex items-center justify-center p-2" aria-label={t("dm.data_view.empty_state.empty_state.google_cloud_storage")}>
         <IconCloudProviderGCS width={32} height={32} className="text-neutral-content-subtler" />
       </div>
     </Tooltip>
-    <Tooltip title="Azure Blob Storage">
-      <div className="flex items-center justify-center p-2" aria-label="Azure Blob Storage">
+    <Tooltip title={t("dm.data_view.empty_state.empty_state.azure_blob_storage")}>
+      <div className="flex items-center justify-center p-2" aria-label={t("dm.data_view.empty_state.empty_state.azure_blob_storage")}>
         <IconCloudProviderAzure width={32} height={32} className="text-neutral-content-subtler" />
       </div>
     </Tooltip>
-    <Tooltip title="Redis Storage">
-      <div className="flex items-center justify-center p-2" aria-label="Redis Storage">
+    <Tooltip title={t("dm.data_view.empty_state.empty_state.redis_storage")}>
+      <div className="flex items-center justify-center p-2" aria-label={t("dm.data_view.empty_state.empty_state.redis_storage")}>
         <IconCloudProviderRedis width={32} height={32} className="text-neutral-content-subtler" />
       </div>
     </Tooltip>
@@ -175,8 +176,8 @@ const DocumentationLink = () => {
         className="inline-flex items-center gap-1"
         data-testid="dm-docs-data-import-link"
       >
-        See docs on importing data
-        <span className="sr-only"> (opens in a new tab)</span>
+        {t("dm.data_view.empty_state.empty_state.see_docs_on_importing_data")}
+        <span className="sr-only"> {t("dm.data_view.empty_state.empty_state.opens_in_a_new_tab")}</span>
         <IconExternal width={20} height={20} />
       </a>
     </Typography>
@@ -226,7 +227,7 @@ export const EmptyState: FC<EmptyStateProps> = ({
       description: "Try adjusting or clearing the filters to see more results",
       actions: (
         <Button variant="primary" look="outlined" onClick={onClearFilters} data-testid="dm-clear-filters-button">
-          Clear Filters
+          {t("dm.data_view.empty_state.empty_state.clear_filters")}
         </Button>
       ),
     });
@@ -263,7 +264,7 @@ export const EmptyState: FC<EmptyStateProps> = ({
               onClick={onLabelAllTasks}
               data-testid="dm-label-all-tasks-button"
             >
-              Label All Tasks
+              {t("dm.data_view.empty_state.empty_state.label_all_tasks")}
             </Button>
           ),
         });
@@ -305,7 +306,7 @@ export const EmptyState: FC<EmptyStateProps> = ({
             onClick={onOpenSourceStorageModal}
             data-testid="dm-connect-source-storage-button"
           >
-            Connect Cloud Storage
+            {t("dm.data_view.empty_state.empty_state.connect_cloud_storage")}
           </Button>
         )}
 
@@ -317,7 +318,7 @@ export const EmptyState: FC<EmptyStateProps> = ({
             onClick={onOpenImportModal}
             data-testid="dm-import-button"
           >
-            Import
+            {t("dm.data_view.empty_state.empty_state.import")}
           </Button>
         )}
       </>

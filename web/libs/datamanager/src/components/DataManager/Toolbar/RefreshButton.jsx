@@ -1,6 +1,7 @@
 import { inject } from "mobx-react";
 import { IconRefresh } from "@humansignal/icons";
 import { Button } from "@humansignal/ui";
+import { t } from "@humansignal/i18n";
 
 const injector = inject(({ store }) => {
   return {
@@ -17,7 +18,7 @@ export const RefreshButton = injector(({ store, needsDataFetch, projectFetch, si
       look={needsDataFetch ? "filled" : "outlined"}
       variant={needsDataFetch ? "primary" : "neutral"}
       waiting={projectFetch}
-      aria-label="Refresh data"
+      aria-label={t("dm.data_manager.toolbar.refresh_button.refresh_data")}
       onClick={async () => {
         await store.fetchProject({ force: true, interaction: "refresh" });
         await store.currentView?.reload();

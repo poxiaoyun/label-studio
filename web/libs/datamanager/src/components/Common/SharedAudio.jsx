@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { IconTimelinePause, IconTimelinePlay } from "@humansignal/icons";
 import { Button } from "./Button/Button";
 import { Space } from "./Space/Space";
+import { t } from "@humansignal/i18n";
 
 const Duration = ({ value, format }) => {
   const formatted = new Date(value * 1000).toISOString().substr(11, 8);
@@ -78,7 +79,7 @@ export class SharedAudio extends Component {
         </Button>
 
         {this.state.error ? (
-          <div>Unable to play</div>
+          <div>{t("dm.components.common.shared_audio.unable_to_play")}</div>
         ) : this.audio ? (
           <div style={{ display: "flex", flex: 1, alignItems: "center" }}>
             <PlaybackControl

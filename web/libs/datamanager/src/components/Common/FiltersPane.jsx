@@ -4,6 +4,7 @@ import { IconChevronDown } from "@humansignal/icons";
 import { Filters } from "../Filters/Filters";
 import { Badge, Button, Dropdown } from "@humansignal/ui";
 import { Icon } from "./Icon/Icon";
+import { t } from "@humansignal/i18n";
 
 const buttonInjector = inject(({ store }) => {
   const { viewsStore, currentView } = store;
@@ -28,10 +29,10 @@ export const FiltersButton = buttonInjector(
           look="outlined"
           onClick={() => sidebarEnabled && viewsStore.toggleSidebar()}
           trailing={<Icon icon={IconChevronDown} />}
-          aria-label="Filters"
+          aria-label={t("dm.components.common.filters_pane.filters")}
           {...rest}
         >
-          Filters{" "}
+          {t("dm.components.common.filters_pane.filters")}{" "}
           {hasFilters && (
             <Badge size="small" className="ml-tightest">
               {activeFiltersNumber}

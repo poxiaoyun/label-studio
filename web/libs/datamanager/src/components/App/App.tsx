@@ -10,6 +10,7 @@ import "./App.scss";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "@humansignal/core/lib/utils/query-client";
 import { AuthProvider } from "@humansignal/core/providers/AuthProvider";
+import { t } from "@humansignal/i18n";
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;
@@ -60,9 +61,9 @@ const AppComponent: React.FC<AppComponentProps> = ({ app }) => {
               <div className={rootClassName}>
                 {app.crashed ? (
                   <div className={clsx(rootCN.toClassName(), rootClassName)}>
-                    <span className={rootCN.elem("header").toClassName()}>Oops...</span>
+                    <span className={rootCN.elem("header").toClassName()}>{t("dm.components.app.app.oops")}</span>
                     <span className={rootCN.elem("description").toClassName()}>
-                      Project has been deleted or not yet created.
+                      {t("dm.components.app.app.project_has_been_deleted_or")}
                     </span>
                   </div>
                 ) : app.loading ? (

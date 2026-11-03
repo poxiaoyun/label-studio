@@ -17,6 +17,7 @@ import { Spinner } from "../Spinner";
 import "./MediaPlayer.scss";
 import { MediaSeeker } from "./MediaSeeker";
 import { Duration } from "./Duration";
+import { t } from "@humansignal/i18n";
 
 const mediaDefaultProps = { crossOrigin: "anonymous" };
 
@@ -151,7 +152,7 @@ export const MediaPlayer = ({ src, video = false }) => {
     <div className={cn("player").mod({ video }).toClassName()} onClick={(e) => e.stopPropagation()}>
       {video && <MediaSource type="video" onClick={togglePlay} {...mediaProps} />}
       {showError ? (
-        <div className={cn("player").elem("loading").toClassName()}>Unable to play</div>
+        <div className={cn("player").elem("loading").toClassName()}>{t("dm.common.media_player.media_player.unable_to_play")}</div>
       ) : state.loaded ? (
         <div className={cn("player").elem("playback").toClassName()}>
           <Space className={cn("player").elem("controls").toClassName()} spread>
@@ -200,7 +201,7 @@ export const MediaPlayer = ({ src, video = false }) => {
           <div className={cn("player").elem("play").toClassName()}>
             <IconTimelinePlay />
           </div>
-          <div className={cn("player").elem("track").toClassName()}>Click to load</div>
+          <div className={cn("player").elem("track").toClassName()}>{t("dm.common.media_player.media_player.click_to_load")}</div>
         </Space>
         <Space className={cn("player").elem("time").toClassName()} size="small" />
       </Space>

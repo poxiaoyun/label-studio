@@ -22,6 +22,7 @@ import {
   ROW_HEIGHT_COMFORTABLE,
   ROW_HEIGHT_COMPACT,
 } from "../../DataManager/Toolbar/DensityToggle";
+import { t } from "@humansignal/i18n";
 
 const injector = inject(({ store }) => {
   const { dataStore, currentView } = store;
@@ -186,9 +187,9 @@ export const DataView = injector(
         if (store.SDK.type === "DE" && ["canceled", "failed"].includes(datasetStatusID)) {
           return (
             <div className={cn("syncInProgress").toClassName()}>
-              <h3 className={cn("syncInProgress").elem("title").toClassName()}>Failed to sync data</h3>
+              <h3 className={cn("syncInProgress").elem("title").toClassName()}>{t("dm.main_view.data_view.table.failed_to_sync_data")}</h3>
               <div className={cn("syncInProgress").elem("text").toClassName()}>
-                Check your storage settings. You may need to recreate this dataset
+                {t("dm.main_view.data_view.table.check_your_storage_settings_you")}
               </div>
             </div>
           );
@@ -200,9 +201,9 @@ export const DataView = injector(
         ) {
           return (
             <div className={cn("syncInProgress").toClassName()}>
-              <h3 className={cn("syncInProgress").elem("title").toClassName()}>Nothing found</h3>
+              <h3 className={cn("syncInProgress").elem("title").toClassName()}>{t("dm.main_view.data_view.table.nothing_found")}</h3>
               <div className={cn("syncInProgress").elem("text").toClassName()}>
-                Try adjusting the filter or similarity search parameters
+                {t("dm.main_view.data_view.table.try_adjusting_the_filter_or")}
               </div>
             </div>
           );
@@ -211,10 +212,10 @@ export const DataView = injector(
           return (
             <div className={cn("syncInProgress").toClassName()}>
               <h3 className={cn("syncInProgress").elem("title").toClassName()}>
-                Hang tight! Records are syncing in the background
+                {t("dm.main_view.data_view.table.hang_tight_records_are_syncing")}
               </h3>
               <div className={cn("syncInProgress").elem("text").toClassName()}>
-                Press the button below to see any synced records
+                {t("dm.main_view.data_view.table.press_the_button_below_to")}
               </div>
               <Button
                 size="small"
@@ -227,7 +228,7 @@ export const DataView = injector(
                   await store.currentView?.reload();
                 }}
               >
-                Refresh
+                {t("dm.main_view.data_view.table.refresh")}
               </Button>
             </div>
           );

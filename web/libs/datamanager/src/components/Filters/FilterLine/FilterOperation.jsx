@@ -7,6 +7,7 @@ import { FilterDropdown } from "../FilterDropdown";
 import * as FilterInputs from "../types";
 import { allowedFilterOperations } from "../types/Utility";
 import { Common } from "../types/Common";
+import { t } from "@humansignal/i18n";
 
 /** @typedef {{
  * type: keyof typeof FilterInputs,
@@ -82,7 +83,7 @@ export const FilterOperation = observer(({ filter, field, operator, value, disab
     <>
       <div className={columnClass.mix("operation").toClassName()}>
         <FilterDropdown
-          placeholder="Condition"
+          placeholder={t("dm.filters.filter_line.filter_operation.condition")}
           value={filter.operator}
           disabled={types.length === 1 || disabled}
           items={availableOperators ? operators.filter((op) => availableOperators.includes(op.value)) : operators}

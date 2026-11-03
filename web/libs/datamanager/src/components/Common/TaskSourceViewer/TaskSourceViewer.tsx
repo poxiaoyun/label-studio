@@ -4,6 +4,7 @@ import { FF_LOPS_E_3, FF_INTERACTIVE_JSON_VIEWER, isFF } from "../../../utils/fe
 import { CodeView } from "./CodeView";
 import styles from "./TaskSourceViewer.module.scss";
 import { ViewToggle, type ViewMode } from "./ViewToggle";
+import { t } from "@humansignal/i18n";
 
 export type { ViewMode };
 
@@ -170,7 +171,7 @@ export const TaskSourceViewer: FC<TaskSourceViewerProps> = ({
             storageKey={storageKey}
             toolbarExtra={
               <div style={{ marginLeft: "auto" }}>
-                <Toggle label="Resolve URIs" checked={resolveUrls} onChange={handleResolveUrlsChange} />
+                <Toggle label={t("dm.common.task_source_viewer.task_source_viewer.resolve_uris")} checked={resolveUrls} onChange={handleResolveUrlsChange} />
               </div>
             }
           />

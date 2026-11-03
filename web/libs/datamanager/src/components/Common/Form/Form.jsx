@@ -18,6 +18,7 @@ import * as Validators from "./Validation/Validators";
 import { SDKContext } from "../../../providers/SDKProvider";
 import { isDefined } from "../../../utils/utils";
 import { MultiProvider } from "../../../providers/MultiProvider";
+import { t } from "@humansignal/i18n";
 
 const PASSWORD_PROTECTED_VALUE = "got ya, suspicious hacker!";
 
@@ -538,7 +539,7 @@ Form.Builder = forwardRef(
         {props.autosubmit !== true && withActions === true && (
           <Form.Actions>
             <Button type="submit" style={{ width: 120 }}>
-              Save
+              {t("dm.common.form.form.save")}
             </Button>
           </Form.Actions>
         )}
@@ -568,7 +569,7 @@ Form.Indicator = () => {
     <div className={cn("form-indicator-dm").toClassName()}>
       <Oneof value={state}>
         <span className={cn("form-indicator-dm").elem("item").mod({ type: state }).toClassName()} case="success">
-          Saved!
+          {t("dm.common.form.form.saved")}
         </span>
       </Oneof>
     </div>

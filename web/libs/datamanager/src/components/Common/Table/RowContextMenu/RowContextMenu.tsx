@@ -7,6 +7,7 @@ import { modal } from "../../Modal/Modal";
 import { TaskSourceViewer, getTaskSourceViewerStorageKey } from "../../TaskSourceViewer";
 // @ts-expect-error - utils is JS module
 import { getProperty } from "../utils";
+import { t } from "@humansignal/i18n";
 
 export interface RowContextMenuProps {
   /** Task data object */
@@ -247,30 +248,30 @@ export const RowContextMenu: FC<RowContextMenuProps> = ({
             data-testid="menu-item-compare-annotations"
             icon={<IconViewAll />}
           >
-            Compare All Annotations
+            {t("dm.table.row_context_menu.row_context_menu.compare_all_annotations")}
           </Menu.Item>
 
           <Menu.Divider />
 
           {canCopyCellContent && (
             <Menu.Item onClick={handleCopyCellContent} data-testid="menu-item-copy-cell" icon={<IconCopyOutline />}>
-              Copy Cell Contents
+              {t("dm.table.row_context_menu.row_context_menu.copy_cell_contents")}
             </Menu.Item>
           )}
 
           <Menu.Item onClick={handleCopyTaskId} data-testid="menu-item-copy-task-id" icon={<IconCopyOutline />}>
-            Copy Task ID
+            {t("dm.table.row_context_menu.row_context_menu.copy_task_id")}
           </Menu.Item>
 
           <Menu.Item onClick={handleViewTaskSource} data-testid="menu-item-view-source" icon={<IconBraces />}>
-            View Task Source
+            {t("dm.table.row_context_menu.row_context_menu.view_task_source")}
           </Menu.Item>
 
           {onViewAnalytics && hasAnnotators && (
             <>
               <Menu.Divider />
               <Menu.Item onClick={handleViewAnalytics} data-testid="menu-item-view-analytics" icon={<IconUserStats />}>
-                View {annotatorLabel} Performance
+                {t("dm.table.row_context_menu.row_context_menu.view")} {annotatorLabel} {t("dm.table.row_context_menu.row_context_menu.performance")}
               </Menu.Item>
             </>
           )}

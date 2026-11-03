@@ -9,6 +9,7 @@ import { Tooltip } from "@humansignal/ui";
 import { ImagePreview } from "./ImagePreview";
 
 import styles from "./GridPreview.module.scss";
+import { t } from "@humansignal/i18n";
 
 type Task = {
   id: number;
@@ -89,11 +90,11 @@ const TaskModal = observer(({ view, tasks, imageField, currentTaskId, setCurrent
 
   const tooltip = (
     <div className={styles.tooltip}>
-      <p>Preview of the task image to quickly navigate through the tasks and select the ones you want to work on.</p>
-      <p>Use [arrow keys] to navigate.</p>
-      <p>[Escape] to close the modal.</p>
-      <p>[Space] to select/unselect the task.</p>
-      <p>Use [scroll] to zoom in/out and [drag] to pan around while image is zoomed in.</p>
+      <p>{t("dm.main_view.grid_view.grid_preview.preview_of_the_task_image")}</p>
+      <p>{t("dm.main_view.grid_view.grid_preview.use_arrow_keys_to_navigate")}</p>
+      <p>{t("dm.main_view.grid_view.grid_preview.escape_to_close_the_modal")}</p>
+      <p>{t("dm.main_view.grid_view.grid_preview.space_to_select_unselect_the_task")}</p>
+      <p>{t("dm.main_view.grid_view.grid_preview.use_scroll_to_zoom_in_out")}</p>
     </div>
   );
 
@@ -101,7 +102,7 @@ const TaskModal = observer(({ view, tasks, imageField, currentTaskId, setCurrent
     <div className={styles.modal}>
       <div className={styles.header}>
         <Checkbox checked={view.selected.isSelected(task.id)} onChange={onSelect}>
-          Task {task.id}
+          {t("dm.main_view.grid_view.grid_preview.task")} {task.id}
         </Checkbox>
         <div className={styles.actions}>
           <Tooltip title={tooltip}>

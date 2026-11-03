@@ -6,6 +6,7 @@ import { FilterLine } from "./FilterLine/FilterLine";
 import { IconChevronRight, IconPlus, IconCopyOutline, IconClipboardCheck, IconUndo } from "@humansignal/icons";
 import { useRecentFilters } from "./useRecentFilters";
 import "./Filters.scss";
+import { t } from "@humansignal/i18n";
 
 const injector = inject(({ store }) => ({
   store,
@@ -100,7 +101,7 @@ export const Filters = injector(({ store, views, currentView, filters, projectId
             />
           ))
         ) : (
-          <div className={cn("filters").elem("empty").toClassName()}>No filters applied</div>
+          <div className={cn("filters").elem("empty").toClassName()}>{t("dm.components.filters.filters.no_filters_applied")}</div>
         )}
       </div>
       <div className={cn("filters").elem("actions").toClassName()}>
@@ -110,7 +111,7 @@ export const Filters = injector(({ store, views, currentView, filters, projectId
           onClick={() => currentView.createFilter()}
           leading={<IconPlus className="!h-3 !w-3" />}
         >
-          Add {filters.length ? "Another Filter" : "Filter"}
+          {t("dm.components.filters.filters.add")} {filters.length ? "Another Filter" : "Filter"}
         </Button>
 
         <div className={cn("filters").elem("actions-right").toClassName()}>
@@ -120,7 +121,7 @@ export const Filters = injector(({ store, views, currentView, filters, projectId
               look="string"
               tooltip={copyFeedback ? "Copied!" : "Copy filters to clipboard; Tip: Use it in Label Studio SDK"}
               onClick={handleCopyFilters}
-              aria-label="Copy filters"
+              aria-label={t("dm.components.filters.filters.copy_filters")}
             >
               <IconCopyOutline className="!w-4 !h-4" />
             </Button>
@@ -131,7 +132,7 @@ export const Filters = injector(({ store, views, currentView, filters, projectId
             look="string"
             tooltip={pasteFeedback ? "Pasted!" : "Paste filters from clipboard"}
             onClick={handlePasteFilters}
-            aria-label="Paste filters"
+            aria-label={t("dm.components.filters.filters.paste_filters")}
           >
             <IconClipboardCheck className="!w-4 !h-4" />
           </Button>
@@ -140,9 +141,9 @@ export const Filters = injector(({ store, views, currentView, filters, projectId
             <Button
               size="small"
               look="string"
-              tooltip="Undo paste — restore previous filters"
+              tooltip={t("dm.components.filters.filters.undo_paste_restore_previous")}
               onClick={handleUndoPaste}
-              aria-label="Undo paste"
+              aria-label={t("dm.components.filters.filters.undo_paste")}
             >
               <IconUndo className="!w-4 !h-4" />
             </Button>
@@ -153,9 +154,9 @@ export const Filters = injector(({ store, views, currentView, filters, projectId
               look="string"
               type="link"
               size="small"
-              tooltip="Pin to sidebar"
+              tooltip={t("dm.components.filters.filters.pin_to_sidebar")}
               onClick={() => views.expandFilters()}
-              aria-label="Pin filters to sidebar"
+              aria-label={t("dm.components.filters.filters.pin_filters_to_sidebar")}
             >
               <IconChevronRight className="!w-4 !h-4" />
             </Button>

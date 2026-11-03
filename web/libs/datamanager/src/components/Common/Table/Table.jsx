@@ -19,6 +19,7 @@ import { FieldsButton } from "../FieldsButton";
 import { FF_LOPS_E_3, isFF } from "../../../utils/feature-flags";
 import { DensityToggle } from "../../DataManager/Toolbar/DensityToggle";
 import { TaskSourceViewer, getTaskSourceViewerStorageKey } from "../TaskSourceViewer";
+import { t } from "@humansignal/i18n";
 
 const Decorator = (decoration) => {
   return {
@@ -204,7 +205,7 @@ export const Table = observer(
               });
             }}
             leading={<Icon icon={IconBraces} />}
-            tooltip="View Task Source"
+            tooltip={t("dm.common.table.table.view_task_source")}
           />
         );
       },

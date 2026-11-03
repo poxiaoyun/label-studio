@@ -10,6 +10,7 @@ import { Resizer } from "../Common/Resizer/Resizer";
 import { Space } from "../Common/Space/Space";
 import { DataView } from "../MainView";
 import "./Label.scss";
+import { t } from "@humansignal/i18n";
 
 // Todo: consider renaming this file to something like LabelingWrapper as it is not a Label component
 const LabelingHeader = ({ SDK, onClick, isExplorerMode }) => {
@@ -23,7 +24,7 @@ const LabelingHeader = ({ SDK, onClick, isExplorerMode }) => {
             onClick={onClick}
             style={{ fontSize: 18, padding: 0, color: "black" }}
           >
-            Back
+            {t("dm.components.label.label.back")}
           </Button>
         )}
 

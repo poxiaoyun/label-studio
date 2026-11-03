@@ -4,6 +4,7 @@ import { cn } from "../../../utils/bem";
 import { Button } from "@humansignal/ui";
 import { Filters } from "../Filters";
 import "./FilterSidebar.scss";
+import { t } from "@humansignal/i18n";
 
 const sidebarInjector = inject(({ store }) => {
   const viewsStore = store.viewsStore;
@@ -23,12 +24,12 @@ export const FiltersSidebar = sidebarInjector(({ viewsStore, sidebarEnabled, sid
           <Button
             look="string"
             onClick={() => viewsStore.collapseFilters()}
-            tooltip="Unpin filters"
-            aria-label="Unpin filters"
+            tooltip={t("dm.filters.filters_sidebar.filter_sidebar.unpin_filters")}
+            aria-label={t("dm.filters.filters_sidebar.filter_sidebar.unpin_filters")}
           >
             <IconChevronLeft width={24} height={24} />
           </Button>
-          <div className={cn("filters-sidebar").elem("title").toClassName()}>Filters</div>
+          <div className={cn("filters-sidebar").elem("title").toClassName()}>{t("dm.filters.filters_sidebar.filter_sidebar.filters")}</div>
         </div>
       </div>
       <Filters sidebar={true} />

@@ -1,4 +1,5 @@
 import { Button } from "./components/Common/Button/Button";
+import { t } from "@humansignal/i18n";
 
 const API_GATEWAY = process.env.API_GATEWAY || process.env.NX_API_GATEWAY;
 const LS_ACCESS_TOKEN = process.env.LS_ACCESS_TOKEN || process.env.NX_LS_ACCESS_TOKEN;
@@ -47,7 +48,7 @@ export const initDevApp = async (DataManager) => {
     },
     instruments: {
       "review-button": () => {
-        return () => <Button style={{ width: 105 }}>Review</Button>;
+        return () => <Button style={{ width: 105 }}>{t("dm.dev.review")}</Button>;
       },
     },
     type: "dm",

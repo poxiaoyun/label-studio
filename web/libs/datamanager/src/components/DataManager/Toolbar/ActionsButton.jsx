@@ -10,6 +10,7 @@ import Form from "../../Common/Form/Form";
 import { Menu } from "../../Common/Menu/Menu";
 import { Modal } from "../../Common/Modal/ModalPopup";
 import "./ActionsButton.scss";
+import { t } from "@humansignal/i18n";
 
 const isFFLOPSE3 = isFF(FF_LOPS_E_3);
 const injector = inject(({ store }) => ({
@@ -241,7 +242,7 @@ export const ActionsButton = injector(
           <Menu size="compact">
             {isLoading || isFetching ? (
               <Menu.Item data-testid="loading-actions" disabled>
-                Loading actions...
+                {t("dm.data_manager.toolbar.actions_button.loading_actions")}
               </Menu.Item>
             ) : (
               actionButtons
@@ -258,7 +259,7 @@ export const ActionsButton = injector(
           look="outlined"
           disabled={!hasSelected}
           trailing={<IconChevronDown />}
-          aria-label="Tasks Actions"
+          aria-label={t("dm.data_manager.toolbar.actions_button.tasks_actions")}
           {...rest}
         >
           {selectedCount > 0 ? `${selectedCount} ${recordTypeLabel}${selectedCount > 1 ? "s" : ""}` : "Actions"}
