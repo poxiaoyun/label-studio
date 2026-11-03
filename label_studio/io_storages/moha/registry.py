@@ -5,7 +5,7 @@
 ``settings.GET_STORAGE_LIST`` points here (see ``core/settings/label_studio.py``)
 instead of patching ``io_storages.functions``. The upstream list is kept as the
 source of truth and the Moha entry is appended, so new upstream drivers show up
-automatically after a rebase.
+automatically after merging onto a newer release.
 """
 
 from .api import MohaExportStorageListAPI, MohaImportStorageListAPI

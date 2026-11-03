@@ -2,7 +2,7 @@
 
 [moha] Upstream-integration self check.
 
-Runs without Django and without the SDK so it can be used right after a rebase:
+Runs without Django and without the SDK so it can be used right after a merge:
 
     python label_studio/io_storages/moha/selfcheck.py
 
@@ -13,6 +13,7 @@ single check is skipped so the driver still self-checks inside build containers.
 ``pytest`` runs the same checks in ``test_moha_integration_anchors.py``.
 """
 
+import os
 import re
 import subprocess
 import sys
@@ -56,11 +57,13 @@ DIFF_BUDGET = {
     'web/libs/ui/src/assets/icons/index.ts': (1, 0),
 }
 
-#: Upstream ref the budget is measured against (the release we forked from).
-BASE_REF = '1.23.2'
+#: Upstream ref the budget is measured against: the release this branch is based
+#: on. When merging the driver onto a newer release set ``MOHA_BASE_REF`` to that
+#: tag (e.g. ``MOHA_BASE_REF=1.24.0 python .../selfcheck.py``).
+BASE_REF = os.environ.get('MOHA_BASE_REF', '1.23.2')
 
 # Files that must stay untouched. A marker in any of them means the driver has
-# started to patch upstream internals, which makes rebases expensive.
+# started to patch upstream internals, which makes upstream merges expensive.
 FORBIDDEN_UPSTREAM_EDITS = (
     'label_studio/io_storages/base_models.py',
     'label_studio/io_storages/api.py',
@@ -224,7 +227,7 @@ def check_diff_budget(root: Path) -> List[str]:
         parts = line.split('\t')
         path = parts[-1]
         if path in tracked and path not in DIFF_BUDGET:
-            failures.append(f'{path} is an upstream file outside the diff budget')
+            failures.append(f'{path} is an upstream file outside the diff budget (base {BASE_REF})')
 
     budgeted = sorted(DIFF_BUDGET)
     numstat = _git(root, 'diff', '--numstat', BASE_REF, '--', *budgeted)
@@ -235,7 +238,8 @@ def check_diff_budget(root: Path) -> List[str]:
         max_added, max_deleted = DIFF_BUDGET[path]
         if int(added) > max_added or int(deleted) > max_deleted:
             failures.append(
-                f'{path} exceeds its diff budget: +{added}/-{deleted} (allowed +{max_added}/-{max_deleted})'
+                f'{path} exceeds its diff budget: +{added}/-{deleted} '
+                f'(allowed +{max_added}/-{max_deleted} against {BASE_REF})'
             )
     return failures
 

@@ -106,27 +106,46 @@ task.data = moha://org/datasets/repo/main/images/1.jpg
 
 > **Dependency lock**: `moha-hub[upload]` is declared in `pyproject.toml`, but the
 > upstream `poetry.lock` is intentionally left untouched (regenerating it would
-> churn hundreds of unrelated entries and make rebases noisy). Run
+> churn hundreds of unrelated entries and make merges noisy). Run
 > `poetry lock` once in the build environment before `poetry install` /
 > `docker build`; plain `pip install -e .` already resolves the SDK.
 
-```bash
-git remote add upstream https://github.com/HumanSignal/label-studio.git  # once
-git fetch upstream --tags
-git switch feat/moha-storage-provider
-git rebase upstream/<new-version>
+### Branch model
 
-python label_studio/io_storages/moha/selfcheck.py   # anchors + boundaries
+Fork: `git@github.com:poxiaoyun/label-studio.git`, which tracks upstream.
+
+| Branch | Meaning |
+| --- | --- |
+| `1.23.2-pxs` | upstream tag `1.23.2` + the Moha driver (current) |
+| `1.24.0-pxs` | created from upstream tag `1.24.0`, then `git merge 1.23.2-pxs` |
+
+Every upstream release gets its **own** `<tag>-pxs` branch: we never rewrite a
+published branch and never force-push. Each generation is a merge of the previous
+one, so the driver's history stays continuous and a bad merge is one revert away.
+
+### Merge-forward on a new release
+
+```bash
+git fetch pxs --tags                 # or: git fetch upstream --tags
+git switch -c 1.24.0-pxs 1.24.0      # new branch on the new tag
+git merge 1.23.2-pxs                 # expect conflicts only in the 10 files below
+
+MOHA_BASE_REF=1.24.0 python label_studio/io_storages/moha/selfcheck.py
 pytest label_studio/io_storages/tests/test_moha_*.py -q
 
-# migration number collision: rename 0023_* to the next free number and update
-# its dependencies; never edit 0001-0022.
+git push -u pxs 1.24.0-pxs
 ```
+
+`MOHA_BASE_REF` moves the diff budget onto the new tag, so the same self check
+tells you whether the merge stayed inside the 10-file budget.
 
 Conflicts can only appear in the 10 files above. Nine of them take a single
 appended line or block (keep both sides); the exceptions are
 `providers/index.ts` and `logo.svg`, which are short files that the fork owns —
-re-apply the `[moha]` lines after a rebase.
+re-apply the `[moha]` lines on top of the new upstream content.
+
+If upstream renumbers migrations: rename `0023_*` to the next free number and
+update its dependencies; never edit `0001-0022`.
 
 Run from the repository root with Label Studio's test environment
 (`DJANGO_SETTINGS_MODULE=core.settings.label_studio`).
