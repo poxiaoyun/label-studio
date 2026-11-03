@@ -12,8 +12,8 @@ import {
   IconDoor,
   IconGithub,
   IconSlack,
+  IconCloudProviderMoha,
 } from "@humansignal/icons";
-import { LSLogo } from "../../assets/images";
 import { Button, Userpic, ThemeToggle } from "@humansignal/ui";
 import { useConfig } from "../../providers/ConfigProvider";
 import { useContextComponent, useFixedLocation } from "../../providers/RoutesProvider";
@@ -139,7 +139,13 @@ export const Menubar = ({ enabled, defaultOpened, defaultPinned, children, onSid
         <div className={menubarClass}>
           <Dropdown.Trigger dropdown={menuDropdownRef} closeOnClickOutside={!sidebarPinned}>
             <div className={`${menubarClass.elem("trigger")} main-menu-trigger`}>
-              <LSLogo className={`${menubarClass.elem("logo")}`} alt="Label Studio Logo" />
+              {/* [moha] Rebrand the header slot: Moha mark + wordmark instead of the Label Studio logo. */}
+              <span className={menubarClass.elem("logo")}>
+                <IconCloudProviderMoha className={menubarClass.elem("logo-mark")} />
+                <span className={menubarClass.elem("logo-word")} aria-label="Moha">
+                  Moha
+                </span>
+              </span>
               <Hamburger opened={sidebarOpened} />
             </div>
           </Dropdown.Trigger>
