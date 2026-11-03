@@ -8,6 +8,7 @@ from unittest.mock import MagicMock
 import pytest
 from core.utils.common import load_func
 from django.conf import settings
+from io_storages.moha.client import MohaObject
 from io_storages.moha.models import MohaExportStorage, MohaImportStorage, MohaImportStorageLink
 from io_storages.moha.serializers import MohaImportStorageSerializer
 from django.test import override_settings
@@ -78,6 +79,27 @@ class TestImportStorageUnit:
         assert kwargs['prefix'] == 'images'
         assert kwargs['recursive'] is False
         assert kwargs['regex'].pattern == r'.*\.jpg$'
+
+    def test_iter_objects_skips_non_task_files_in_tasks_mode(self):
+        storage = _import_storage(use_blob_urls=False)
+        storage._moha_client = _stub_client()
+        storage.moha_client.list_files.return_value = iter(
+            [
+                MohaObject(path='README.md'),
+                MohaObject(path='data/a.json'),
+                MohaObject(path='images/a.jpg'),
+                MohaObject(path='data/b.jsonl'),
+            ]
+        )
+        assert [obj.path for obj in storage.iter_objects()] == ['data/a.json', 'data/b.jsonl']
+
+    def test_iter_objects_keeps_everything_in_files_mode(self):
+        storage = _import_storage(use_blob_urls=True)
+        storage._moha_client = _stub_client()
+        storage.moha_client.list_files.return_value = iter(
+            [MohaObject(path='README.md'), MohaObject(path='images/a.jpg')]
+        )
+        assert [obj.path for obj in storage.iter_objects()] == ['README.md', 'images/a.jpg']
 
     def test_get_bytes_stream_rejects_out_of_scope(self):
         storage = _import_storage()
@@ -224,6 +246,8 @@ class TestSerializer:
         )
         payload = MohaImportStorageSerializer(storage).data
         assert 'moha_token' not in payload
+        # Drives /api/storages/{type}/... on the frontend; must not be "io_storages".
+        assert payload['type'] == 'moha'
 
     def test_create_requires_token(self):
         project = load_func(settings.PROJECT_FACTORY)()

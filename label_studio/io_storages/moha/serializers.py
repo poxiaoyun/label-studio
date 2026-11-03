@@ -150,12 +150,19 @@ class MohaStorageSerializerMixin:
 
 
 class MohaImportStorageSerializer(MohaStorageSerializerMixin, ImportStorageSerializer):
+    # ``type`` drives the frontend API paths (/api/storages/{type}/...). The shared
+    # serializer derives it from its own file location ("io_storages"), so every
+    # driver must override it.
+    type = serializers.ReadOnlyField(default='moha')
+
     class Meta:
         model = MohaImportStorage
         fields = '__all__'
 
 
 class MohaExportStorageSerializer(MohaStorageSerializerMixin, ExportStorageSerializer):
+    type = serializers.ReadOnlyField(default='moha')
+
     class Meta:
         model = MohaExportStorage
         fields = '__all__'

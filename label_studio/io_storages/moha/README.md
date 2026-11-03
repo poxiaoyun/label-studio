@@ -134,6 +134,7 @@ Run from the repository root with Label Studio's test environment
 | R3 | Realtime export creates one commit per annotation | verbose repository history; use bulk Sync for large backfills | `models.save_annotation()` |
 | R4 | `images` / `spaces` repositories are out of scope | Moha serves them from dedicated endpoints | `uri.REPO_TYPES` + client |
 | R5 | Token is stored like other storage credentials (DB plaintext) | same posture as S3 | future KMS field |
+| R6 | **Tasks** mode only considers `.json` / `.jsonl` / `.parquet` | other repository files (`README.md`, images) are skipped and logged instead of failing the whole sync; use **Files** mode to import them as blobs | `models.iter_objects()` |
 
 ## 8. Tests
 

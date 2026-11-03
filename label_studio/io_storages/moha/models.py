@@ -38,6 +38,11 @@ from .uri import REPO_TYPES, build_uri, in_scope, parse_uri
 
 logger = logging.getLogger(__name__)
 
+#: Repositories usually contain README/metadata next to the data. In "Tasks" mode
+#: only these extensions can produce tasks; anything else is skipped instead of
+#: aborting the whole sync (upstream raises ``UnsupportedFileFormatError``).
+_TASK_FILE_SUFFIXES = ('.json', '.jsonl', '.parquet')
+
 
 class MohaStorageMixin(models.Model):
     """Fields and connection helpers shared by source and target storages."""
@@ -149,12 +154,22 @@ class MohaImportStorageBase(MohaStorageMixin, ImportStorage):
 
     def iter_objects(self) -> Iterator[MohaObject]:
         regex = re.compile(str(self.regex_filter)) if self.regex_filter else None
-        yield from self.moha_client.list_files(
+        skipped = 0
+        for obj in self.moha_client.list_files(
             prefix=self.prefix or '',
             recursive=bool(self.recursive_scan),
             regex=regex,
             revision=self.resolved_revision(),
-        )
+        ):
+            if not self.use_blob_urls and not obj.path.lower().endswith(_TASK_FILE_SUFFIXES):
+                skipped += 1
+                continue
+            yield obj
+        if skipped:
+            logger.info(
+                '[moha] skipped %s non-task file(s); enable "Files" import method to import them as blobs',
+                skipped,
+            )
 
     def iter_keys(self) -> Iterator[str]:
         for obj in self.iter_objects():
