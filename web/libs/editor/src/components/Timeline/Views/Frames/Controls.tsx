@@ -3,6 +3,7 @@ import { IconInterpolationAdd, IconInterpolationRemove, IconKeypointAdd, IconKey
 import { TimelineContext } from "../../Context";
 import { ControlButton } from "../../Controls";
 import type { TimelineExtraControls } from "../../Types";
+import { t } from "@humansignal/i18n";
 
 type Actions = "keypoint_add" | "keypoint_remove" | "lifespan_add" | "lifespan_remove";
 type DataType = {
@@ -69,11 +70,11 @@ export const Controls: FC<TimelineExtraControls<Actions, DataType>> = ({ onActio
 
   return (
     <>
-      <ControlButton onClick={onKeypointToggle} disabled={!hasSelectedRegion || readonly} tooltip="Toggle Keypoint">
+      <ControlButton onClick={onKeypointToggle} disabled={!hasSelectedRegion || readonly} tooltip={t("lsf.views.frames.controls.toggle_keypoint")}>
         {keypointIcon}
       </ControlButton>
 
-      <ControlButton onClick={onLifespanToggle} disabled={!closestKeypoint || readonly} tooltip="Toggle Interpolation">
+      <ControlButton onClick={onLifespanToggle} disabled={!closestKeypoint || readonly} tooltip={t("lsf.views.frames.controls.toggle_interpolation")}>
         {interpolationIcon}
       </ControlButton>
     </>

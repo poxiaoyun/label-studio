@@ -7,6 +7,7 @@ import type { ColorScheme } from "../Visual/ColorMapper";
 import type { SpectrogramScale } from "../Analysis/FFTProcessor";
 import { SPECTROGRAM_DEFAULTS } from "../Visual/constants";
 import type { MutableRefObject } from "react";
+import { t } from "@humansignal/i18n";
 
 interface SpectrogramConfigProps {
   waveform: MutableRefObject<Waveform | undefined>;
@@ -98,24 +99,24 @@ export const SpectrogramConfig: React.FC<SpectrogramConfigProps> = ({ waveform }
 
   return (
     <div className="spectrogram-config">
-      <h3>Spectrogram Settings</h3>
+      <h3>{t("lsf.audio_ultra.react.spectrogram_config.spectrogram_settings")}</h3>
       <div className="control-group">
         <label>
-          Scale
+          {t("lsf.audio_ultra.react.spectrogram_config.scale")}
           <select onChange={(e) => setScale(e.target.value as SpectrogramScale)}>
-            <option value="linear">Linear</option>
-            <option value="log">Logarithmic</option>
-            <option value="mel">Mel</option>
+            <option value="linear">{t("lsf.audio_ultra.react.spectrogram_config.linear")}</option>
+            <option value="log">{t("lsf.audio_ultra.react.spectrogram_config.logarithmic")}</option>
+            <option value="mel">{t("lsf.audio_ultra.react.spectrogram_config.mel")}</option>
           </select>
         </label>
 
         <label>
-          Mel Bands
+          {t("lsf.audio_ultra.react.spectrogram_config.mel_bands")}
           <input type="number" min="1" max="512" onChange={(e) => setMelBands(Number.parseInt(e.target.value))} />
         </label>
 
         <label>
-          FFT Size
+          {t("lsf.audio_ultra.react.spectrogram_config.fft_size")}
           <select onChange={(e) => setFftSamples(Number.parseInt(e.target.value))}>
             <option value="256">256</option>
             <option value="512">512</option>
@@ -126,28 +127,28 @@ export const SpectrogramConfig: React.FC<SpectrogramConfigProps> = ({ waveform }
         </label>
 
         <label>
-          Window Function
+          {t("lsf.audio_ultra.react.spectrogram_config.window_function")}
           <select onChange={(e) => setWindowingFunction(e.target.value as WindowFunctionType)}>
-            <option value="hann">Hann</option>
-            <option value="hamming">Hamming</option>
-            <option value="blackman">Blackman</option>
-            <option value="rectangular">Rectangular</option>
+            <option value="hann">{t("lsf.audio_ultra.react.spectrogram_config.hann")}</option>
+            <option value="hamming">{t("lsf.audio_ultra.react.spectrogram_config.hamming")}</option>
+            <option value="blackman">{t("lsf.audio_ultra.react.spectrogram_config.blackman")}</option>
+            <option value="rectangular">{t("lsf.audio_ultra.react.spectrogram_config.rectangular")}</option>
           </select>
         </label>
 
         <label>
-          Color Scheme
+          {t("lsf.audio_ultra.react.spectrogram_config.color_scheme")}
           <select onChange={(e) => setColorScheme(e.target.value as ColorScheme)}>
-            <option value="inferno">Inferno</option>
-            <option value="magma">Magma</option>
-            <option value="viridis">Viridis</option>
-            <option value="plasma">Plasma</option>
+            <option value="inferno">{t("lsf.audio_ultra.react.spectrogram_config.inferno")}</option>
+            <option value="magma">{t("lsf.audio_ultra.react.spectrogram_config.magma")}</option>
+            <option value="viridis">{t("lsf.audio_ultra.react.spectrogram_config.viridis")}</option>
+            <option value="plasma">{t("lsf.audio_ultra.react.spectrogram_config.plasma")}</option>
           </select>
         </label>
 
         <div className="db-range">
           <label>
-            Min dB
+            {t("lsf.audio_ultra.react.spectrogram_config.min_d_b")}
             <input
               type="number"
               step="1"
@@ -163,7 +164,7 @@ export const SpectrogramConfig: React.FC<SpectrogramConfigProps> = ({ waveform }
           </label>
 
           <label>
-            Max dB
+            {t("lsf.audio_ultra.react.spectrogram_config.max_d_b")}
             <input
               type="number"
               step="1"

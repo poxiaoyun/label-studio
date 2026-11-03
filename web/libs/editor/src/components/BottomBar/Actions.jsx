@@ -8,6 +8,7 @@ import { DynamicPreannotationsToggle } from "../AnnotationTab/DynamicPreannotati
 import { GroundTruth } from "../CurrentEntity/GroundTruth";
 import { EditingHistory } from "./HistoryActions";
 import "./Actions.scss";
+import { t } from "@humansignal/i18n";
 
 export const Actions = ({ store }) => {
   const annotationStore = store.annotationStore;
@@ -24,11 +25,11 @@ export const Actions = ({ store }) => {
         {store.description && store.hasInterface("instruction") && (
           <Button
             type="text"
-            aria-label="Instructions"
+            aria-label={t("lsf.components.bottom_bar.actions.instructions")}
             size="small"
             variant="neutral"
             look="string"
-            tooltip="Show instructions"
+            tooltip={t("lsf.components.bottom_bar.actions.show_instructions")}
             onClick={() => store.toggleDescription()}
             className="aspect-square"
             leading={<IconInfoOutline />}
@@ -37,12 +38,12 @@ export const Actions = ({ store }) => {
         )}
         <Button
           type="text"
-          aria-label="Settings"
+          aria-label={t("lsf.components.bottom_bar.actions.settings")}
           size="small"
           look="string"
           variant="neutral"
           onClick={() => store.toggleSettings()}
-          tooltip="Settings"
+          tooltip={t("lsf.components.bottom_bar.actions.settings")}
           className="aspect-square"
           leading={<IconSettings />}
           data-testid="bottombar-settings-button"

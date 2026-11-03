@@ -12,6 +12,7 @@ import { IconInfoOutline } from "@humansignal/icons";
 import type { MSTStore } from "../../stores/types";
 import { FF_FIT_1304_STRICT_OVERLAP, isFF } from "../../utils/feature-flags";
 import { INCOMPLETE_ACCEPT_TOOLTIP } from "./Controls";
+import { t } from "@humansignal/i18n";
 
 type MixedInParams = {
   store: MSTStore;
@@ -128,7 +129,7 @@ export const SkipButton = memo(
     return (
       <>
         {showInfoIcon && (
-          <Tooltip title="Annotators and Reviewers will not be able to skip this task">
+          <Tooltip title={t("lsf.components.bottom_bar.buttons.annotators_and_reviewers_will_not")}>
             <IconInfoOutline width={20} height={20} className="text-neutral-content ml-auto cursor-pointer" />
           </Tooltip>
         )}
@@ -152,7 +153,7 @@ export const SkipButton = memo(
           }}
           data-testid="bottombar-skip-button"
         >
-          Skip
+          {t("lsf.components.bottom_bar.buttons.skip")}
         </Button>
       </>
     );
@@ -164,7 +165,7 @@ export const UnskipButton = memo(
     return (
       <Button
         key="cancel-skip"
-        tooltip="Cancel skip: []"
+        tooltip={t("lsf.components.bottom_bar.buttons.cancel_skip")}
         aria-label="cancel-skip"
         look="outlined"
         disabled={disabled}
@@ -177,7 +178,7 @@ export const UnskipButton = memo(
         }}
         data-testid="bottombar-unskip-button"
       >
-        Cancel skip
+        {t("lsf.components.bottom_bar.buttons.cancel_skip_3")}
       </Button>
     );
   }),

@@ -17,6 +17,7 @@ import { taxonomyPathsToSelectedItems, COMMENT_TAXONOMY_OPTIONS } from "../../..
 
 import "./CommentItem.scss";
 import { LinkState } from "./LinkState";
+import { t } from "@humansignal/i18n";
 
 interface CommentItemProps {
   comment: {
@@ -205,19 +206,19 @@ export const CommentItem: FC<CommentItemProps> = observer(
               </>
             ) : isConfirmDelete ? (
               <div className={cn("comment-item").elem("confirmForm").toClassName()}>
-                <div className={cn("comment-item").elem("question").toClassName()}>Are you sure?</div>
+                <div className={cn("comment-item").elem("question").toClassName()}>{t("lsf.comments.comment.comment_item.are_you_sure")}</div>
                 <div className={cn("comment-item").elem("controls").toClassName()}>
                   <Button
                     onClick={() => deleteComment()}
                     size="small"
                     look="danger"
                     autoFocus
-                    aria-label="Delete comment"
+                    aria-label={t("lsf.comments.comment.comment_item.delete_comment")}
                   >
-                    Yes
+                    {t("lsf.comments.comment.comment_item.yes")}
                   </Button>
-                  <Button onClick={() => setConfirmMode(false)} size="small" aria-label="Cancel delete">
-                    No
+                  <Button onClick={() => setConfirmMode(false)} size="small" aria-label={t("lsf.comments.comment.comment_item.cancel_delete")}>
+                    {t("lsf.comments.comment.comment_item.no")}
                   </Button>
                 </div>
               </div>
@@ -273,7 +274,7 @@ export const CommentItem: FC<CommentItemProps> = observer(
                               setConfirmMode(true);
                             }}
                           >
-                            Delete
+                            {t("lsf.comments.comment.comment_item.delete")}
                           </Menu.Item>
                         )}
                       </>
@@ -281,7 +282,7 @@ export const CommentItem: FC<CommentItemProps> = observer(
                   </Menu>
                 }
               >
-                <Button size="small" look="string" icon={<IconEllipsis />} aria-label="Comment options" />
+                <Button size="small" look="string" icon={<IconEllipsis />} aria-label={t("lsf.comments.comment.comment_item.comment_options")} />
               </Dropdown.Trigger>
             )}
           </div>

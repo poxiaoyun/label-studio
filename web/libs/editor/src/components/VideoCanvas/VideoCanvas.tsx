@@ -11,6 +11,7 @@ import { MAX_ZOOM, MIN_ZOOM } from "./VideoConstants";
 import { VirtualCanvas } from "./VirtualCanvas";
 import { VirtualVideo } from "./VirtualVideo";
 import { ff } from "@humansignal/core";
+import { t } from "@humansignal/i18n";
 
 const isSyncedBuffering = ff.isActive(ff.FF_SYNCED_BUFFERING);
 
@@ -652,7 +653,7 @@ export const VideoCanvas = memo(
             height={canvasHeight}
           />
           {!isSyncedBuffering && !loading && buffering && (
-            <div className={cn("video-canvas").elem("buffering").toClassName()} aria-label="Buffering Media Source" />
+            <div className={cn("video-canvas").elem("buffering").toClassName()} aria-label={t("lsf.components.video_canvas.video_canvas.buffering_media_source")} />
           )}
         </div>
 

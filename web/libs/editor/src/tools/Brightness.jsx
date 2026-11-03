@@ -8,13 +8,14 @@ import ToolMixin from "../mixins/Tool";
 import { Tool } from "../components/Toolbar/Tool";
 import { Range } from "../common/Range/Range";
 import { IconBrightnessTool } from "@humansignal/icons";
+import { t } from "@humansignal/i18n";
 
 const ToolView = observer(({ item }) => {
   return (
     <Tool
       active={item.selected}
       ariaLabel="brightness"
-      label="Brightness"
+      label={t("lsf.tools.brightness.brightness")}
       controlsOnHover
       controls={[
         <Range

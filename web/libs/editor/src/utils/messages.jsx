@@ -1,4 +1,5 @@
 import { htmlEscape } from "./html";
+import { t } from "@humansignal/i18n";
 
 const URL_CORS_DOCS = "https://labelstud.io/guide/storage.html#Troubleshoot-CORS-and-access-problems";
 const URL_TAGS_DOCS = "https://labelstud.io/tags";
@@ -54,10 +55,10 @@ export default {
     return (
       <div data-testid="error:audio">
         <p>
-          Error while loading audio. Check <code>{attr}</code> field in task.
+          {t("lsf.utils.messages.error_while_loading_audio_check")} <code>{attr}</code> field in task.
         </p>
-        <p>Technical description: {error}</p>
-        <p>URL: {htmlEscape(url)}</p>
+        <p>{t("lsf.utils.messages.technical_description")} {error}</p>
+        <p>{t("lsf.utils.messages.url")} {htmlEscape(url)}</p>
       </div>
     );
   },

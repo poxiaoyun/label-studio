@@ -4,6 +4,7 @@ import Utils from "../../utils";
 import { cn } from "../../utils/bem";
 
 import "./DraftPanel.scss";
+import { t } from "@humansignal/i18n";
 
 const panel = cn("draft-panel");
 
@@ -30,7 +31,7 @@ export const DraftPanel = observer(({ item }) => {
           look="string"
           onClick={() => item.toggleDraft()}
           className={panel.elem("toggle").toClassName()}
-          aria-label="Toggle draft mode"
+          aria-label={t("lsf.components.draft_panel.draft_panel.toggle_draft_mode")}
         >
           {item.draftSelected ? "draft" : "original"}
         </Button>

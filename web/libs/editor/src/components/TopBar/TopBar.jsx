@@ -9,6 +9,7 @@ import { AnnotationsCarousel } from "../AnnotationsCarousel/AnnotationsCarousel"
 import { ViewAllToggle } from "../AnnotationsCarousel/ViewAllToggle";
 
 import "./TopBar.scss";
+import { t } from "@humansignal/i18n";
 
 export const TopBar = observer(({ store }) => {
   const annotationStore = store.annotationStore;
@@ -34,11 +35,11 @@ export const TopBar = observer(({ store }) => {
           <Button
             className={cn("topbar").elem("button").toClassName()}
             type={isViewAll ? undefined : "text"}
-            aria-label="Create an annotation"
+            aria-label={t("lsf.components.top_bar.top_bar.create_an_annotation")}
             variant="neutral"
             size="small"
             look="outlined"
-            tooltip="Create a new annotation"
+            tooltip={t("lsf.components.top_bar.top_bar.create_a_new_annotation")}
             onClick={(event) => {
               event.preventDefault();
               const created = store.annotationStore.createAnnotation();

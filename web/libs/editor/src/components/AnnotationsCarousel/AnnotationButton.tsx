@@ -38,6 +38,7 @@ import { confirm } from "../../common/Modal/Modal";
 import { type ContextMenuAction, ContextMenu, type MenuActionOnClick } from "../ContextMenu";
 import { useResolveUser, isUserComplete } from "@humansignal/core/hooks/useResolveUser";
 import "./AnnotationButton.scss";
+import { t } from "@humansignal/i18n";
 
 // Constants for name truncation
 const NAME_TRUNCATE_START = 8;
@@ -323,7 +324,7 @@ function AnnotationButtonTooltip({
                 border: "none",
               }}
             >
-              Skipped
+              {t("lsf.components.annotations_carousel.annotation_button.skipped")}
             </Badge>
           )}
           {/* Ground Truth badge shown last */}
@@ -335,7 +336,7 @@ function AnnotationButtonTooltip({
                 border: "none",
               }}
             >
-              Ground Truth
+              {t("lsf.components.annotations_carousel.annotation_button.ground_truth")}
             </Badge>
           )}
         </div>
@@ -470,9 +471,9 @@ const AnnotationButtonContextMenu = injector(
           title: "Delete annotation?",
           body: (
             <>
-              This will <strong>delete all existing regions</strong>. Are you sure you want to delete them?
+              {t("lsf.components.annotations_carousel.annotation_button.this_will")} <strong>delete all existing regions</strong>{t("lsf.components.annotations_carousel.annotation_button.are_you_sure_you")}
               <br />
-              This action cannot be undone.
+              {t("lsf.components.annotations_carousel.annotation_button.this_action_cannot_be_undone")}
             </>
           ),
           buttonLook: "negative",
@@ -1014,21 +1015,21 @@ export const AnnotationButton = observer(
           {!isPrediction && (
             <div className={cn("annotation-button").elem("icons").toClassName()}>
               {(entity.draftId > 0 || isDraft) && (
-                <Tooltip title="Draft">
+                <Tooltip title={t("lsf.components.annotations_carousel.annotation_button.draft")}>
                   <div className={cn("annotation-button").elem("icon").mod({ draft: true }).toClassName()}>
                     <IconDraftCreated2 color="#617ADA" />
                   </div>
                 </Tooltip>
               )}
               {entity.skipped && (
-                <Tooltip title="Skipped">
+                <Tooltip title={t("lsf.components.annotations_carousel.annotation_button.skipped")}>
                   <div className={cn("annotation-button").elem("icon").mod({ skipped: true }).toClassName()}>
                     <IconAnnotationSkipped2 color="#DD0000" />
                   </div>
                 </Tooltip>
               )}
               {isGroundTruth && (
-                <Tooltip title="Ground-truth">
+                <Tooltip title={t("lsf.components.annotations_carousel.annotation_button.ground_truth_2")}>
                   <div className={cn("annotation-button").elem("icon").mod({ groundTruth: true }).toClassName()}>
                     <IconAnnotationGroundTruth />
                   </div>

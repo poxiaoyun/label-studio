@@ -25,6 +25,7 @@ import {
 } from "./buttons";
 
 import "./Controls.scss";
+import { t } from "@humansignal/i18n";
 
 // these buttons can be reused inside custom buttons or can be replaces with custom buttons
 type SupportedInternalButtons = "accept" | "reject";
@@ -186,7 +187,7 @@ export const Controls = controlsInjector<{ annotation: MSTAnnotation }>(
     } else if (annotation.skipped) {
       buttons.push(
         <div className={cn("controls").elem("skipped-info").toClassName()} key="skipped">
-          <IconBan /> Was skipped
+          <IconBan /> {t("lsf.components.bottom_bar.controls.was_skipped")}
         </div>,
       );
       buttons.push(<UnskipButton key="unskip" disabled={disabled} store={store} />);
@@ -254,7 +255,7 @@ export const Controls = controlsInjector<{ annotation: MSTAnnotation }>(
             <div className={cn("controls").elem("tooltip-wrapper").toClassName()}>
               <ButtonGroup>
                 <Button
-                  aria-label="Submit current annotation"
+                  aria-label={t("lsf.components.bottom_bar.controls.submit_current_annotation")}
                   name="submit"
                   className="w-[150px]"
                   disabled={isDisabled}
@@ -268,7 +269,7 @@ export const Controls = controlsInjector<{ annotation: MSTAnnotation }>(
                   }}
                   data-testid="bottombar-submit-button"
                 >
-                  Submit
+                  {t("lsf.components.bottom_bar.controls.submit")}
                 </Button>
                 {useExitOption ? (
                   <Dropdown.Trigger
@@ -281,7 +282,7 @@ export const Controls = controlsInjector<{ annotation: MSTAnnotation }>(
                   >
                     <Button
                       disabled={isDisabled}
-                      aria-label="Submit annotation"
+                      aria-label={t("lsf.components.bottom_bar.controls.submit_annotation")}
                       data-testid="bottombar-submit-dropdown"
                     >
                       <IconChevronDown />
@@ -332,7 +333,7 @@ export const Controls = controlsInjector<{ annotation: MSTAnnotation }>(
                   >
                     <Button
                       disabled={isUpdateDisabled}
-                      aria-label="Update annotation"
+                      aria-label={t("lsf.components.bottom_bar.controls.update_annotation")}
                       data-testid="bottombar-update-dropdown"
                     >
                       <IconChevronDown />

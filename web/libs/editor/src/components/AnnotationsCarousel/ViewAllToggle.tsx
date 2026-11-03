@@ -3,6 +3,7 @@ import { IconViewAll } from "@humansignal/icons";
 import { Typography } from "@humansignal/ui";
 import { cn } from "../../utils/bem";
 import "./ViewAllToggle.scss";
+import { t } from "@humansignal/i18n";
 
 interface ViewAllToggleProps {
   isActive: boolean;
@@ -15,7 +16,7 @@ export const ViewAllToggle = observer(({ isActive, onClick }: ViewAllToggleProps
       type="button"
       className={cn("view-all-toggle").mod({ selected: isActive }).toClassName()}
       onClick={onClick}
-      aria-label="Compare all annotations"
+      aria-label={t("lsf.components.annotations_carousel.view_all_toggle.compare_all_annotations")}
       aria-pressed={isActive}
       data-testid="compare-all-toggle"
     >
@@ -25,7 +26,7 @@ export const ViewAllToggle = observer(({ isActive, onClick }: ViewAllToggleProps
         </div>
         <div className={cn("view-all-toggle").elem("content").toClassName()}>
           <Typography variant="label" size="small" className={cn("view-all-toggle").elem("label").toClassName()}>
-            Compare All
+            {t("lsf.components.annotations_carousel.view_all_toggle.compare_all")}
           </Typography>
         </div>
       </div>

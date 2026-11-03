@@ -3,6 +3,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@humansignal/ui/lib/ta
 import type { MSTAnnotation, MSTStore } from "../../stores/types";
 import TaskSummary from "../TaskSummary/TaskSummary";
 import Grid from "./Grid";
+import { t } from "@humansignal/i18n";
 
 type Props = {
   store: MSTStore["annotationStore"];
@@ -19,10 +20,10 @@ export const ViewAll = ({ store: annotationStore, annotations, root }: Props) =>
         <Tabs variant="default" value={tab} onValueChange={(value) => setTab(value as "summary" | "compare")}>
           <TabsList>
             <TabsTrigger value="summary" data-testid="compare-all-summary-tab">
-              Summary
+              {t("lsf.components.app.view_all.summary")}
             </TabsTrigger>
             <TabsTrigger value="compare" data-testid="compare-all-side-by-side-tab">
-              Side-by-side
+              {t("lsf.components.app.view_all.side_by_side")}
             </TabsTrigger>
           </TabsList>
 

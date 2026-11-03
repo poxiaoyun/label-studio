@@ -34,6 +34,7 @@ import type {
 import { AudioControl } from "./Controls/AudioControl";
 import { ConfigControl } from "./Controls/ConfigControl";
 import { TimeDurationControl } from "../TimeDurationControl/TimeDurationControl";
+import { t } from "@humansignal/i18n";
 
 const positionFromTime = ({ time, fps }: TimelineControlsFormatterOptions) => {
   const roundedFps = Math.round(fps).toString();
@@ -182,7 +183,7 @@ export const Controls: FC<TimelineControlsProps> = memo(
         {buffering && (
           <div
             className={cn("timeline-controls").elem("buffering").toClassName()}
-            aria-label="Buffering Media Source"
+            aria-label={t("lsf.components.timeline.controls.buffering_media_source")}
           />
         )}
         {mediaType === "audio" ? (
@@ -224,7 +225,7 @@ export const Controls: FC<TimelineControlsProps> = memo(
                       onClick={stepHandlerWrapper(onStepBackward, settings.stepSize)}
                       hotkey={settings?.stepAltBack}
                       disabled={startReached}
-                      aria-label="Hop backward"
+                      aria-label={t("lsf.components.timeline.controls.hop_backward")}
                     >
                       {<IconPrev />}
                     </ControlButton>
@@ -233,7 +234,7 @@ export const Controls: FC<TimelineControlsProps> = memo(
                     onClick={stepHandlerWrapper(onStepBackward)}
                     hotkey={settings?.stepBackHotkey}
                     disabled={startReached}
-                    aria-label="Step backward"
+                    aria-label={t("lsf.components.timeline.controls.step_backward")}
                   >
                     <IconChevronLeft />
                   </ControlButton>
@@ -245,7 +246,7 @@ export const Controls: FC<TimelineControlsProps> = memo(
                     onClick={() => onRewind?.()}
                     disabled={startReached}
                     hotkey={settings?.skipToBeginning}
-                    aria-label="Skip to start"
+                    aria-label={t("lsf.components.timeline.controls.skip_to_start")}
                   >
                     <IconRewind />
                   </ControlButton>
@@ -253,7 +254,7 @@ export const Controls: FC<TimelineControlsProps> = memo(
                     onClick={() => onRewind?.(altHopSize)}
                     disabled={startReached}
                     hotkey={settings?.hopBackward}
-                    aria-label="Media rewind"
+                    aria-label={t("lsf.components.timeline.controls.media_rewind")}
                   >
                     <IconBackward />
                   </ControlButton>
@@ -265,7 +266,7 @@ export const Controls: FC<TimelineControlsProps> = memo(
               onClick={handlePlay}
               hotkey={settings?.playpauseHotkey}
               hotkeyScope={Hotkey.ALL_SCOPES}
-              aria-label="Play"
+              aria-label={t("lsf.components.timeline.controls.play")}
             >
               {playing ? <IconTimelinePause /> : <IconTimelinePlay />}
             </ControlButton>
@@ -277,7 +278,7 @@ export const Controls: FC<TimelineControlsProps> = memo(
                     onClick={stepHandlerWrapper(onStepForward)}
                     hotkey={settings?.stepForwardHotkey}
                     disabled={endReached}
-                    aria-label="Step forward"
+                    aria-label={t("lsf.components.timeline.controls.step_forward")}
                   >
                     <IconChevronRight />
                   </ControlButton>
@@ -286,7 +287,7 @@ export const Controls: FC<TimelineControlsProps> = memo(
                       disabled={endReached}
                       onClick={stepHandlerWrapper(onStepForward, settings.stepSize)}
                       hotkey={settings?.stepAltForward}
-                      aria-label="Hop forward"
+                      aria-label={t("lsf.components.timeline.controls.hop_forward")}
                     >
                       <IconNext />
                     </ControlButton>
@@ -299,12 +300,12 @@ export const Controls: FC<TimelineControlsProps> = memo(
                     onClick={() => onForward?.(altHopSize)}
                     disabled={endReached}
                     hotkey={settings?.hopForward}
-                    aria-label="Media fast forward"
+                    aria-label={t("lsf.components.timeline.controls.media_fast_forward")}
                   >
                     <IconForward />
                   </ControlButton>
                   <ControlButton
-                    aria-label="Skip to end"
+                    aria-label={t("lsf.components.timeline.controls.skip_to_end")}
                     onClick={() => onForward?.()}
                     disabled={endReached}
                     hotkey={settings?.skipToEnd}
@@ -318,12 +319,12 @@ export const Controls: FC<TimelineControlsProps> = memo(
           </Space>
           <Space className={cn("timeline-controls").elem("group").toClassName()} collapsed>
             {!disableFrames && allowViewCollapse && (
-              <ControlButton tooltip="Toggle Timeline" onClick={() => onToggleCollapsed?.(!collapsed)}>
+              <ControlButton tooltip={t("lsf.components.timeline.controls.toggle_timeline")} onClick={() => onToggleCollapsed?.(!collapsed)}>
                 {collapsed ? <IconExpand /> : <IconCollapse />}
               </ControlButton>
             )}
             {allowFullscreen && (
-              <ControlButton tooltip="Fullscreen" onClick={() => onFullScreenToggle?.(false)}>
+              <ControlButton tooltip={t("lsf.components.timeline.controls.fullscreen")} onClick={() => onFullScreenToggle?.(false)}>
                 {fullscreen ? <IconFullscreenExit /> : <IconFullscreen />}
               </ControlButton>
             )}

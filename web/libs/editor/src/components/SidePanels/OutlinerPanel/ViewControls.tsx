@@ -20,6 +20,7 @@ import { cn } from "../../../utils/bem";
 import { SidePanelsContext } from "../SidePanelsContext";
 import "./ViewControls.scss";
 import { observer } from "mobx-react";
+import { t } from "@humansignal/i18n";
 
 export type GroupingOptions = "manual" | "label" | "type";
 
@@ -72,7 +73,7 @@ export const ViewControls: FC<ViewControlsProps> = observer(
           return {
             label: (
               <>
-                <IconList /> Group Manually
+                <IconList /> {t("lsf.side_panels.outliner_panel.view_controls.group_manually")}
               </>
             ),
             selectedLabel: "Manual",
@@ -83,7 +84,7 @@ export const ViewControls: FC<ViewControlsProps> = observer(
           return {
             label: (
               <>
-                <IconBoundingBox /> Group by Label
+                <IconBoundingBox /> {t("lsf.side_panels.outliner_panel.view_controls.group_by_label")}
               </>
             ),
             selectedLabel: "By Label",
@@ -94,7 +95,7 @@ export const ViewControls: FC<ViewControlsProps> = observer(
           return {
             label: (
               <>
-                <IconCursor /> Group by Tool
+                <IconCursor /> {t("lsf.side_panels.outliner_panel.view_controls.group_by_tool")}
               </>
             ),
             selectedLabel: "By Tool",
@@ -110,7 +111,7 @@ export const ViewControls: FC<ViewControlsProps> = observer(
           return {
             label: (
               <>
-                <IconClockTimeFourOutline /> Order by Time
+                <IconClockTimeFourOutline /> {t("lsf.side_panels.outliner_panel.view_controls.order_by_time")}
               </>
             ),
             selectedLabel: "By Time",
@@ -120,7 +121,7 @@ export const ViewControls: FC<ViewControlsProps> = observer(
           return {
             label: (
               <>
-                <IconPredictions /> Order by Score
+                <IconPredictions /> {t("lsf.side_panels.outliner_panel.view_controls.order_by_score")}
               </>
             ),
             selectedLabel: "By Score",
@@ -130,7 +131,7 @@ export const ViewControls: FC<ViewControlsProps> = observer(
           return {
             label: (
               <>
-                <IconTimelineRegion /> Order by Media Start Time
+                <IconTimelineRegion /> {t("lsf.side_panels.outliner_panel.view_controls.order_by_media_start_time")}
               </>
             ),
             selectedLabel: "By Media Start Time",

@@ -4,6 +4,7 @@ import { Button, IconRefresh } from "@humansignal/ui";
 import { observer } from "mobx-react";
 
 import styles from "./Styles.module.scss";
+import { t } from "@humansignal/i18n";
 
 export default observer(
   class SliderDropDownTool extends Component {
@@ -35,7 +36,7 @@ export default observer(
       return (
         <Fragment>
           <Dropdown overlay={menu}>
-            <Button className={styles.button} aria-label="Slider options">
+            <Button className={styles.button} aria-label={t("lsf.components.tools.slider_drop_down.slider_options")}>
               {this.props.icon}
             </Button>
           </Dropdown>

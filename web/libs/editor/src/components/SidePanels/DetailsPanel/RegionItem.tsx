@@ -9,6 +9,7 @@ import { cn } from "../../../utils/bem";
 import { NodeIcon } from "../../Node/Node";
 import { LockButton } from "../Components/LockButton";
 import { RegionLabels } from "./RegionLabels";
+import { t } from "@humansignal/i18n";
 
 interface RegionItemProps {
   region: any;
@@ -70,7 +71,7 @@ export const RegionItem: FC<RegionItemProps> = observer(
           <div className={cn("detailed-region").elem("warning").toClassName()}>
             <IconWarning />
             <div className={cn("detailed-region").elem("warning-text").toClassName()}>
-              Incomplete {region.type?.replace("region", "") ?? "region"}
+              {t("lsf.side_panels.details_panel.region_item.incomplete")} {region.type?.replace("region", "") ?? "region"}
             </div>
           </div>
         )}
@@ -116,7 +117,7 @@ const RegionAction: FC<any> = observer(({ region, annotation, editMode, onEditMo
             annotation.startLinkingMode(CREATE_RELATION_MODE, region);
           }
         }}
-        aria-label="Create Relation"
+        aria-label={t("lsf.side_panels.details_panel.region_item.create_relation")}
       >
         <IconRelationLink />
       </RegionActionButton>
@@ -130,7 +131,7 @@ const RegionAction: FC<any> = observer(({ region, annotation, editMode, onEditMo
         look={editMode ? "filled" : "string"}
         variant={editMode ? "primary" : "neutral"}
         onClick={() => onEditModeChange(!editMode)}
-        aria-label="Edit region's meta"
+        aria-label={t("lsf.side_panels.details_panel.region_item.edit_regions_meta")}
       >
         <IconPlus />
       </RegionActionButton>
@@ -153,8 +154,8 @@ const RegionAction: FC<any> = observer(({ region, annotation, editMode, onEditMo
             displayedHotkey="region:lock"
             variant="neutral"
             look="string"
-            aria-label="Unlock Region"
-            tooltip="Unlock Region"
+            aria-label={t("lsf.side_panels.details_panel.region_item.unlock_region")}
+            tooltip={t("lsf.side_panels.details_panel.region_item.unlock_region")}
           />
         )}
         {!region.incomplete && region.hideable && (
@@ -171,9 +172,9 @@ const RegionAction: FC<any> = observer(({ region, annotation, editMode, onEditMo
         <RegionActionButton
           variant="negative"
           look="string"
-          aria-label="Delete selected region"
+          aria-label={t("lsf.side_panels.details_panel.region_item.delete_selected_region")}
           disabled={region.isReadOnly()}
-          tooltip="Delete selected region"
+          tooltip={t("lsf.side_panels.details_panel.region_item.delete_selected_region")}
           onClick={() => annotation.deleteRegion(region)}
         >
           <IconTrash />

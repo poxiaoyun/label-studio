@@ -13,6 +13,7 @@ import * as TagSettings from "./TagSettings";
 import { IconClose } from "@humansignal/icons";
 import { Checkbox, Toggle } from "@humansignal/ui";
 import { ff } from "@humansignal/core";
+import { t } from "@humansignal/i18n";
 
 const HotkeysDescription = () => {
   const columns = [
@@ -125,13 +126,13 @@ const LayoutSettings = observer(({ store }) => {
             setTimeout(triggerResizeEvent);
           }}
         >
-          Move sidepanel to the bottom
+          {t("lsf.components.settings.settings.move_sidepanel_to_the_bottom")}
         </Checkbox>
       </div>
 
       <div className={cn("settings").elem("field").toClassName()}>
         <Checkbox checked={store.settings.displayLabelsByDefault} onChange={store.settings.toggleSidepanelModel}>
-          Display Labels by default in Results panel
+          {t("lsf.components.settings.settings.display_labels_by_default_in")}
         </Checkbox>
       </div>
 
@@ -143,7 +144,7 @@ const LayoutSettings = observer(({ store }) => {
             store.settings.toggleAnnotationsPanel();
           }}
         >
-          Show Annotations panel
+          {t("lsf.components.settings.settings.show_annotations_panel")}
         </Checkbox>
       </div>
 
@@ -155,7 +156,7 @@ const LayoutSettings = observer(({ store }) => {
             store.settings.togglePredictionsPanel();
           }}
         >
-          Show Predictions panel
+          {t("lsf.components.settings.settings.show_predictions_panel")}
         </Checkbox>
       </div>
 

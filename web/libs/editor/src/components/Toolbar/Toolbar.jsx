@@ -10,6 +10,7 @@ import { ToolbarProvider } from "./ToolbarContext";
 import "./FlyoutMenu.scss";
 import "./Tool.scss";
 import "./Toolbar.scss";
+import { t } from "@humansignal/i18n";
 
 export const Toolbar = inject("store")(
   observer(({ store, tools, expanded }) => {
@@ -85,7 +86,7 @@ const SmartTools = observer(({ tools }) => {
       <div className={cn("toolbar").elem("group").toClassName()}>
         <Tool
           smart
-          label="Auto-Detect"
+          label={t("lsf.components.toolbar.toolbar.auto_detect")}
           active={hasSelected}
           icon={selected.iconClass}
           shortcut="tool:auto-detect"

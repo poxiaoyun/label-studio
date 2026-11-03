@@ -8,6 +8,7 @@ import { DrawingTool } from "../mixins/DrawingTool";
 import { Tool } from "../components/Toolbar/Tool";
 import { Range } from "../common/Range/Range";
 import { NodeViews } from "../components/Node/Node";
+import { t } from "@humansignal/i18n";
 
 const MIN_SIZE = 1;
 const MAX_SIZE = 50;
@@ -29,7 +30,7 @@ const IconDot = ({ size }) => {
 const ToolView = observer(({ item }) => {
   return (
     <Tool
-      label="Bitmask"
+      label={t("lsf.tools.bitmask.bitmask")}
       ariaLabel="bitmask-tool"
       active={item.selected}
       shortcut={item.shortcut}

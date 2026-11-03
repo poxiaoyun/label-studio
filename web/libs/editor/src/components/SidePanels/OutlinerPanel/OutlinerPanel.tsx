@@ -9,6 +9,7 @@ import { IconInfo } from "@humansignal/icons";
 import { IconLsLabeling } from "@humansignal/ui";
 import { EmptyState } from "../Components/EmptyState";
 import { getDocsUrl } from "../../../utils/docs";
+import { t } from "@humansignal/i18n";
 
 // Local type definitions based on ViewControls and RegionStore
 type GroupingOptions = "manual" | "label" | "type";
@@ -50,7 +51,7 @@ const OutlinerPanelComponent: FC<OutlinerPanelProps> = ({ regions, ...props }) =
   regions.setGrouping(group);
 
   return (
-    <PanelBase {...props} name="outliner" mix={OutlinerFFClasses} title="Outliner">
+    <PanelBase {...props} name="outliner" mix={OutlinerFFClasses} title={t("lsf.side_panels.outliner_panel.outliner_panel.outliner")}>
       <ViewControls
         ordering={regions.sort}
         regions={regions}
@@ -103,7 +104,7 @@ const OutlinerEmptyState = () => (
     description={
       <>
         <span>
-          Start labeling and track your results
+          {t("lsf.side_panels.outliner_panel.outliner_panel.start_labeling_and_track_your")}
           <br />
           using this panel
         </span>
@@ -127,9 +128,9 @@ const OutlinerTreeComponent: FC<OutlinerTreeComponentProps> = observer(({ region
       {allRegionsHidden ? (
         <div className={cn("filters-info").toClassName()}>
           <IconInfo width={21} height={20} />
-          <div className={cn("filters-info").elem("filters-title").toClassName()}>All regions hidden</div>
+          <div className={cn("filters-info").elem("filters-title").toClassName()}>{t("lsf.side_panels.outliner_panel.outliner_panel.all_regions_hidden")}</div>
           <div className={cn("filters-info").elem("filters-description").toClassName()}>
-            Adjust or remove the filters to view
+            {t("lsf.side_panels.outliner_panel.outliner_panel.adjust_or_remove_the_filters")}
           </div>
         </div>
       ) : regions?.regions?.length > 0 ? (
@@ -141,10 +142,10 @@ const OutlinerTreeComponent: FC<OutlinerTreeComponentProps> = observer(({ region
                 <div className={cn("filters-info").toClassName()}>
                   <IconInfo width={21} height={20} />
                   <div className={cn("filters-info").elem("filters-title").toClassName()}>
-                    There {hiddenRegions === 1 ? "is" : "are"} {hiddenRegions} hidden region{hiddenRegions > 1 && "s"}
+                    {t("lsf.side_panels.outliner_panel.outliner_panel.there")} {hiddenRegions === 1 ? "is" : "are"} {hiddenRegions} hidden region{hiddenRegions > 1 && "s"}
                   </div>
                   <div className={cn("filters-info").elem("filters-description").toClassName()}>
-                    Adjust or remove filters to view
+                    {t("lsf.side_panels.outliner_panel.outliner_panel.adjust_or_remove_filters_to")}
                   </div>
                 </div>
               )

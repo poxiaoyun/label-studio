@@ -14,6 +14,7 @@ import { cn } from "../../../utils/bem";
 import { wrapArray } from "../../../utils/utilities";
 import { RegionItem } from "./RegionItem";
 import "./Relations.scss";
+import { t } from "@humansignal/i18n";
 
 const RealtionsComponent: FC<any> = ({ relationStore }) => {
   const relations = relationStore.orderedRelations;
@@ -109,7 +110,7 @@ const RelationItem: FC<{ relation: any }> = observer(({ relation }) => {
                 variant="neutral"
                 look="string"
                 size="small"
-                tooltip="Toggle Visibility"
+                tooltip={t("lsf.side_panels.details_panel.relations.toggle_visibility")}
                 onClick={relation.toggleVisibility}
                 aria-label={`${relation.visible ? "Hide" : "Show"} Relation`}
               >
@@ -127,8 +128,8 @@ const RelationItem: FC<{ relation: any }> = observer(({ relation }) => {
                 variant="negative"
                 look="string"
                 size="small"
-                aria-label="Delete Relation"
-                tooltip="Delete Relation"
+                aria-label={t("lsf.side_panels.details_panel.relations.delete_relation")}
+                tooltip={t("lsf.side_panels.details_panel.relations.delete_relation")}
                 onClick={() => {
                   relation.node1.setHighlight(false);
                   relation.node2.setHighlight(false);
@@ -176,7 +177,7 @@ const RelationMeta: FC<any> = observer(({ relation }) => {
       <Select
         multiple={selectionMode}
         style={{ width: "100%" }}
-        placeholder="Select labels"
+        placeholder={t("lsf.side_panels.details_panel.relations.select_labels")}
         value={selectedValues}
         onChange={onChange}
         options={options}

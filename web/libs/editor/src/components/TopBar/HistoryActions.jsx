@@ -3,6 +3,7 @@ import { IconRedo, IconRemove, IconUndo } from "@humansignal/icons";
 import { Button } from "@humansignal/ui";
 import { cn } from "../../utils/bem";
 import "./HistoryActions.scss";
+import { t } from "@humansignal/i18n";
 
 export const EditingHistory = observer(({ entity }) => {
   const { history } = entity;
@@ -12,9 +13,9 @@ export const EditingHistory = observer(({ entity }) => {
       <Button
         variant="neutral"
         look="string"
-        aria-label="Undo"
+        aria-label={t("lsf.components.top_bar.history_actions.undo")}
         className="!p-0"
-        tooltip="Undo"
+        tooltip={t("lsf.components.top_bar.history_actions.undo")}
         disabled={!history?.canUndo}
         onClick={() => entity.undo()}
       >
@@ -23,9 +24,9 @@ export const EditingHistory = observer(({ entity }) => {
       <Button
         variant="neutral"
         look="string"
-        aria-label="Redo"
+        aria-label={t("lsf.components.top_bar.history_actions.redo")}
         className="!p-0"
-        tooltip="Redo"
+        tooltip={t("lsf.components.top_bar.history_actions.redo")}
         disabled={!history?.canRedo}
         onClick={() => entity.redo()}
         leading={<IconRedo />}
@@ -33,8 +34,8 @@ export const EditingHistory = observer(({ entity }) => {
       <Button
         look="string"
         variant="negative"
-        aria-label="Reset"
-        tooltip="Reset"
+        aria-label={t("lsf.components.top_bar.history_actions.reset")}
+        tooltip={t("lsf.components.top_bar.history_actions.reset")}
         className="!p-0"
         disabled={!history?.canUndo}
         onClick={() => history?.reset()}

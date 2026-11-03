@@ -11,6 +11,7 @@ import {
 
 import styles from "./Panel.module.scss";
 import Hint from "../Hint/Hint";
+import { t } from "@humansignal/i18n";
 
 /**
  * Panel component with buttons:
@@ -40,8 +41,8 @@ export default observer(({ store }) => {
             ev.preventDefault();
           }}
         >
-          Undo
-          {store.settings.enableHotkeys && store.settings.enableTooltips && <Hint>[ Ctrl+z ]</Hint>}
+          {t("lsf.components.panel.panel.undo")}
+          {store.settings.enableHotkeys && store.settings.enableTooltips && <Hint>{t("lsf.components.panel.panel.ctrl_z")}</Hint>}
         </Button>
         <Button
           look="string"
@@ -52,7 +53,7 @@ export default observer(({ store }) => {
             ev.preventDefault();
           }}
         >
-          Redo
+          {t("lsf.components.panel.panel.redo")}
         </Button>
         <Button
           type="ghost"
@@ -62,7 +63,7 @@ export default observer(({ store }) => {
             history && history.reset();
           }}
         >
-          Reset
+          {t("lsf.components.panel.panel.reset")}
         </Button>
         {store.setPrelabeling && (
           <Button
@@ -72,7 +73,7 @@ export default observer(({ store }) => {
               store.resetPrelabeling();
             }}
           >
-            Reset Prelabeling
+            {t("lsf.components.panel.panel.reset_prelabeling")}
           </Button>
         )}
         {store.hasInterface("debug") && (
@@ -91,7 +92,7 @@ export default observer(({ store }) => {
               store.toggleDescription();
             }}
           >
-            Hide Instructions
+            {t("lsf.components.panel.panel.hide_instructions")}
           </Button>
         )}
         {store.description && !store.showingDescription && (
@@ -101,7 +102,7 @@ export default observer(({ store }) => {
               store.toggleDescription();
             }}
           >
-            Instructions
+            {t("lsf.components.panel.panel.instructions")}
           </Button>
         )}
 

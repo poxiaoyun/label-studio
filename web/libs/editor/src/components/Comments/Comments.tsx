@@ -10,13 +10,14 @@ import { FF_DEV_3034, isFF } from "../../utils/feature-flags";
 import { FF_FIT_720_LAZY_LOAD_ANNOTATIONS } from "@humansignal/core/lib/utils/feature-flags";
 
 import "./Comments.scss";
+import { t } from "@humansignal/i18n";
 
 // FIT-720: Skeleton loader for comments while fetching
 const CommentsLoadingSkeleton: FC = () => (
   <div className={cn("comments").elem("loading").toClassName()}>
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "40px 0" }}>
       <Spin size="default" />
-      <span style={{ marginLeft: 12, color: "#999" }}>Loading comments...</span>
+      <span style={{ marginLeft: 12, color: "#999" }}>{t("lsf.components.comments.comments.loading_comments")}</span>
     </div>
   </div>
 );

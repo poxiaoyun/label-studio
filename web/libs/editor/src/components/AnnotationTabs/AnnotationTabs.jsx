@@ -5,6 +5,7 @@ import { Userpic } from "@humansignal/ui";
 import { Space } from "../../common/Space/Space";
 import { cn } from "../../utils/bem";
 import "./AnnotationTabs.scss";
+import { t } from "@humansignal/i18n";
 
 export const EntityTab = observer(
   forwardRef(
@@ -36,7 +37,7 @@ export const EntityTab = observer(
 
             {!infoIsHidden && (
               <div className={cn("entity-tab").elem("identifier").toClassName()}>
-                ID {entity.pk ?? entity.id} {isUnsaved && "*"}
+                {t("lsf.components.annotation_tabs.annotation_tabs.id")} {entity.pk ?? entity.id} {isUnsaved && "*"}
               </div>
             )}
 

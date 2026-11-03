@@ -16,6 +16,7 @@ import {
 
 import Utils from "../../utils";
 import styles from "./Annotations.module.scss";
+import { t } from "@humansignal/i18n";
 
 /** @deprecated this file is not used; DraftPanel is moved to separate component */
 
@@ -48,12 +49,12 @@ const Annotation = observer(({ item, store }) => {
   const removeHoney = () => (
     <Button
       size="small"
-      tooltip="Unset this result as a ground truth"
+      tooltip={t("lsf.components.annotations.annotations.unset_this_result_as_a")}
       onClick={(ev) => {
         ev.preventDefault();
         item.setGroundTruth(false);
       }}
-      aria-label="Unset ground truth"
+      aria-label={t("lsf.components.annotations.annotations.unset_ground_truth")}
     >
       <StarOutlined />
     </Button>
@@ -113,12 +114,12 @@ const Annotation = observer(({ item, store }) => {
    * Title of card
    */
   if (item.userGenerate && !item.sentUserGenerate) {
-    annotationID = <span className={styles.title}>Unsaved Annotation</span>;
+    annotationID = <span className={styles.title}>{t("lsf.components.annotations.annotations.unsaved_annotation")}</span>;
   } else {
     if (item.pk) {
-      annotationID = <span className={styles.title}>ID {item.pk}</span>;
+      annotationID = <span className={styles.title}>{t("lsf.components.annotations.annotations.id")} {item.pk}</span>;
     } else if (item.id) {
-      annotationID = <span className={styles.title}>ID {item.id}</span>;
+      annotationID = <span className={styles.title}>{t("lsf.components.annotations.annotations.id")} {item.id}</span>;
     }
   }
 
@@ -148,7 +149,7 @@ const Annotation = observer(({ item, store }) => {
         {store.hasInterface("ground-truth") && (item.ground_truth ? removeHoney() : setHoney())}
         &nbsp;
         {store.hasInterface("annotations:delete") && (
-          <Tooltip placement="topLeft" title="Delete selected annotation">
+          <Tooltip placement="topLeft" title={t("lsf.components.annotations.annotations.delete_selected_annotation")}>
             <Popconfirm
               placement="bottomLeft"
               title={"Please confirm you want to delete this annotation"}
@@ -157,7 +158,7 @@ const Annotation = observer(({ item, store }) => {
               okType="danger"
               cancelText="Cancel"
             >
-              <Button size="small" look="string" variant="negative" aria-label="Delete selected annotation">
+              <Button size="small" look="string" variant="negative" aria-label={t("lsf.components.annotations.annotations.delete_selected_annotation")}>
                 <DeleteOutlined />
               </Button>
             </Popconfirm>
@@ -190,7 +191,7 @@ const Annotation = observer(({ item, store }) => {
         </div>
         {/* platform uses was_cancelled so check both */}
         {store.hasInterface("skip") && (item.skipped || item.was_cancelled) && (
-          <Tooltip alignment="top-left" title="Skipped annotation">
+          <Tooltip alignment="top-left" title={t("lsf.components.annotations.annotations.skipped_annotation")}>
             <StopOutlined className={styles.skipped} />
           </Tooltip>
         )}
@@ -199,7 +200,7 @@ const Annotation = observer(({ item, store }) => {
             size="small"
             look="outlined"
             onClick={toggleVisibility}
-            aria-label="Toggle visibility of current annotation"
+            aria-label={t("lsf.components.annotations.annotations.toggle_visibility_of_current_annotation")}
           >
             {item.hidden ? <EyeInvisibleOutlined /> : <EyeOutlined />}
           </Button>
@@ -217,21 +218,21 @@ class Annotations extends Component {
     const title = (
       <div className={`${styles.title} ${styles.titlespace}`}>
         <div style={{ display: "flex", alignItems: "center" }}>
-          <h3>Annotations</h3>
+          <h3>{t("lsf.components.annotations.annotations.annotations")}</h3>
         </div>
 
         <div style={{ marginRight: "1px" }}>
           {store.hasInterface("annotations:add-new") && (
             <Button
               size="small"
-              tooltip="Create new annotation"
+              tooltip={t("lsf.components.annotations.annotations.create_new_annotation")}
               onClick={(ev) => {
                 ev.preventDefault();
                 const c = store.annotationStore.createAnnotation();
 
                 store.annotationStore.selectAnnotation(c.id);
               }}
-              aria-label="Create new annotation"
+              aria-label={t("lsf.components.annotations.annotations.create_new_annotation")}
             >
               <PlusOutlined />
             </Button>
@@ -239,13 +240,13 @@ class Annotations extends Component {
           &nbsp;
           <Button
             size="small"
-            tooltip="View all annotations"
+            tooltip={t("lsf.components.annotations.annotations.view_all_annotations")}
             look={store.annotationStore.viewingAll ? "filled" : "outlined"}
             onClick={(ev) => {
               ev.preventDefault();
               store.annotationStore.toggleViewingAllAnnotations();
             }}
-            aria-label="Toggle view of all annotations"
+            aria-label={t("lsf.components.annotations.annotations.toggle_view_of_all_annotations")}
           >
             <WindowsOutlined />
           </Button>
@@ -257,7 +258,7 @@ class Annotations extends Component {
 
     return (
       <Card title={title} size="small" bodyStyle={{ padding: "0", paddingTop: "1px" }}>
-        <List>{store.annotationStore.annotations ? content : <p>No annotations submitted yet</p>}</List>
+        <List>{store.annotationStore.annotations ? content : <p>{t("lsf.components.annotations.annotations.no_annotations_submitted_yet")}</p>}</List>
       </Card>
     );
   }

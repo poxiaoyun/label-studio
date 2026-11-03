@@ -10,6 +10,7 @@ import { isDefined } from "../../utils/utilities";
 
 import "./Controls.scss";
 import { useCallback, useMemo, useState } from "react";
+import { t } from "@humansignal/i18n";
 
 const TOOLTIP_DELAY = 0.8;
 
@@ -80,9 +81,9 @@ export const Controls = controlsInjector(
 
     const RejectButton = useMemo(() => {
       return (
-        <ButtonTooltip key="reject" title="Reject annotation: [ Ctrl+Space ]">
+        <ButtonTooltip key="reject" title={t("lsf.components.top_bar.controls.reject_annotation_ctrl_space")}>
           <Button
-            aria-label="Reject current annotation"
+            aria-label={t("lsf.components.top_bar.controls.reject_current_annotation")}
             disabled={disabled}
             look="danger"
             onClick={async (e) => {
@@ -95,7 +96,7 @@ export const Controls = controlsInjector(
               }
             }}
           >
-            Reject
+            {t("lsf.components.top_bar.controls.reject")}
           </Button>
         </ButtonTooltip>
       );
@@ -105,9 +106,9 @@ export const Controls = controlsInjector(
       buttons.push(RejectButton);
 
       buttons.push(
-        <ButtonTooltip key="accept" title="Accept annotation: [ Ctrl+Enter ]">
+        <ButtonTooltip key="accept" title={t("lsf.components.top_bar.controls.accept_annotation_ctrl_enter")}>
           <Button
-            aria-label="Accept current annotation"
+            aria-label={t("lsf.components.top_bar.controls.accept_current_annotation")}
             disabled={disabled}
             look="primary"
             onClick={async () => {
@@ -122,13 +123,13 @@ export const Controls = controlsInjector(
     } else if (annotation.skipped) {
       buttons.push(
         <div className={cn("controls").elem("skipped-info").toClassName()} key="skipped">
-          <IconBan color="#d00" /> Was skipped
+          <IconBan color="#d00" /> {t("lsf.components.top_bar.controls.was_skipped")}
         </div>,
       );
       buttons.push(
-        <ButtonTooltip key="cancel-skip" title="Cancel skip: []">
+        <ButtonTooltip key="cancel-skip" title={t("lsf.components.top_bar.controls.cancel_skip")}>
           <Button
-            aria-label="Cancel skip and return to annotation"
+            aria-label={t("lsf.components.top_bar.controls.cancel_skip_and_return_to")}
             disabled={disabled}
             look="outlined"
             onClick={async () => {
@@ -136,7 +137,7 @@ export const Controls = controlsInjector(
               store.unskipTask();
             }}
           >
-            Cancel skip
+            {t("lsf.components.top_bar.controls.cancel_skip_2")}
           </Button>
         </ButtonTooltip>,
       );
@@ -160,7 +161,7 @@ export const Controls = controlsInjector(
 
         if (showInfoIcon) {
           buttons.push(
-            <Tooltip key="skip-info" title="Annotators and Reviewers will not be able to skip this task">
+            <Tooltip key="skip-info" title={t("lsf.components.top_bar.controls.annotators_and_reviewers_will_not")}>
               <IconInfoOutline width={20} height={20} className="text-neutral-content ml-auto cursor-pointer" />
             </Tooltip>,
           );
@@ -169,7 +170,7 @@ export const Controls = controlsInjector(
         buttons.push(
           <ButtonTooltip key="skip" title={tooltip}>
             <Button
-              aria-label="Skip current task"
+              aria-label={t("lsf.components.top_bar.controls.skip_current_task")}
               disabled={isDisabled}
               variant="negative"
               look="outlined"
@@ -183,7 +184,7 @@ export const Controls = controlsInjector(
                 }
               }}
             >
-              Skip
+              {t("lsf.components.top_bar.controls.skip")}
             </Button>
           </ButtonTooltip>,
         );
@@ -197,7 +198,7 @@ export const Controls = controlsInjector(
           <ButtonTooltip key="submit" title={title}>
             <div className={cn("controls").elem("tooltip-wrapper").toClassName()}>
               <Button
-                aria-label="Submit current annotation"
+                aria-label={t("lsf.components.top_bar.controls.submit_current_annotation")}
                 disabled={disabled || submitDisabled}
                 look="primary"
                 onClick={async () => {
@@ -205,7 +206,7 @@ export const Controls = controlsInjector(
                   store.submitAnnotation();
                 }}
               >
-                Submit
+                {t("lsf.components.top_bar.controls.submit")}
               </Button>
             </div>
           </ButtonTooltip>,
@@ -215,9 +216,9 @@ export const Controls = controlsInjector(
       if ((userGenerate && sentUserGenerate) || (!userGenerate && store.hasInterface("update"))) {
         const isUpdate = sentUserGenerate || versions.result;
         const button = (
-          <ButtonTooltip key="update" title="Update this task: [ Alt+Enter ]">
+          <ButtonTooltip key="update" title={t("lsf.components.top_bar.controls.update_this_task_alt_enter")}>
             <Button
-              aria-label="Update current annotation"
+              aria-label={t("lsf.components.top_bar.controls.update_current_annotation")}
               disabled={disabled || submitDisabled}
               look="primary"
               onClick={async () => {

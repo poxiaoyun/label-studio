@@ -10,6 +10,7 @@ import "./ConfigControl.scss";
 import { SpectrogramConfig } from "./SpectrogramConfig";
 import type { Waveform } from "../Waveform";
 import type { MutableRefObject } from "react";
+import { t } from "@humansignal/i18n";
 
 const MAX_SPEED = 2.5;
 const MAX_ZOOM = 150;
@@ -116,14 +117,14 @@ export const ConfigControl: FC<ConfigControlProps> = ({
           <Toggle
             checked={settings?.loopRegion}
             onChange={(e) => changeSetting?.("loopRegion", e.target.checked)}
-            label="Loop Regions"
+            label={t("lsf.audio_ultra.react.config_control.loop_regions")}
           />
         </div>
         <div className={cn("audio-config").elem("toggle").toClassName()}>
           <Toggle
             checked={settings?.autoPlayNewSegments}
             onChange={(e) => changeSetting?.("autoPlayNewSegments", e.target.checked)}
-            label="Auto-play New Regions"
+            label={t("lsf.audio_ultra.react.config_control.auto_play_new_regions")}
           />
         </div>
         {renderLayerToggles()}

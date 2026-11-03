@@ -14,6 +14,7 @@ import { GroundTruth } from "../CurrentEntity/GroundTruth";
 import "./Annotations.scss";
 import { TimeAgo } from "../../common/TimeAgo/TimeAgo";
 import { reaction } from "mobx";
+import { t } from "@humansignal/i18n";
 
 export const Annotations = observer(({ store, annotationStore, commentStore }) => {
   const dropdownRef = useRef();
@@ -140,7 +141,7 @@ export const Annotations = observer(({ store, annotationStore, commentStore }) =
       <div className={cn("annotations-list").toClassName()} ref={dropdownRef}>
         <div className={cn("annotations-list").elem("selected").toClassName()}>
           <Annotation
-            aria-label="Annotations List Toggle"
+            aria-label={t("lsf.components.top_bar.annotations.annotations_list_toggle")}
             entity={annotationStore.selected}
             onClick={(e) => {
               e.stopPropagation();
@@ -184,14 +185,14 @@ const CreateAnnotation = observer(({ annotationStore, onClick }) => {
   return (
     <div
       className={cn("annotations-list").elem("create").toClassName()}
-      aria-label="Create Annotation"
+      aria-label={t("lsf.components.top_bar.annotations.create_annotation")}
       onClick={onCreateAnnotation}
     >
       <Space size="small">
         <Userpic className={cn("annotations-list").elem("userpic").mod({ prediction: true }).toClassName()}>
           <IconPlusCircle />
         </Userpic>
-        Create Annotation
+        {t("lsf.components.top_bar.annotations.create_annotation")}
       </Space>
     </div>
   );

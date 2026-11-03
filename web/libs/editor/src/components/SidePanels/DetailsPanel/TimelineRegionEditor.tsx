@@ -1,6 +1,7 @@
 import { observer } from "mobx-react";
 import type { MSTTimelineRegion } from "../../Timeline/Types";
 import styles from "./TimelineRegionEditor.module.scss";
+import { t } from "@humansignal/i18n";
 
 export const TimelineRegionEditor = observer(({ region }: { region: MSTTimelineRegion }) => {
   const { start, end } = region.ranges[0];
@@ -18,9 +19,9 @@ export const TimelineRegionEditor = observer(({ region }: { region: MSTTimelineR
 
   return (
     <div className={styles.container}>
-      <Field label="Start frame" value={start} onChange={changeStartTimeHandler} region={region} min={1} max={end} />
-      <Field label="End frame" value={end} onChange={changeEndTimeHandler} region={region} min={start} max={length} />
-      <Field label="Duration" value={end - start + 1} region={region} />
+      <Field label={t("lsf.side_panels.details_panel.timeline_region_editor.start_frame")} value={start} onChange={changeStartTimeHandler} region={region} min={1} max={end} />
+      <Field label={t("lsf.side_panels.details_panel.timeline_region_editor.end_frame")} value={end} onChange={changeEndTimeHandler} region={region} min={start} max={length} />
+      <Field label={t("lsf.side_panels.details_panel.timeline_region_editor.duration")} value={end - start + 1} region={region} />
     </div>
   );
 });

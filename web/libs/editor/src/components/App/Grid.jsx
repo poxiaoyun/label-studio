@@ -20,6 +20,7 @@ import { FF_DEV_3391, isFF } from "../../utils/feature-flags";
 import { FF_FIT_720_LAZY_LOAD_ANNOTATIONS } from "@humansignal/core/lib/utils/feature-flags";
 import { moveStylesBetweenHeadTags } from "../../utils/html";
 import { useAnnotationFetcher } from "../../hooks/useAnnotationQuery";
+import { t } from "@humansignal/i18n";
 
 // FIT-720: Virtualization constants for Compare view
 const PANEL_WIDTH = 500; // Width of each annotation panel (approximately 50% of typical viewport)
@@ -427,7 +428,7 @@ const VirtualizedGrid = observer(({ store, annotations, root }) => {
             look="string"
             onClick={scrollLeft}
             className={styles.left}
-            aria-label="Move left"
+            aria-label={t("lsf.components.app.grid.move_left")}
             disabled={isLeftDisabled}
           >
             <LeftCircleOutlined />
@@ -437,7 +438,7 @@ const VirtualizedGrid = observer(({ store, annotations, root }) => {
             look="string"
             onClick={scrollRight}
             className={styles.right}
-            aria-label="Move right"
+            aria-label={t("lsf.components.app.grid.move_right")}
             disabled={isRightDisabled}
           >
             <RightCircleOutlined />
@@ -580,7 +581,7 @@ class GridClassComponent extends Component {
             .filter((c) => !c.hidden)
             .map((c) => (
               <div id={`c-${c.id}`} key={`anno-${c.id}`} style={{ position: "relative" }}>
-                <Tooltip title="Open Annotation Tab">
+                <Tooltip title={t("lsf.components.app.grid.open_annotation_tab")}>
                   <div>
                     <EntityTab
                       entity={c}
@@ -625,10 +626,10 @@ class GridClassComponent extends Component {
             </div>
           )}
         </div>
-        <Button size="small" look="string" onClick={this.left} className={styles.left} aria-label="Move left">
+        <Button size="small" look="string" onClick={this.left} className={styles.left} aria-label={t("lsf.components.app.grid.move_left")}>
           <LeftCircleOutlined />
         </Button>
-        <Button size="small" look="string" onClick={this.right} className={styles.right} aria-label="Move right">
+        <Button size="small" look="string" onClick={this.right} className={styles.right} aria-label={t("lsf.components.app.grid.move_right")}>
           <RightCircleOutlined />
         </Button>
       </div>

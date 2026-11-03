@@ -12,6 +12,7 @@ import "./CommentForm.scss";
 import { NewTaxonomy as Taxonomy, type TaxonomyPath } from "../../../components/NewTaxonomy/NewTaxonomy";
 import { CommentFormButtons } from "./CommentFormButtons";
 import { taxonomyPathsToSelectedItems, COMMENT_TAXONOMY_OPTIONS } from "../../../utils/commentClassification";
+import { t } from "@humansignal/i18n";
 
 export type CommentFormProps = {
   commentStore: any;
@@ -150,7 +151,7 @@ export const CommentForm: FC<CommentFormProps> = observer(({ commentStore, annot
         <TextArea
           actionRef={actionRef}
           name="comment"
-          placeholder="Add a comment"
+          placeholder={t("lsf.comments.comment.comment_form.add_a_comment")}
           value={text}
           rows={ROWS}
           maxRows={MAX_ROWS}

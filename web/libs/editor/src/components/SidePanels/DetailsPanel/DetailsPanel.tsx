@@ -14,6 +14,7 @@ import { RelationsControls } from "./RelationsControls";
 import { EmptyState } from "../Components/EmptyState";
 import { IconCursor, IconRelationLink } from "@humansignal/icons";
 import { getDocsUrl } from "../../../utils/docs";
+import { t } from "@humansignal/i18n";
 
 interface DetailsPanelProps extends PanelProps {
   regions: any;
@@ -24,7 +25,7 @@ const DetailsPanelComponent: FC<DetailsPanelProps> = ({ currentEntity, regions, 
   const selectedRegions = regions.selection;
 
   return (
-    <PanelBase {...props} currentEntity={currentEntity} name="details" title="Details">
+    <PanelBase {...props} currentEntity={currentEntity} name="details" title={t("lsf.side_panels.details_panel.details_panel.details")}>
       <Content selection={selectedRegions} currentEntity={currentEntity} />
     </PanelBase>
   );
@@ -79,7 +80,7 @@ const RelationsTab: FC<any> = inject("store")(
               <>
                 <div className={cn("relations").elem("view-control").toClassName()}>
                   <div className={cn("relations").elem("section-head").toClassName()}>
-                    Relations ({relationStore.size})
+                    {t("lsf.side_panels.details_panel.details_panel.relations")}{relationStore.size})
                   </div>
                   <RelationsControls relationStore={relationStore} />
                 </div>
@@ -91,7 +92,7 @@ const RelationsTab: FC<any> = inject("store")(
               <EmptyState
                 icon={<IconRelationLink width={24} height={24} />}
                 header="Create relations between regions"
-                description={<>Link regions to define relationships between them</>}
+                description={<>{t("lsf.side_panels.details_panel.details_panel.link_regions_to_define_relationships")}</>}
                 learnMore={{
                   href: getDocsUrl("guide/labeling#Add-relations-between-annotations"),
                   text: "Learn more",
@@ -119,7 +120,7 @@ const HistoryTab: FC<any> = inject("store")(
               enabled={showAnnotationHistory}
               sectionHeader={
                 <>
-                  Annotation History
+                  {t("lsf.side_panels.details_panel.details_panel.annotation_history")}
                   <span>#{currentEntity.pk ?? currentEntity.id}</span>
                 </>
               }
@@ -142,7 +143,7 @@ const InfoTab: FC<any> = inject("store")(
               <EmptyState
                 icon={<IconCursor width={24} height={24} />}
                 header="View region details"
-                description={<>Select a region to view its properties, metadata and available actions</>}
+                description={<>{t("lsf.side_panels.details_panel.details_panel.select_a_region_to_view")}</>}
               />
             ) : (
               <>
@@ -180,7 +181,7 @@ const GeneralPanel: FC<any> = inject("store")(
             enabled={showAnnotationHistory}
             sectionHeader={
               <>
-                Annotation History
+                {t("lsf.side_panels.details_panel.details_panel.annotation_history")}
                 <span>#{currentEntity.pk ?? currentEntity.id}</span>
               </>
             }
@@ -188,7 +189,7 @@ const GeneralPanel: FC<any> = inject("store")(
         </div>
         <div className={cn("details").elem("section").toClassName()}>
           <div className={cn("details").elem("view-control").toClassName()}>
-            <div className={cn("details").elem("section-head").toClassName()}>Relations ({relationStore.size})</div>
+            <div className={cn("details").elem("section-head").toClassName()}>{t("lsf.side_panels.details_panel.details_panel.relations")}{relationStore.size})</div>
             <RelationsControls relationStore={relationStore} />
           </div>
           <div className={cn("details").elem("section-content").toClassName()}>
@@ -197,7 +198,7 @@ const GeneralPanel: FC<any> = inject("store")(
         </div>
         {store.hasInterface("annotations:comments") && store.commentStore.isCommentable && (
           <div className={cn("details").elem("section").toClassName()}>
-            <div className={cn("details").elem("section-head").toClassName()}>Comments</div>
+            <div className={cn("details").elem("section-head").toClassName()}>{t("lsf.side_panels.details_panel.details_panel.comments")}</div>
             <div className={cn("details").elem("section-content").toClassName()}>
               <CommentsComponent
                 annotationStore={store.annotationStore}

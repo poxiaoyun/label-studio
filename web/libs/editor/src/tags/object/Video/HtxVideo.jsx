@@ -25,6 +25,7 @@ import { clamp, isDefined } from "../../../utils/utilities";
 import "./Video.scss";
 import { VideoRegions } from "./VideoRegions";
 import { ff } from "@humansignal/core";
+import { t } from "@humansignal/i18n";
 
 const isSyncedBuffering = ff.isActive(ff.FF_SYNCED_BUFFERING);
 
@@ -650,10 +651,10 @@ const HtxVideoView = ({ item, store }) => {
                         inline={isFullScreen}
                         content={
                           <Menu size="auto" closeDropdownOnItemClick={false}>
-                            <Menu.Item onClick={zoomIn}>Zoom In</Menu.Item>
-                            <Menu.Item onClick={zoomOut}>Zoom Out</Menu.Item>
-                            <Menu.Item onClick={zoomToFit}>Zoom To Fit</Menu.Item>
-                            <Menu.Item onClick={zoomReset}>Zoom 100%</Menu.Item>
+                            <Menu.Item onClick={zoomIn}>{t("lsf.object.video.htx_video.zoom_in")}</Menu.Item>
+                            <Menu.Item onClick={zoomOut}>{t("lsf.object.video.htx_video.zoom_out")}</Menu.Item>
+                            <Menu.Item onClick={zoomToFit}>{t("lsf.object.video.htx_video.zoom_to_fit")}</Menu.Item>
+                            <Menu.Item onClick={zoomReset}>{t("lsf.object.video.htx_video.zoom_100")}</Menu.Item>
                           </Menu>
                         }
                       >

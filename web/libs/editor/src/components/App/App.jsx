@@ -52,6 +52,7 @@ import { ViewAll } from "./ViewAll";
  * Styles
  */
 import "./App.scss";
+import { t } from "@humansignal/i18n";
 
 /**
  * Check if annotation has any tag that should be rendered in sidebar
@@ -109,15 +110,15 @@ class App extends Component {
         }}
       >
         <Result status="success" title={getEnv(this.props.store).messages.NO_NEXT_TASK} />
-        <div className={cn("sub__result").toClassName()}>All tasks in the queue have been completed</div>
+        <div className={cn("sub__result").toClassName()}>{t("lsf.components.app.app.all_tasks_in_the_queue")}</div>
         {store.taskHistory.length > 0 && (
           <Button
             onClick={(e) => store.prevTask(e, true)}
             variant="neutral"
             className="mx-0 my-4"
-            aria-label="Previous task"
+            aria-label={t("lsf.components.app.app.previous_task")}
           >
-            Go to Previous Task
+            {t("lsf.components.app.app.go_to_previous_task")}
           </Button>
         )}
       </div>
@@ -171,7 +172,7 @@ class App extends Component {
 
     return (
       <Space className={cn("main-view").elem("infobar").toClassName()} size="small">
-        <span>Task #{id}</span>
+        <span>{t("lsf.components.app.app.task")}{id}</span>
 
         {queue && <span>{queue}</span>}
       </Space>

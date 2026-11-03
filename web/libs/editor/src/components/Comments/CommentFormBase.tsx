@@ -5,6 +5,7 @@ import { IconSend } from "@humansignal/icons";
 import { TextArea } from "../../common/TextArea/TextArea";
 import { observer } from "mobx-react";
 import { Button } from "@humansignal/ui";
+import { t } from "@humansignal/i18n";
 
 export type CommentFormProps = {
   value?: string;
@@ -49,7 +50,7 @@ export const CommentFormBase: FC<CommentFormProps> = observer(
         <TextArea
           actionRef={actionRef}
           name="comment"
-          placeholder="Add a comment"
+          placeholder={t("lsf.components.comments.comment_form_base.add_a_comment")}
           value={value}
           rows={rows}
           maxRows={maxRows}
@@ -66,7 +67,7 @@ export const CommentFormBase: FC<CommentFormProps> = observer(
           onBlur={(e) => onBlur?.(e)}
         />
         <div className={cn("comment-form").elem("primary-action").toClassName()}>
-          <Button type="submit" aria-label="Submit comment" variant="neutral" look="string">
+          <Button type="submit" aria-label={t("lsf.components.comments.comment_form_base.submit_comment")} variant="neutral" look="string">
             <IconSend />
           </Button>
         </div>

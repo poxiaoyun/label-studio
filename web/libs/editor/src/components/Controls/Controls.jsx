@@ -7,6 +7,7 @@ import styles from "./Controls.module.scss";
 import { Button, Tooltip } from "@humansignal/ui";
 import { IconInfoOutline } from "@humansignal/icons";
 import { cn } from "../../utils/bem";
+import { t } from "@humansignal/i18n";
 
 export default inject("store")(
   observer(({ item, store }) => {
@@ -32,16 +33,16 @@ export default inject("store")(
     const updateButtonClassName = cn("update-btn").toClassName();
 
     if (store.task) {
-      taskInformation = <h4 className={`${styles.task} ${taskInfoClassName}`}>Task ID: {store.task.id}</h4>;
+      taskInformation = <h4 className={`${styles.task} ${taskInfoClassName}`}>{t("lsf.components.controls.controls.task_id")} {store.task.id}</h4>;
     }
 
     /**
      * Hotkeys
      */
     if (enableHotkeys && enableTooltips) {
-      buttons.submit = <Hint> [ Ctrl+Enter ]</Hint>;
-      buttons.skip = <Hint> [ Ctrl+Space ]</Hint>;
-      buttons.update = <Hint> [ Alt+Enter] </Hint>;
+      buttons.submit = <Hint> {t("lsf.components.controls.controls.ctrl_enter")}</Hint>;
+      buttons.skip = <Hint> {t("lsf.components.controls.controls.ctrl_space")}</Hint>;
+      buttons.update = <Hint> {t("lsf.components.controls.controls.alt_enter")} </Hint>;
     }
 
     let skipButton;
@@ -73,7 +74,7 @@ export default inject("store")(
         skipButton = (
           <>
             {showInfoIcon && (
-              <Tooltip title="Annotators and Reviewers will not be able to skip this task">
+              <Tooltip title={t("lsf.components.controls.controls.annotators_and_reviewers_will_not")}>
                 <IconInfoOutline width={20} height={20} className="text-neutral-content ml-auto cursor-pointer" />
               </Tooltip>
             )}
@@ -84,7 +85,7 @@ export default inject("store")(
               tooltip={skipTooltip}
               className={`${styles.skip} ${skipButtonClassName}`}
             >
-              Skip {buttons.skip}
+              {t("lsf.components.controls.controls.skip")} {buttons.skip}
             </Button>
           </>
         );
@@ -97,10 +98,10 @@ export default inject("store")(
             look="primary"
             icon={<CheckOutlined />}
             onClick={store.submitAnnotation}
-            tooltip="Save results: [ Ctrl+Enter ]"
+            tooltip={t("lsf.components.controls.controls.save_results_ctrl_enter")}
             className={`${styles.submit} ${submitButtonClassName}`}
           >
-            Submit {buttons.submit}
+            {t("lsf.components.controls.controls.submit")} {buttons.submit}
           </Button>
         );
       }
@@ -112,7 +113,7 @@ export default inject("store")(
             look="primary"
             icon={<CheckCircleOutlined />}
             onClick={store.updateAnnotation}
-            tooltip="Update this task: [ Alt+Enter ]"
+            tooltip={t("lsf.components.controls.controls.update_this_task_alt_enter")}
             className={updateButtonClassName}
           >
             {sentUserGenerate || versions.result ? "Update" : "Submit"} {buttons.update}

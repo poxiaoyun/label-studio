@@ -16,6 +16,7 @@ import { cn } from "../../../utils/bem";
 import { cnm } from "@humansignal/shad/utils";
 import { ff } from "@humansignal/core";
 import { useHotkey } from "../../../hooks/useHotkey";
+import { t } from "@humansignal/i18n";
 
 const audioDefaultProps = { crossOrigin: "anonymous" };
 const isSyncedBuffering = ff.isActive(ff.FF_SYNCED_BUFFERING);
@@ -64,7 +65,7 @@ const ParagraphAudio = observer(({ item }) => {
 
   return (
     <>
-      {isBuffering && <div className="lsf-timeline-controls__buffering" aria-label="Buffering Media Source" />}
+      {isBuffering && <div className="lsf-timeline-controls__buffering" aria-label={t("lsf.object.paragraphs.htx_paragraphs.buffering_media_source")} />}
       <audio
         {...audioDefaultProps}
         controls={item.showplayer && !item.syncedAudio}
@@ -979,7 +980,7 @@ class HtxParagraphsView extends Component {
               }}
               label={"Auto-scroll"}
             />
-            <Tooltip alignment="top-left" title="Automatically sync transcript scrolling with audio playback">
+            <Tooltip alignment="top-left" title={t("lsf.object.paragraphs.htx_paragraphs.automatically_sync_transcript_scrolling_with")}>
               <IconHelp />
             </Tooltip>
           </div>

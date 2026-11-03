@@ -8,6 +8,7 @@ import { NodeIcon } from "../../Node/Node";
 import { RegionLabel } from "../../SidePanels/OutlinerPanel/RegionLabel";
 
 import "./LinkState.scss";
+import { t } from "@humansignal/i18n";
 
 type LinkStateProps = {
   linking: boolean;
@@ -111,7 +112,7 @@ const LinkedRegion: FC<LinkedRegionProps> = observer(({ region, result, interact
             look="string"
             leading={<IconClose />}
             onClick={onUnlink}
-            aria-label="Unlink comment"
+            aria-label={t("lsf.comments.comment.link_state.unlink_comment")}
           />
         </div>
       )}

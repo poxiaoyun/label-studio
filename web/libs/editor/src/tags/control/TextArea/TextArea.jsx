@@ -25,6 +25,7 @@ import VisibilityMixin from "../../../mixins/Visibility";
 
 import "./TextArea.scss";
 import { cn } from "../../../utils/bem";
+import { t } from "@humansignal/i18n";
 
 const { TextArea } = Input;
 
@@ -415,9 +416,9 @@ const HtxTextArea = observer(({ item }) => {
         >
           <Form.Item style={itemStyle}>
             {rows === 1 ? (
-              <Input {...props} aria-label="TextArea Input" data-testid="textarea-input" />
+              <Input {...props} aria-label={t("lsf.control.text_area.text_area.text_area_input")} data-testid="textarea-input" />
             ) : (
-              <TextArea {...props} aria-label="TextArea Input" data-testid="textarea-input" />
+              <TextArea {...props} aria-label={t("lsf.control.text_area.text_area.text_area_input")} data-testid="textarea-input" />
             )}
             {showAddButton && (
               <div
@@ -468,7 +469,7 @@ const HtxTextArea = observer(({ item }) => {
                       className="text-neutral-content-subtler italic"
                       data-testid="textarea-instruction"
                     >
-                      Press Shift + Enter to Add
+                      {t("lsf.control.text_area.text_area.press_shift_enter_to")}
                     </Typography>
                   )}
 
@@ -483,7 +484,7 @@ const HtxTextArea = observer(({ item }) => {
                       htmlType="submit"
                       data-testid="textarea-add-button"
                     >
-                      Add
+                      {t("lsf.control.text_area.text_area.add")}
                     </Button>
                   </Form.Item>
                 </div>

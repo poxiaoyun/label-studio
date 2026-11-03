@@ -11,6 +11,7 @@ import { Slider } from "./Slider";
 import { SpectrogramControl } from "./SpectrogramControl";
 import "./ConfigControl.scss";
 import { FF_AUDIO_SPECTROGRAMS, isFF } from "../../../utils/feature-flags";
+import { t } from "@humansignal/i18n";
 
 // Define Scale Options Type
 type SpectrogramScale = "linear" | "log" | "mel";
@@ -181,7 +182,7 @@ export const ConfigControl: FC<ConfigControlProps> = ({
         style={{ opacity: 0, position: "fixed" }}
       >
         <div className={cn("audio-config").elem("scroll-content").toClassName()}>
-          <div className={cn("audio-config").elem("section-header").toClassName()}>Playback Settings</div>
+          <div className={cn("audio-config").elem("section-header").toClassName()}>{t("lsf.timeline.controls.config_control.playback_settings")}</div>
           <Slider
             min={MIN_SPEED}
             max={MAX_SPEED}
@@ -204,7 +205,7 @@ export const ConfigControl: FC<ConfigControlProps> = ({
             <Toggle
               checked={settings?.loopRegion}
               onChange={(e) => changeSetting?.("loopRegion", e.target.checked)}
-              label="Loop Regions"
+              label={t("lsf.timeline.controls.config_control.loop_regions")}
               labelProps={{ size: "small" }}
             />
           </div>
@@ -212,14 +213,14 @@ export const ConfigControl: FC<ConfigControlProps> = ({
             <Toggle
               checked={settings?.autoPlayNewSegments}
               onChange={(e) => changeSetting?.("autoPlayNewSegments", e.target.checked)}
-              label="Auto-play New Regions"
+              label={t("lsf.timeline.controls.config_control.auto_play_new_regions")}
               labelProps={{ size: "small" }}
             />
           </div>
 
           {isFF(FF_AUDIO_SPECTROGRAMS) && (
             <>
-              <div className={cn("audio-config").elem("section-header").toClassName()}>Spectrogram Settings</div>
+              <div className={cn("audio-config").elem("section-header").toClassName()}>{t("lsf.timeline.controls.config_control.spectrogram_settings")}</div>
               <SpectrogramControl waveform={waveform} />
             </>
           )}
@@ -237,7 +238,7 @@ export const ConfigControl: FC<ConfigControlProps> = ({
       ref={buttonRef as any}
       onClick={(e: MouseEvent<HTMLButtonElement>) => e.stopPropagation()}
     >
-      <ControlButton look={configModal ? "filled" : undefined} onClick={onSetModal} aria-label="Audio settings">
+      <ControlButton look={configModal ? "filled" : undefined} onClick={onSetModal} aria-label={t("lsf.timeline.controls.config_control.audio_settings")}>
         {<IconConfig />}
       </ControlButton>
       {configModal && renderModal()}

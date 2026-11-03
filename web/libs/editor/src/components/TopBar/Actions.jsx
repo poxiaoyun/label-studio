@@ -8,6 +8,7 @@ import { GroundTruth } from "../CurrentEntity/GroundTruth";
 import { EditingHistory } from "./HistoryActions";
 import { confirm } from "../../common/Modal/Modal";
 import { useCallback } from "react";
+import { t } from "@humansignal/i18n";
 
 export const Actions = ({ store }) => {
   const annotationStore = store.annotationStore;
@@ -24,10 +25,10 @@ export const Actions = ({ store }) => {
   return (
     <div className={cn("topbar").elem("section").toClassName()}>
       {store.hasInterface("annotations:view-all") && !isBulkMode && (
-        <Tooltip title="Compare all annotations">
+        <Tooltip title={t("lsf.components.top_bar.actions.compare_all_annotations")}>
           <Button
             icon={<IconViewAll />}
-            aria-label="Compare all annotations"
+            aria-label={t("lsf.components.top_bar.actions.compare_all_annotations")}
             onClick={() => onToggleVisibility()}
             variant={isViewAll ? "primary" : "neutral"}
             look={isViewAll ? "filled" : "string"}
@@ -45,13 +46,13 @@ export const Actions = ({ store }) => {
       {!isPrediction && !isViewAll && store.hasInterface("edit-history") && <EditingHistory entity={entity} />}
 
       {!isViewAll && !isBulkMode && store.hasInterface("annotations:delete") && (
-        <Tooltip title="Delete annotation">
+        <Tooltip title={t("lsf.components.top_bar.actions.delete_annotation")}>
           <Button
             icon={<IconTrash />}
             variant="negative"
             look="string"
             type="text"
-            aria-label="Delete"
+            aria-label={t("lsf.components.top_bar.actions.delete")}
             onClick={() => {
               confirm({
                 title: "Delete annotation",
@@ -77,7 +78,7 @@ export const Actions = ({ store }) => {
             variant="neutral"
             look="string"
             type="text"
-            aria-label="Copy Annotation"
+            aria-label={t("lsf.components.top_bar.actions.copy_annotation")}
             onClick={(ev) => {
               ev.preventDefault();
 
@@ -102,7 +103,7 @@ export const Actions = ({ store }) => {
         icon={<IconSettings />}
         variant="neutral"
         look="string"
-        aria-label="Settings"
+        aria-label={t("lsf.components.top_bar.actions.settings")}
         onClick={() => store.toggleSettings()}
         style={{
           height: 36,
@@ -116,7 +117,7 @@ export const Actions = ({ store }) => {
           icon={<IconInfo style={{ width: 16, height: 16 }} />}
           variant={store.showingDescription ? "primary" : "neutral"}
           look={store.showingDescription ? "filled" : "string"}
-          aria-label="Instructions"
+          aria-label={t("lsf.components.top_bar.actions.instructions")}
           onClick={() => store.toggleDescription()}
           style={{
             height: 36,

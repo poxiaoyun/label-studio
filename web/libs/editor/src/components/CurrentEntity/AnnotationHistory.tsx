@@ -22,6 +22,7 @@ import { userDisplayName } from "@humansignal/core";
 import { humanDateDiff } from "../../utils/utilities";
 import { EmptyState } from "../SidePanels/Components/EmptyState";
 import "./AnnotationHistory.scss";
+import { t } from "@humansignal/i18n";
 
 type HistoryItemType =
   | "prediction"
@@ -135,7 +136,7 @@ const AnnotationHistoryComponent: FC<any> = ({
     <EmptyState
       icon={<IconHistoryRewind width={24} height={24} />}
       header="View annotation activity"
-      description={<>See a log of user actions for this annotation</>}
+      description={<>{t("lsf.components.current_entity.annotation_history.see_a_log_of_user")}</>}
     />
   );
 

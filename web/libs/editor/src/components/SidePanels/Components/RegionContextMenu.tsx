@@ -5,6 +5,7 @@ import { observer } from "mobx-react";
 import { type FC, useCallback, useMemo, useState } from "react";
 import { cn } from "../../../utils/bem";
 import { ContextMenu, type ContextMenuAction, ContextMenuTrigger, type MenuActionOnClick } from "../../ContextMenu";
+import { t } from "@humansignal/i18n";
 
 export const RegionContextMenu: FC<{ item: any }> = observer(({ item }: { item: any }) => {
   const [open, setOpen] = useState(false);
@@ -50,7 +51,7 @@ export const RegionContextMenu: FC<{ item: any }> = observer(({ item }: { item: 
       content={<ContextMenu actions={actions} />}
       onToggle={(isOpen) => setOpen(isOpen)}
     >
-      <Button variant="neutral" look="string" size="smaller" aria-label="Region options">
+      <Button variant="neutral" look="string" size="smaller" aria-label={t("lsf.side_panels.components.region_context_menu.region_options")}>
         <IconEllipsis />
       </Button>
     </ContextMenuTrigger>

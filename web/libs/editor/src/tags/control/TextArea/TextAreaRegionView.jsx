@@ -11,6 +11,7 @@ import { PER_REGION_MODES } from "../../../mixins/PerRegion";
 import { cn } from "../../../utils/bem";
 
 import "./TextArea.scss";
+import { t } from "@humansignal/i18n";
 
 const { TextArea } = Input;
 
@@ -82,7 +83,7 @@ const HtxTextAreaResultLine = forwardRef(
             className={cn("textarea-tag").elem("action").toClassName()}
             size="small"
             look="string"
-            aria-label="Delete Region"
+            aria-label={t("lsf.control.text_area.text_area_region_view.delete_region")}
             data-testid="textarea-region-delete"
             leading={<IconTrash />}
             onClick={() => {

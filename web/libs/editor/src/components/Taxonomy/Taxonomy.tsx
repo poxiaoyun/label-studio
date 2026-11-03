@@ -9,6 +9,7 @@ import { isArraysEqual } from "../../utils/utilities";
 import TreeStructure from "../TreeStructure/TreeStructure";
 
 import styles from "./Taxonomy.module.scss";
+import { t } from "@humansignal/i18n";
 
 type TaxonomyPath = string[];
 type onAddLabelCallback = (path: string[]) => any;
@@ -288,11 +289,11 @@ const Item: React.FC<RowProps> = ({ style, item, dimensionCallback, maxWidth, is
                                 addChild(id);
                               }}
                             >
-                              Add Inside
+                              {t("lsf.components.taxonomy.taxonomy.add_inside")}
                             </Menu.Item>
                             {item.row.origin === "session" && (
                               <Menu.Item key="delete" className={styles.taxonomy__action} onClick={onDelete}>
-                                Delete
+                                {t("lsf.components.taxonomy.taxonomy.delete")}
                               </Menu.Item>
                             )}
                           </Menu>
@@ -441,9 +442,9 @@ const TaxonomyDropdown = ({ show, flatten, items, dropdownRef, isEditable }: Tax
                 look="string"
                 type="button"
                 onClick={addInside}
-                aria-label="Add new label"
+                aria-label={t("lsf.components.taxonomy.taxonomy.add_new_label")}
               >
-                Add
+                {t("lsf.components.taxonomy.taxonomy.add")}
               </Button>
             </div>
           ) : null}

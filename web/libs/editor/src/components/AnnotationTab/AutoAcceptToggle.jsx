@@ -6,6 +6,7 @@ import { Space } from "../../common/Space/Space";
 import { cn } from "../../utils/bem";
 
 import "./AutoAcceptToggle.scss";
+import { t } from "@humansignal/i18n";
 
 // we need to inject all of them to trigger rerender on changes to suggestions
 const injector = inject(({ store }) => {
@@ -55,7 +56,7 @@ export const AutoAcceptToggle = injector(
                 <Toggle
                   checked={store.autoAcceptSuggestions}
                   onChange={(e) => store.setAutoAcceptSuggestions(e.target.checked)}
-                  label="Auto-Accept Suggestions"
+                  label={t("lsf.components.annotation_tab.auto_accept_toggle.auto_accept_suggestions")}
                   data-testid="bottombar-auto-accept-toggle"
                 />
               )}

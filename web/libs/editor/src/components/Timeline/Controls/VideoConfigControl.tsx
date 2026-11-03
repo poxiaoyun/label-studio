@@ -7,6 +7,7 @@ import { IconConfig } from "@humansignal/icons";
 import { ControlButton } from "../Controls";
 import { Slider } from "./Slider";
 import styles from "./VideoConfigControl.module.scss";
+import { t } from "@humansignal/i18n";
 
 const MIN_SPEED = 0.25;
 const MAX_SPEED = 10;
@@ -159,7 +160,7 @@ export const VideoConfigControl: FC<VideoConfigControlProps> = ({
         style={{ opacity: 0, position: "fixed" }}
       >
         <div className={styles.scrollContent}>
-          <div className={styles.sectionHeader}>Playback Settings</div>
+          <div className={styles.sectionHeader}>{t("lsf.timeline.controls.video_config_control.playback_settings")}</div>
           <Slider
             min={minSpeed}
             max={MAX_SPEED}
@@ -173,7 +174,7 @@ export const VideoConfigControl: FC<VideoConfigControlProps> = ({
             <Toggle
               checked={loopTimelineRegion}
               onChange={(e) => onLoopTimelineRegionChange(e.target.checked)}
-              label="Loop Timeline Regions"
+              label={t("lsf.timeline.controls.video_config_control.loop_timeline_regions")}
               labelProps={{ size: "small" }}
             />
           </div>
@@ -186,7 +187,7 @@ export const VideoConfigControl: FC<VideoConfigControlProps> = ({
 
   return (
     <div className={styles.videoConfig} ref={buttonRef} onClick={handleContainerClick}>
-      <ControlButton look={configModal ? "filled" : undefined} onClick={handleButtonClick} aria-label="Video settings">
+      <ControlButton look={configModal ? "filled" : undefined} onClick={handleButtonClick} aria-label={t("lsf.timeline.controls.video_config_control.video_settings")}>
         {<IconConfig />}
       </ControlButton>
       {configModal && renderModal()}

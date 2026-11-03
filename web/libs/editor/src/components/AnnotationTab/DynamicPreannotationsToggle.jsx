@@ -5,6 +5,7 @@ import { Toggle } from "@humansignal/ui";
 import ToolsManager from "../../tools/Manager";
 import { cn } from "../../utils/bem";
 import "./DynamicPreannotationsToggle.scss";
+import { t } from "@humansignal/i18n";
 
 export const DynamicPreannotationsToggle = inject("store")(
   observer(({ store }) => {
@@ -29,7 +30,7 @@ export const DynamicPreannotationsToggle = inject("store")(
                   ToolsManager.allInstances().forEach((inst) => inst.selectDefault());
                 }
               }}
-              label="Auto-Annotation"
+              label={t("lsf.components.annotation_tab.dynamic_preannotations_toggle.auto_annotation")}
               data-testid="bottombar-auto-annotation-toggle"
             />
           </Space>

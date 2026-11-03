@@ -3,6 +3,7 @@ import { Form } from "antd";
 import { Button } from "@humansignal/ui";
 
 import { observer } from "mobx-react";
+import { t } from "@humansignal/i18n";
 
 const toJSON = (annotation) => {
   const id = annotation.pk || annotation.id;
@@ -56,23 +57,23 @@ const DebugComponent = ({ store }) => {
   return (
     <div style={{ width: "100%" }}>
       <br />
-      <h2>Debug</h2>
+      <h2>{t("lsf.components.debug.debug")}</h2>
       <div>
-        <Button size="small" onClick={serializeAll} aria-label="Serialize all">
-          Serialize All Annotations
+        <Button size="small" onClick={serializeAll} aria-label={t("lsf.components.debug.serialize_all")}>
+          {t("lsf.components.debug.serialize_all_annotations")}
         </Button>
-        <Button size="small" onClick={serializeCurrent} aria-label="Serialize current">
-          Serialize Current Annotation
+        <Button size="small" onClick={serializeCurrent} aria-label={t("lsf.components.debug.serialize_current")}>
+          {t("lsf.components.debug.serialize_current_annotation")}
         </Button>
-        <Button size="small" onClick={loadTask} aria-label="Load task">
-          Simulate Loading Task
+        <Button size="small" onClick={loadTask} aria-label={t("lsf.components.debug.load_task")}>
+          {t("lsf.components.debug.simulate_loading_task")}
         </Button>
       </div>
 
       <Form>
         <div style={{ display: "flex" }}>
           <div style={{ flexBasis: "50%" }}>
-            <p>Data</p>
+            <p>{t("lsf.components.debug.data")}</p>
             <textarea
               style={{ width: "100%" }}
               ref={refData}
@@ -80,7 +81,7 @@ const DebugComponent = ({ store }) => {
               defaultValue={store.task.data}
               className="is-search"
             />
-            <p>Config</p>
+            <p>{t("lsf.components.debug.config")}</p>
             <textarea
               style={{ width: "100%" }}
               ref={refConfig}
@@ -90,7 +91,7 @@ const DebugComponent = ({ store }) => {
             />
           </div>
           <div style={{ flexBasis: "50%" }}>
-            <p>Annotations</p>
+            <p>{t("lsf.components.debug.annotations")}</p>
             <textarea
               style={{ width: "100%" }}
               ref={refAnnotations}

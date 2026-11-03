@@ -4,6 +4,7 @@ import { cn } from "../../utils/bem";
 import messages from "../../utils/messages";
 import { ErrorMessage } from "../ErrorMessage/ErrorMessage";
 import "./Image.scss";
+import { t } from "@humansignal/i18n";
 
 /**
  * Coordinates in relative mode belong to a data domain consisting of percentages in the range from 0 to 100
@@ -76,7 +77,7 @@ export const Image = observer(
 const ImageProgress = observer(({ downloading, progress, error, src, usedValue }) => {
   return downloading ? (
     <div className={cn("image-progress").toClassName()}>
-      <div className={cn("image-progress").elem("message").toClassName()}>Downloading image</div>
+      <div className={cn("image-progress").elem("message").toClassName()}>{t("lsf.components.image_view.image.downloading_image")}</div>
       <progress
         className={cn("image-progress").elem("bar").toClassName()}
         value={progress}

@@ -2,6 +2,7 @@ import { cn } from "../../utils/bem";
 import { isDefined } from "../../utils/utilities";
 import { Fragment, useEffect, useState } from "react";
 import { Hotkey } from "../../core/Hotkey";
+import { t } from "@humansignal/i18n";
 
 const hotkeys = Hotkey("SegmentationToolbar", "Segmentation Tools");
 
@@ -101,7 +102,7 @@ export const FlyoutMenu = ({ items, icon }) => {
           .elem("icon")
           .mix(isClicked ? "isClicked" : "")
           .toClassName()}
-        title="Zoom presets (click to see options)"
+        title={t("lsf.components.toolbar.flyout_menu.zoom_presets_click_to_see")}
       >
         {icon}
       </div>

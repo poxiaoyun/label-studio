@@ -7,6 +7,7 @@ import ToolMixin from "../mixins/Tool";
 import { Tool } from "../components/Toolbar/Tool";
 import { FlyoutMenu } from "../components/Toolbar/FlyoutMenu";
 import { IconExpandTool, IconHandTool, IconZoomIn, IconZoomOut } from "@humansignal/icons";
+import { t } from "@humansignal/i18n";
 
 const ToolView = observer(({ item }) => {
   return (
@@ -15,7 +16,7 @@ const ToolView = observer(({ item }) => {
         active={item.selected}
         icon={<IconHandTool />}
         ariaLabel="pan"
-        label="Pan Image"
+        label={t("lsf.tools.zoom.pan_image")}
         shortcut="tool:pan-image"
         onClick={() => {
           const sel = item.selected;
@@ -26,7 +27,7 @@ const ToolView = observer(({ item }) => {
       <Tool
         icon={<IconZoomIn />}
         ariaLabel="zoom-in"
-        label="Zoom In"
+        label={t("lsf.tools.zoom.zoom_in")}
         shortcut="tool:zoom-in"
         onClick={() => {
           item.handleZoom(1);
@@ -54,7 +55,7 @@ const ToolView = observer(({ item }) => {
       <Tool
         icon={<IconZoomOut />}
         ariaLabel="zoom-out"
-        label="Zoom Out"
+        label={t("lsf.tools.zoom.zoom_out")}
         shortcut="tool:zoom-out"
         onClick={() => {
           item.handleZoom(-1);

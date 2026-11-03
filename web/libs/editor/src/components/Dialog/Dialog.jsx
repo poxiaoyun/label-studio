@@ -3,6 +3,7 @@ import { PropTypes } from "prop-types";
 import { Tag } from "antd";
 
 import styles from "./Dialog.module.scss";
+import { t } from "@humansignal/i18n";
 
 export default class DialogView extends React.Component {
   render() {
@@ -23,7 +24,7 @@ export default class DialogView extends React.Component {
       selectedStyle = `${selectedStyle} ${styles.block_selected}`;
       hint = (
         <div>
-          <Tag color="magenta">Selected Message</Tag>
+          <Tag color="magenta">{t("lsf.components.dialog.dialog.selected_message")}</Tag>
         </div>
       );
 

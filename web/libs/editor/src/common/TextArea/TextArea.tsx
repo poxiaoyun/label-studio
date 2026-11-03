@@ -5,6 +5,7 @@ import { isMacOS } from "../../utils/utilities";
 
 import "./TextArea.scss";
 import mergeRefs from "../Utils/mergeRefs";
+import { t } from "@humansignal/i18n";
 
 export type ActionRefValue = { update?: (text?: string) => void; el?: RefObject<HTMLTextAreaElement> };
 
@@ -171,7 +172,7 @@ export const TextArea: FC<TextAreaProps> = ({
       rows={autoGrowRef.current.rows}
       onChange={onChange}
       onInput={onInput}
-      aria-label="TextArea Input"
+      aria-label={t("lsf.common.text_area.text_area.text_area_input")}
       data-testid="textarea-input"
       {...props}
     />

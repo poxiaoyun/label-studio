@@ -8,6 +8,7 @@ import { TimelineContext } from "../Context";
 import { Slider } from "./Slider";
 import "./SpectrogramControl.scss";
 import colormap from "colormap";
+import { t } from "@humansignal/i18n";
 
 // Define Scale Options Type
 type SpectrogramScale = "linear" | "log" | "mel";
@@ -426,7 +427,7 @@ export const SpectrogramControl: FC<SpectrogramControlProps> = ({ waveform }) =>
   return (
     <div className={cn("spectrogram-controls").toClassName()}>
       {showWarning && (
-        <Tooltip title="High FFT or mel band values may cause performance issues or artifacts.">
+        <Tooltip title={t("lsf.timeline.controls.spectrogram_control.high_fft_or_mel_band")}>
           <IconWarningCircleFilled
             style={{
               color: "var(--color-warning-icon, #faad14)",
@@ -453,7 +454,7 @@ export const SpectrogramControl: FC<SpectrogramControlProps> = ({ waveform }) =>
         />
         <div className={cn("spectrogram-controls").elem("control").toClassName()}>
           <div className={cn("spectrogram-controls").elem("info").toClassName()}>
-            FFT Samples
+            {t("lsf.timeline.controls.spectrogram_control.fft_samples")}
             <Tooltip title={fftInfoText}>
               <IconInfoConfig />
             </Tooltip>
@@ -468,8 +469,8 @@ export const SpectrogramControl: FC<SpectrogramControlProps> = ({ waveform }) =>
       </div>
       <div className={cn("spectrogram-controls").elem("spectrogram-controls").toClassName()}>
         <div className={cn("spectrogram-controls").elem("info").toClassName()}>
-          Scale
-          <Tooltip title="Determines the frequency scale mapping: Linear, Logarithmic, or Mel (perceptual).">
+          {t("lsf.timeline.controls.spectrogram_control.scale")}
+          <Tooltip title={t("lsf.timeline.controls.spectrogram_control.determines_the_frequency_scale_mapping")}>
             <IconInfoConfig />
           </Tooltip>
         </div>
@@ -502,8 +503,8 @@ export const SpectrogramControl: FC<SpectrogramControlProps> = ({ waveform }) =>
         />
         <div className={cn("spectrogram-controls").elem("control").toClassName()}>
           <div className={cn("spectrogram-controls").elem("info").toClassName()}>
-            Spectogram dB
-            <Tooltip title="Controls the range of decibel values shown in the spectrogram. Lower values show quieter sounds.">
+            {t("lsf.timeline.controls.spectrogram_control.spectogram_d_b")}
+            <Tooltip title={t("lsf.timeline.controls.spectrogram_control.controls_the_range_of_decibel")}>
               <IconInfoConfig />
             </Tooltip>
           </div>
@@ -539,7 +540,7 @@ export const SpectrogramControl: FC<SpectrogramControlProps> = ({ waveform }) =>
         </div>
       </div>
       <div className={cn("spectrogram-controls").elem("spectrogram-controls").toClassName()}>
-        <div className={cn("spectrogram-controls").elem("label").toClassName()}>Windowing Function</div>
+        <div className={cn("spectrogram-controls").elem("label").toClassName()}>{t("lsf.timeline.controls.spectrogram_control.windowing_function")}</div>
         <Select
           value={displayWindowFunc}
           onChange={handleChangeWindowingFunction}
@@ -548,7 +549,7 @@ export const SpectrogramControl: FC<SpectrogramControlProps> = ({ waveform }) =>
         />
       </div>
       <div className={cn("spectrogram-controls").elem("spectrogram-controls").toClassName()}>
-        <div className={cn("spectrogram-controls").elem("label").toClassName()}>Color Scheme</div>
+        <div className={cn("spectrogram-controls").elem("label").toClassName()}>{t("lsf.timeline.controls.spectrogram_control.color_scheme")}</div>
         <Select
           value={displayColorScheme}
           onChange={handleChangeColorScheme}

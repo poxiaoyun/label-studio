@@ -4,6 +4,7 @@ import { IconCommentLinkTo, IconSend } from "@humansignal/icons";
 import { Tooltip } from "@humansignal/ui";
 import { cn } from "../../../utils/bem";
 import "./CommentFormButtons.scss";
+import { t } from "@humansignal/i18n";
 
 export const CommentFormButtons = ({
   region,
@@ -17,7 +18,7 @@ export const CommentFormButtons = ({
   <div className={cn("comment-form-buttons").toClassName()}>
     <div className={cn("comment-form-buttons").elem("buttons").toClassName()}>
       {onLinkTo && !region && (
-        <Tooltip title="Link to...">
+        <Tooltip title={t("lsf.comments.comment.comment_form_buttons.link_to")}>
           <button
             type="button"
             className={cn("comment-form-buttons").elem("action").mod({ highlight: linking }).toClassName()}

@@ -4,12 +4,13 @@ import { Select } from "@humansignal/ui";
 import ColorScheme from "pleasejs";
 import Utils from "../../../utils";
 import styles from "./Paragraphs.module.scss";
+import { t } from "@humansignal/i18n";
 
 const AuthorTag = ({ name, selected }) => {
   const itemStyle = { border: `2px solid ${Utils.Colors.convertToRGBA(ColorScheme.make_color({ seed: name })[0])}` };
 
   if (name === "all") {
-    return <>Show all authors</>;
+    return <>{t("lsf.object.paragraphs.author_filter.show_all_authors")}</>;
   }
 
   return (
@@ -35,7 +36,7 @@ const renderMultipleSelected = (selected) => {
 };
 
 export const AuthorFilter = observer(({ item, onChange }) => {
-  const placeholder = useMemo(() => <span className={styles.authorFilter__placeholder}>Show all authors</span>, []);
+  const placeholder = useMemo(() => <span className={styles.authorFilter__placeholder}>{t("lsf.object.paragraphs.author_filter.show_all_authors")}</span>, []);
   const initialValue = "all";
   const options = useMemo(() => {
     const authorOptions = item._value

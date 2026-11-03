@@ -4,6 +4,7 @@ import { LabelingSummary } from "./LabelingSummary";
 import { NumbersSummary } from "./NumbersSummary";
 import type { ControlTag, ObjectTagEntry, ObjectTypes } from "./types";
 import { getLabelColors, sortControls } from "./utils";
+import { t } from "@humansignal/i18n";
 
 type TaskSummaryProps = {
   annotations: MSTAnnotation[];
@@ -108,7 +109,7 @@ const TaskSummary = ({ annotations: all, store: annotationStore }: TaskSummaryPr
   return (
     <div>
       <div className="mb-base">
-        <h2 className="mt-base text-headline-small font-semibold text-neutral-content">Task Summary</h2>
+        <h2 className="mt-base text-headline-small font-semibold text-neutral-content">{t("lsf.components.task_summary.task_summary.task_summary")}</h2>
         <NumbersSummary values={values} />
       </div>
       <div className="mb-relaxed">
@@ -121,7 +122,7 @@ const TaskSummary = ({ annotations: all, store: annotationStore }: TaskSummaryPr
         />
       </div>
       <div className="mb-relaxed">
-        <h2 className="mb-base text-headline-small font-semibold text-neutral-content">Task Data</h2>
+        <h2 className="mb-base text-headline-small font-semibold text-neutral-content">{t("lsf.components.task_summary.task_summary.task_data")}</h2>
         <DataSummary data_types={dataTypes} />
       </div>
     </div>

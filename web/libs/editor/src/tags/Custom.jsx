@@ -6,6 +6,7 @@ import { observer } from "mobx-react";
 import { EnterpriseBadge } from "@humansignal/ui";
 import Registry from "../core/Registry";
 import ControlBase from "./control/Base";
+import { t } from "@humansignal/i18n";
 
 const ENTERPRISE_URL = "https://docs.humansignal.com/guide/label_studio_compare";
 
@@ -31,7 +32,7 @@ if (!APP_SETTINGS?.billing?.enterprise && !Registry.models.custominterface) {
         <EnterpriseBadge /> <Code>{item.type === "custominterface" ? "CustomInterface" : "React"}</Code> tag is only
         available in{" "}
         <a className="no-go" href={ENTERPRISE_URL} target="_blank" rel="noreferrer">
-          Enterprise
+          {t("lsf.tags.custom.enterprise")}
         </a>
         .
       </div>
