@@ -12,6 +12,7 @@ import { useAtomValue } from "jotai";
  * each one of these eventually has to be migrated to core or ui
  */
 import { Input } from "apps/labelstudio/src/components/Form/Elements";
+import { t } from "@humansignal/i18n";
 
 const updateUserAvatarAtom = atomWithMutation(() => ({
   mutationKey: ["update-user"],
@@ -117,7 +118,7 @@ export const PersonalInfo = () => {
           </form>
           {user?.avatar && (
             <Button type="submit" variant="negative" look="outlined" size="medium" onClick={deleteUserAvatar}>
-              Delete
+              {t("appcommon.account_settings.sections.personal_info.delete")}
             </Button>
           )}
         </div>
@@ -125,7 +126,7 @@ export const PersonalInfo = () => {
           <div className={styles.flexRow}>
             <div className={styles.flex1}>
               <Input
-                label="First Name"
+                label={t("appcommon.account_settings.sections.personal_info.first_name")}
                 value={fname}
                 onChange={(e: React.KeyboardEvent<HTMLInputElement>) => setFname(e.currentTarget.value)}
                 name="first_name"
@@ -133,7 +134,7 @@ export const PersonalInfo = () => {
             </div>
             <div className={styles.flex1}>
               <Input
-                label="Last Name"
+                label={t("appcommon.account_settings.sections.personal_info.last_name")}
                 value={lname}
                 onChange={(e: React.KeyboardEvent<HTMLInputElement>) => setLname(e.currentTarget.value)}
                 name="last_name"
@@ -142,11 +143,11 @@ export const PersonalInfo = () => {
           </div>
           <div className={styles.flexRow}>
             <div className={styles.flex1}>
-              <Input label="E-mail" type="email" readOnly={true} value={user?.email ?? ""} />
+              <Input label={t("appcommon.account_settings.sections.personal_info.e_mail")} type="email" readOnly={true} value={user?.email ?? ""} />
             </div>
             <div className={styles.flex1}>
               <Input
-                label="Phone"
+                label={t("appcommon.account_settings.sections.personal_info.phone")}
                 type="phone"
                 onChange={(e: React.KeyboardEvent<HTMLInputElement>) => setPhone(e.currentTarget.value)}
                 value={phone}
@@ -156,7 +157,7 @@ export const PersonalInfo = () => {
           </div>
           <div className={clsx(styles.flexRow, styles.flexEnd)}>
             <Button style={{ width: 125 }} waiting={isInProgress}>
-              Save
+              {t("appcommon.account_settings.sections.personal_info.save")}
             </Button>
           </div>
         </form>

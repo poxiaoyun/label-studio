@@ -3,6 +3,7 @@ import { IconBookOpenText } from "@humansignal/icons";
 import { Button } from "../button/button";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { ReaderViewModal } from "./reader-view-modal";
+import { t } from "@humansignal/i18n";
 
 export interface ReaderViewButtonProps {
   nodeData: {
@@ -38,13 +39,13 @@ export const ReaderViewButton: FC<ReaderViewButtonProps> = ({ nodeData, threshol
 
   return (
     <>
-      <Tooltip title="Open Reader View">
+      <Tooltip title={t("ui.lib.json_viewer.reader_view_button.open_reader_view")}>
         <Button
           look="string"
           onClick={handleClick}
           className="jer-edit-button"
           size="small"
-          aria-label="Open Reader View"
+          aria-label={t("ui.lib.json_viewer.reader_view_button.open_reader_view")}
           leading={<IconBookOpenText width={20} height={20} />}
         />
       </Tooltip>

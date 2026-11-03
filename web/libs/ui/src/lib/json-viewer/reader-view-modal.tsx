@@ -4,6 +4,7 @@ import { Markdown } from "../../../../editor/src/components/Markdown/Markdown";
 import { Modal } from "../modal";
 import { Tabs, TabsList, TabsTrigger } from "../tabs/tabs";
 import styles from "./reader-view-modal.module.scss";
+import { t } from "@humansignal/i18n";
 
 type ContentFormat = "plain" | "markdown" | "html";
 
@@ -41,13 +42,13 @@ export const ReaderViewModal: FC<ReaderViewModalProps> = ({ content, isOpen, onC
     switch (format) {
       case "plain":
         return (
-          <pre className={styles.plainText} aria-label="Plain text content">
+          <pre className={styles.plainText} aria-label={t("ui.lib.json_viewer.reader_view_modal.plain_text_content")}>
             {content}
           </pre>
         );
       case "markdown":
         return (
-          <div className={styles.markdownContent} aria-label="Markdown content">
+          <div className={styles.markdownContent} aria-label={t("ui.lib.json_viewer.reader_view_modal.markdown_content")}>
             <Markdown text={content} allowHtml={true} />
           </div>
         );
@@ -55,7 +56,7 @@ export const ReaderViewModal: FC<ReaderViewModalProps> = ({ content, isOpen, onC
         return (
           <div
             className={styles.htmlContent}
-            aria-label="HTML content"
+            aria-label={t("ui.lib.json_viewer.reader_view_modal.html_content")}
             dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
           />
         );
@@ -67,8 +68,8 @@ export const ReaderViewModal: FC<ReaderViewModalProps> = ({ content, isOpen, onC
   const headerContent = (
     <Tabs value={format} onValueChange={(v) => setFormat(v as ContentFormat)} variant="default">
       <TabsList>
-        <TabsTrigger value="plain">Plain Text</TabsTrigger>
-        <TabsTrigger value="markdown">Markdown</TabsTrigger>
+        <TabsTrigger value="plain">{t("ui.lib.json_viewer.reader_view_modal.plain_text")}</TabsTrigger>
+        <TabsTrigger value="markdown">{t("ui.lib.json_viewer.reader_view_modal.markdown")}</TabsTrigger>
         <TabsTrigger value="html">HTML</TabsTrigger>
       </TabsList>
     </Tabs>
@@ -80,7 +81,7 @@ export const ReaderViewModal: FC<ReaderViewModalProps> = ({ content, isOpen, onC
       visible={isOpen}
       onHide={onClose}
       fullscreen={true}
-      title="Reader View"
+      title={t("ui.lib.json_viewer.reader_view_modal.reader_view")}
       header={headerContent}
       allowClose={true}
       closeOnClickOutside={false}

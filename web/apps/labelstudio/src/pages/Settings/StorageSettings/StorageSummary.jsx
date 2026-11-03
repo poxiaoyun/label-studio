@@ -5,6 +5,7 @@ import { modal } from "../../../components/Modal/Modal";
 import { Oneof } from "../../../components/Oneof/Oneof";
 import { getLastTraceback } from "../../../utils/helpers";
 import { useCopyText } from "@humansignal/core";
+import { t } from "@humansignal/i18n";
 
 // Component to handle copy functionality within the modal
 const CopyButton = ({ msg }) => {
@@ -61,9 +62,9 @@ export const StorageSummary = ({ target, storage, className, storageTypes = [] }
                   href="https://labelstud.io/guide/storage.html#Troubleshooting"
                   target="_blank"
                   rel="noreferrer noopener"
-                  aria-label="Learn more about cloud storage troubleshooting"
+                  aria-label={t("pages.settings.storage_settings.storage_summary.learn_more_about_cloud_storage")}
                 >
-                  See docs
+                  {t("pages.settings.storage_settings.storage_summary.see_docs")}
                 </a>{" "}
                 for troubleshooting tips on cloud storage connections.
               </>
@@ -72,7 +73,7 @@ export const StorageSummary = ({ target, storage, className, storageTypes = [] }
           <Space>
             <CopyButton msg={msg} />
             <Button variant="primary" className="w-[7rem]" onClick={() => currentModal.close()}>
-              Close
+              {t("pages.settings.storage_settings.storage_summary.close")}
             </Button>
           </Space>
         </div>
@@ -115,7 +116,7 @@ export const StorageSummary = ({ target, storage, className, storageTypes = [] }
               className="cursor-pointer border-b border-dashed border-negative-border-subtle text-negative-content"
               onClick={handleButtonClick}
             >
-              {storageStatus} (View Logs)
+              {storageStatus} {t("pages.settings.storage_settings.storage_summary.view_logs")}
             </span>
           ) : (
             storageStatus

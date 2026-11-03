@@ -6,6 +6,7 @@ import { IconClose } from "@humansignal/icons";
 
 import { cn } from "@humansignal/shad/utils";
 import { Button } from "../../../lib/button/button";
+import { t } from "@humansignal/i18n";
 
 const Sheet = DialogPrimitive.Root;
 
@@ -68,7 +69,7 @@ const SheetContent = React.forwardRef<React.ElementRef<typeof DialogPrimitive.Co
                 className="absolute right-3 !p-0"
                 style={{ top: "12px" }}
                 leading={<IconClose />}
-                aria-label="Close"
+                aria-label={t("ui.components.ui.sheet.close")}
                 data-testid="drawer-close-button"
               />
             </DialogPrimitive.Close>

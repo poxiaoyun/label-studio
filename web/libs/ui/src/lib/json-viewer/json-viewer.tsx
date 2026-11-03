@@ -7,6 +7,7 @@ import { Tooltip } from "../Tooltip/Tooltip";
 import type { JsonViewerProps } from "./types";
 import { ReaderViewButton } from "./reader-view-button";
 import styles from "./json-viewer.module.scss";
+import { t } from "@humansignal/i18n";
 
 // Custom Label Studio theme for json-edit-react
 // Note: Colors are applied via SCSS using :global selectors because
@@ -231,14 +232,14 @@ export const JsonViewer: FC<JsonViewerProps> = ({
                   <IconSearch className={styles.searchIcon} />
                   <input
                     type="text"
-                    placeholder="Search keys or values"
+                    placeholder={t("ui.lib.json_viewer.json_viewer.search_keys_or_values")}
                     value={searchText}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchText(e.target.value)}
                     className={styles.searchInput}
-                    aria-label="Search JSON"
+                    aria-label={t("ui.lib.json_viewer.json_viewer.search_json")}
                   />
                   {searchText && (
-                    <Tooltip title="Clear Search">
+                    <Tooltip title={t("ui.lib.json_viewer.json_viewer.clear_search")}>
                       <Button
                         look="string"
                         variant="primary"
@@ -246,7 +247,7 @@ export const JsonViewer: FC<JsonViewerProps> = ({
                         onClick={() => setSearchText("")}
                         className={styles.searchClear}
                         leading={<IconClose width={20} height={20} />}
-                        aria-label="Clear Search"
+                        aria-label={t("ui.lib.json_viewer.json_viewer.clear_search")}
                       />
                     </Tooltip>
                   )}
@@ -266,7 +267,7 @@ export const JsonViewer: FC<JsonViewerProps> = ({
                     </Button>
                   ))}
                   {activeFilter && (
-                    <Tooltip title="Reset filters">
+                    <Tooltip title={t("ui.lib.json_viewer.json_viewer.reset_filters")}>
                       <Button
                         look="outlined"
                         variant="neutral"

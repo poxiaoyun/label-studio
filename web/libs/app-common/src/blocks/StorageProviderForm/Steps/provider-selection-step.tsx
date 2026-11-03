@@ -2,6 +2,7 @@ import { Label } from "@humansignal/ui";
 import { useEffect } from "react";
 import { ProviderGrid } from "../components";
 import type { ProviderConfig } from "../types/provider";
+import { t } from "@humansignal/i18n";
 
 interface ProviderSelectionStepProps {
   formData: {
@@ -51,13 +52,13 @@ export const ProviderSelectionStep = ({
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-xl font-semibold">Choose your cloud storage provider</h2>
-        <p className="text-muted-foreground">Select the cloud storage service where your data is stored</p>
+        <h2 className="text-xl font-semibold">{t("appcommon.storage_provider_form.steps.provider_selection_step.choose_your_cloud_storage_provider")}</h2>
+        <p className="text-muted-foreground">{t("appcommon.storage_provider_form.steps.provider_selection_step.select_the_cloud_storage_service")}</p>
       </div>
 
       <div className="space-y-4">
         <div className="space-y-2">
-          <Label text="Storage Provider" required />
+          <Label text={t("appcommon.storage_provider_form.steps.provider_selection_step.storage_provider")} required />
           <ProviderGrid
             providers={providers}
             selectedProvider={formData.provider}

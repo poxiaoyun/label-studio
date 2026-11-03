@@ -3,6 +3,7 @@ import { modal } from "../../components/Modal/Modal";
 import { useModalControls } from "../../components/Modal/ModalPopup";
 import { Space } from "../../components/Space/Space";
 import { cn } from "../../utils/bem";
+import { t } from "@humansignal/i18n";
 
 export const WebhookDeleteModal = ({ onDelete }) => {
   return modal({
@@ -13,7 +14,7 @@ export const WebhookDeleteModal = ({ onDelete }) => {
       return (
         <div className={rootClass}>
           <div className={rootClass.elem("modal-text").toClassName()}>
-            Are you sure you want to delete the webhook? This action cannot be undone.
+            {t("pages.pages.webhook_page.webhook_delete_modal.are_you_sure_you_want")}
           </div>
         </div>
       );
@@ -28,9 +29,9 @@ export const WebhookDeleteModal = ({ onDelete }) => {
             onClick={() => {
               ctrl.hide();
             }}
-            aria-label="Cancel webhook deletion"
+            aria-label={t("pages.pages.webhook_page.webhook_delete_modal.cancel_webhook_deletion")}
           >
-            Cancel
+            {t("pages.pages.webhook_page.webhook_delete_modal.cancel")}
           </Button>
           <Button
             variant="negative"
@@ -38,9 +39,9 @@ export const WebhookDeleteModal = ({ onDelete }) => {
               await onDelete();
               ctrl.hide();
             }}
-            aria-label="Confirm webhook deletion"
+            aria-label={t("pages.pages.webhook_page.webhook_delete_modal.confirm_webhook_deletion")}
           >
-            Delete Webhook
+            {t("pages.pages.webhook_page.webhook_delete_modal.delete_webhook")}
           </Button>
         </Space>
       );

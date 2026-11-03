@@ -11,6 +11,7 @@ import { Spinner } from "../../components/Spinner/Spinner";
 import { useAPI } from "../../providers/ApiProvider";
 import { useProject } from "../../providers/ProjectProvider";
 import { cn } from "../../utils/bem";
+import { t } from "@humansignal/i18n";
 
 export const DangerZone = () => {
   const { project } = useProject();
@@ -61,7 +62,7 @@ export const DangerZone = () => {
               onClick={() => ctrl?.hide()}
               data-testid="danger-zone-cancel-button"
             >
-              Cancel
+              {t("pages.pages.settings.danger_zone.cancel")}
             </Button>
             <Button
               variant="negative"
@@ -86,7 +87,7 @@ export const DangerZone = () => {
         title: "Reset Cache",
         message: (
           <>
-            You are about to reset the cache for <strong>{project.title}</strong>. This action cannot be undone.
+            {t("pages.pages.settings.danger_zone.you_are_about_to_reset")} <strong>{project.title}</strong>{t("pages.pages.settings.danger_zone.this_action_cannot_be")}
           </>
         ),
         requiredWord: "cache",
@@ -96,7 +97,7 @@ export const DangerZone = () => {
         title: "Drop All Tabs",
         message: (
           <>
-            You are about to drop all tabs for <strong>{project.title}</strong>. This action cannot be undone.
+            {t("pages.pages.settings.danger_zone.you_are_about_to_drop")} <strong>{project.title}</strong>{t("pages.pages.settings.danger_zone.this_action_cannot_be")}
           </>
         ),
         requiredWord: "tabs",
@@ -106,7 +107,7 @@ export const DangerZone = () => {
         title: "Delete Project",
         message: (
           <>
-            You are about to delete the project <strong>{project.title}</strong>. This action cannot be undone.
+            {t("pages.pages.settings.danger_zone.you_are_about_to_delete")} <strong>{project.title}</strong>{t("pages.pages.settings.danger_zone.this_action_cannot_be")}
           </>
         ),
         requiredWord: "delete",
@@ -199,11 +200,10 @@ export const DangerZone = () => {
   return (
     <div className={cn("simple-settings").toClassName()}>
       <Typography variant="headline" size="medium" className="mb-tighter">
-        Danger Zone
+        {t("pages.pages.settings.danger_zone.danger_zone")}
       </Typography>
       <Typography variant="body" size="medium" className="text-neutral-content-subtler !mb-base">
-        Perform these actions at your own risk. Actions you take on this page can't be reverted. Make sure your data is
-        backed up.
+        {t("pages.pages.settings.danger_zone.perform_these_actions_at_your")}
       </Typography>
 
       {project.id ? (

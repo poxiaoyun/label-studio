@@ -19,6 +19,7 @@ import styles from "./select.module.scss";
 import { cn, cnm } from "../../utils/utils";
 import { VariableSizeList } from "react-window";
 import InfiniteLoader from "react-window-infinite-loader";
+import { t } from "@humansignal/i18n";
 
 const VARIABLE_LIST_ITEM_HEIGHT = 40;
 const VARIABLE_LIST_COUNT_RENDERED = 5;
@@ -117,12 +118,12 @@ const SelectedItemsGroup = ({
             readOnly
             disabled={disabled || selectedOptions.length === 0}
             onClick={handleDeselectAllClick}
-            aria-label="Deselect all items"
+            aria-label={t("ui.lib.select.select.deselect_all_items")}
           />
 
           {/* Title with counter badge inline */}
           <div className={styles.selectedItemsTitle}>
-            <Typography variant="body">Selected items</Typography>
+            <Typography variant="body">{t("ui.lib.select.select.selected_items")}</Typography>
             <Badge>{selectedOptions.length}</Badge>
           </div>
         </button>
@@ -133,11 +134,11 @@ const SelectedItemsGroup = ({
             type="button"
             onClick={handleSelectAllClick}
             disabled={disabled}
-            aria-label="Select all rendered items"
+            aria-label={t("ui.lib.select.select.select_all_rendered_items")}
             look="string"
             size="smaller"
           >
-            Select All
+            {t("ui.lib.select.select.select_all")}
           </Button>
         )}
       </div>
@@ -166,7 +167,7 @@ const SelectedItemsGroup = ({
               })}
             </CommandGroup>
           ) : (
-            <div className="px-base py-tight text-neutral-content-subtler text-center">No items selected</div>
+            <div className="px-base py-tight text-neutral-content-subtler text-center">{t("ui.lib.select.select.no_items_selected")}</div>
           )}
         </div>
       )}
@@ -556,7 +557,7 @@ export const Select = forwardRef(
         <PopoverContent align="start" data-testid="select-popup" className={cnm("min-w-full", contentClassName)}>
           {isLoading ? (
             <span className={styles.selectLoading} tabIndex={-1}>
-              Loading...
+              {t("ui.lib.select.select.loading")}
             </span>
           ) : (
             <Command shouldFilter={false}>
@@ -570,7 +571,7 @@ export const Select = forwardRef(
                 />
               )}
               <CommandList
-                label="Select an option"
+                label={t("ui.lib.select.select.select_an_option")}
                 className={cnm({
                   "shadow-inner shadow-neutral-surface-inset border-t border-neutral-border shadow-": searchable,
                   "max-h-none": footer !== undefined || isVirtualList,

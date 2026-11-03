@@ -7,6 +7,7 @@ import { useAtomValue } from "jotai";
 import { atomWithQuery } from "jotai-tanstack-query";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Input } from "../../../components/Form";
+import { t } from "@humansignal/i18n";
 
 const linkAtom = atomWithQuery(() => ({
   queryKey: ["invite-link"],
@@ -39,7 +40,7 @@ export function InviteLink({
   return (
     <Modal
       ref={modalRef}
-      title="Invite members"
+      title={t("pages.organization.people_page.invite_link.invite_members")}
       opened={opened}
       bareFooter={true}
       body={<InvitationModal />}
@@ -57,8 +58,7 @@ const InvitationModal = () => {
     <div className={cn("invite").toClassName()}>
       <Input value={link} style={{ width: "100%" }} readOnly />
       <Typography size="small" className="text-neutral-content-subtler mt-base mb-wider">
-        Invite members to join your Label Studio instance. People that you invite have full access to all of your
-        projects.{" "}
+        {t("pages.organization.people_page.invite_link.invite_members_to_join_your")}{" "}
         <a
           href="https://labelstud.io/guide/signup.html"
           target="_blank"
@@ -70,7 +70,7 @@ const InvitationModal = () => {
             })
           }
         >
-          Learn more
+          {t("pages.organization.people_page.invite_link.learn_more")}
         </a>
         .
       </Typography>
@@ -90,9 +90,9 @@ const InvitationFooter = () => {
           look="outlined"
           style={{ width: 170 }}
           onClick={() => refetch()}
-          aria-label="Refresh invite link"
+          aria-label={t("pages.organization.people_page.invite_link.refresh_invite_link")}
         >
-          Reset Link
+          {t("pages.organization.people_page.invite_link.reset_link")}
         </Button>
       </Space>
       <Space>
@@ -100,7 +100,7 @@ const InvitationFooter = () => {
           variant={copied ? "positive" : "primary"}
           className="w-[170px]"
           onClick={() => copyText(link!)}
-          aria-label="Copy invite link"
+          aria-label={t("pages.organization.people_page.invite_link.copy_invite_link")}
         >
           {copied ? "Copied!" : "Copy link"}
         </Button>

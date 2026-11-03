@@ -2,6 +2,7 @@ import { getProviderConfig } from "../providers";
 import { ProviderForm } from "../components/provider-form";
 import Input from "apps/labelstudio/src/components/Form/Elements/Input/Input";
 import { Toggle } from "@humansignal/ui";
+import { t } from "@humansignal/i18n";
 
 interface ProviderDetailsStepProps {
   formData: any;
@@ -41,7 +42,7 @@ export const ProviderDetailsStep = ({
           name="title"
           value={formData.title ?? ""}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleProviderFieldChange("title", e.target.value)}
-          placeholder="Enter a descriptive name (e.g., 'Legal Documents', 'Training Data')"
+          placeholder={t("appcommon.storage_provider_form.steps.provider_details_step.enter_a_descriptive_name_e_g")}
           validate=""
           skip={false}
           labelProps={{}}
@@ -49,8 +50,8 @@ export const ProviderDetailsStep = ({
           tooltip=""
           tooltipIcon={null}
           required={true}
-          label="Storage Title"
-          description="This name will help you identify this connection in your project"
+          label={t("appcommon.storage_provider_form.steps.provider_details_step.storage_title")}
+          description={t("appcommon.storage_provider_form.steps.provider_details_step.this_name_will_help_you")}
           footer={errors.title ? <span className="text-negative-content">{errors.title}</span> : ""}
           className={errors.title ? "border-negative-content" : ""}
         />
@@ -73,9 +74,9 @@ export const ProviderDetailsStep = ({
             <Toggle
               checked={formData.can_delete_objects ?? false}
               onChange={(e) => handleProviderFieldChange("can_delete_objects", e.target.checked)}
-              aria-label="Can delete objects from storage"
-              label="Can delete objects from storage"
-              description="If unchecked, annotations will not be deleted from storage"
+              aria-label={t("appcommon.storage_provider_form.steps.provider_details_step.can_delete_objects_from_storage")}
+              label={t("appcommon.storage_provider_form.steps.provider_details_step.can_delete_objects_from_storage")}
+              description={t("appcommon.storage_provider_form.steps.provider_details_step.if_unchecked_annotations_will_not")}
             />
           </div>
         </div>

@@ -2,6 +2,7 @@ import { z } from "zod";
 import type { ProviderConfig } from "@humansignal/app-common/blocks/StorageProviderForm/types/provider";
 import { IconFolderOpen } from "@humansignal/icons";
 import { Alert, AlertDescription, AlertTitle } from "@humansignal/shad/components/ui/alert";
+import { t } from "@humansignal/i18n";
 
 const localFilesDocumentRoot =
   typeof window === "undefined" ? undefined : window.APP_SETTINGS?.local_files_document_root;
@@ -23,19 +24,17 @@ const LocalFilesServingWarning = () => {
   return (
     <>
       <Alert variant="destructive">
-        <AlertTitle>Local file serving is disabled</AlertTitle>
+        <AlertTitle>{t("pages.storage_settings.providers.local_files.local_file_serving_is_disabled")}</AlertTitle>
         <AlertDescription>
-          Set the "LOCAL_FILES_SERVING_ENABLED" environment variable to "true" and restart Label Studio to enable Local
-          Files storage. See the documentation for details:{" "}
+          {t("pages.storage_settings.providers.local_files.set_the_local_files_serving_enabled_environment_")}{" "}
           <a href="https://labelstud.io/guide/storage.html#Local-storage" target="_blank" rel="noreferrer">
-            Local Storage documentation
+            {t("pages.storage_settings.providers.local_files.local_storage_documentation")}
           </a>
           {isCommunityEdition && (
             <Alert variant="info">
               <AlertDescription>
                 <p>
-                  Tip: Create a "mydata" or "label-studio-data" directory next to the command you use to run Label
-                  Studio and local file serving will be enabled automatically.
+                  {t("pages.storage_settings.providers.local_files.tip_create_a_mydata_or")}
                 </p>
                 <p>
                   If you run the Docker image, the app starts in "/label-studio", so you can bind-mount your host folder

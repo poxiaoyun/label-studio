@@ -9,6 +9,7 @@ import {
   CardFooter,
 } from "@humansignal/shad/components/ui/card";
 import { HotkeyItem } from "./Item";
+import { t } from "@humansignal/i18n";
 
 // Type definitions
 interface Hotkey {
@@ -144,14 +145,14 @@ export const HotkeySection = ({
           ))}
 
           {hotkeys.length === 0 && (
-            <div className="py-8 text-center text-muted-foreground italic">No hotkeys in this section</div>
+            <div className="py-8 text-center text-muted-foreground italic">{t("appcommon.sections.hotkeys.section.no_hotkeys_in_this_section")}</div>
           )}
         </div>
       </CardContent>
 
       <CardFooter className="flex justify-end">
         <Button variant="primary" onClick={handleSaveSection} disabled={!hasChanges}>
-          Save
+          {t("appcommon.sections.hotkeys.section.save")}
         </Button>
       </CardFooter>
     </Card>

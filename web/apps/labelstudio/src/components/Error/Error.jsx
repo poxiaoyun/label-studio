@@ -6,6 +6,7 @@ import { absoluteURL, copyText } from "../../utils/helpers";
 import { Button } from "@humansignal/ui";
 import { Space } from "../Space/Space";
 import "./Error.scss";
+import { t } from "@humansignal/i18n";
 
 const SLACK_INVITE_URL = "https://slack.labelstud.io/?source=product-error-msg";
 
@@ -40,7 +41,7 @@ export const ErrorWrapper = ({
           className={cn("error-message").elem("heidi").toClassName()}
           src={absoluteURL("/static/images/opossum_broken.svg")}
           height="111"
-          alt="Heidi's down"
+          alt={t("pages.components.error.error.heidis_down")}
         />
       )}
 
@@ -98,7 +99,7 @@ export const ErrorWrapper = ({
               icon={<IconSlack />}
               href={SLACK_INVITE_URL}
             >
-              Ask on Slack
+              {t("pages.components.error.error.ask_on_slack")}
             </Button>
 
             <Space size="small">
@@ -107,19 +108,19 @@ export const ErrorWrapper = ({
                   disabled={copied}
                   onClick={copyStacktrace}
                   className="w-[100px]"
-                  aria-label="Copy error stacktrace"
+                  aria-label={t("pages.components.error.error.copy_error_stacktrace")}
                 >
                   {copied ? "Copied" : "Copy Stacktrace"}
                 </Button>
               )}
               {onGoBack && (
-                <Button onClick={onGoBack} aria-label="Go back">
-                  Go Back
+                <Button onClick={onGoBack} aria-label={t("pages.components.error.error.go_back")}>
+                  {t("pages.components.error.error.go_back_2")}
                 </Button>
               )}
               {onReload && (
-                <Button onClick={onReload} aria-label="Reload page">
-                  Reload
+                <Button onClick={onReload} aria-label={t("pages.components.error.error.reload_page")}>
+                  {t("pages.components.error.error.reload")}
                 </Button>
               )}
             </Space>

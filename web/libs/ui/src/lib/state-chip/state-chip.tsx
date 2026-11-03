@@ -8,6 +8,7 @@
 
 import { useState, type ReactNode } from "react";
 import { Badge, Tooltip, Popover } from "@humansignal/ui";
+import { t } from "@humansignal/i18n";
 
 export interface StateChipProps {
   /**
@@ -84,7 +85,7 @@ export function StateChip({
         setOpen(!isOpen);
       }}
       type="button"
-      title="Click to view history"
+      title={t("ui.lib.state_chip.state_chip.click_to_view_history")}
     >
       <Badge variant={variant} shape="rounded">
         {label}

@@ -6,6 +6,7 @@ import { Button, Typography } from "@humansignal/ui";
 import { IconSync, IconError, IconHistoryRewind, IconCross } from "@humansignal/icons";
 import { useStateHistory, type StateHistoryItem } from "../../hooks/useStateHistory";
 import { StateHistoryTimeline } from "./StateHistoryTimeline";
+import { t } from "@humansignal/i18n";
 
 export interface StateHistoryPopoverContentProps {
   entityType: "task" | "annotation" | "project";
@@ -34,7 +35,7 @@ export function StateHistoryPopoverContent({ entityType, entityId, isOpen, onClo
           <div className="flex items-center gap-2">
             <IconHistoryRewind className="w-4 h-4" />
             <Typography variant="body" size="small" className="font-medium text-neutral-foreground">
-              State History
+              {t("appcommon.components.state_chips.state_history_popover_content.state_history")}
             </Typography>
           </div>
           {onClose && (
@@ -46,7 +47,7 @@ export function StateHistoryPopoverContent({ entityType, entityId, isOpen, onClo
               leading={<IconCross />}
               look="string"
               size="small"
-              aria-label="Close"
+              aria-label={t("appcommon.components.state_chips.state_history_popover_content.close")}
             />
           )}
         </div>
@@ -58,7 +59,7 @@ export function StateHistoryPopoverContent({ entityType, entityId, isOpen, onClo
           <div className="flex flex-col items-center justify-center py-8 gap-3">
             <IconSync className="w-8 h-8 text-primary-icon animate-spin" />
             <Typography variant="body" size="small" className="text-neutral-content-subtle">
-              Loading...
+              {t("appcommon.components.state_chips.state_history_popover_content.loading")}
             </Typography>
           </div>
         )}
@@ -67,7 +68,7 @@ export function StateHistoryPopoverContent({ entityType, entityId, isOpen, onClo
           <div className="flex flex-col items-center justify-center py-8 gap-3">
             <IconError className="w-8 h-8 text-negative-icon" />
             <Typography variant="body" size="small" className="text-neutral-foreground">
-              Failed to load history
+              {t("appcommon.components.state_chips.state_history_popover_content.failed_to_load_history")}
             </Typography>
             <Typography variant="body" size="smallest" className="text-neutral-content-subtle text-center">
               {error instanceof Error ? error.message : "Unknown error"}
@@ -82,7 +83,7 @@ export function StateHistoryPopoverContent({ entityType, entityId, isOpen, onClo
               variant="primary"
               type="button"
             >
-              Retry
+              {t("appcommon.components.state_chips.state_history_popover_content.retry")}
             </Button>
           </div>
         )}
@@ -91,7 +92,7 @@ export function StateHistoryPopoverContent({ entityType, entityId, isOpen, onClo
           <div className="flex flex-col items-center justify-center py-8 gap-3">
             <IconHistoryRewind className="w-8 h-8 text-neutral-content-subtler" />
             <Typography variant="body" size="small" className="text-neutral-content-subtle">
-              No history available
+              {t("appcommon.components.state_chips.state_history_popover_content.no_history_available")}
             </Typography>
           </div>
         )}

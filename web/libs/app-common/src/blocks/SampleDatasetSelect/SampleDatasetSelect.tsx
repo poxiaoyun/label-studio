@@ -1,5 +1,6 @@
 import { Select } from "@humansignal/ui";
 import { useCallback, useMemo } from "react";
+import { t } from "@humansignal/i18n";
 
 type Sample = {
   title: string;
@@ -59,7 +60,7 @@ export function SampleDatasetSelect({
       <span className="text-neutral-content-subtler">or use a sample dataset</span>
       <Select
         value={sample?.url ?? undefined}
-        placeholder="Select sample"
+        placeholder={t("appcommon.blocks.sample_dataset_select.sample_dataset_select.select_sample")}
         onChange={onSelect}
         triggerProps={{ onClick }}
         options={options}

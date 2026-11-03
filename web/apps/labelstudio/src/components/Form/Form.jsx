@@ -19,6 +19,7 @@ import {
 } from "./FormContext";
 import * as Validators from "./Validation/Validators";
 import { ToastProvider, ToastViewport } from "@humansignal/ui";
+import { t } from "@humansignal/i18n";
 
 const PASSWORD_PROTECTED_VALUE = "got ya, suspicious hacker!";
 
@@ -524,8 +525,8 @@ Form.Builder = React.forwardRef(
         {children}
         {props.autosubmit !== true && withActions === true && (
           <Form.Actions>
-            <Button type="submit" className="w-[120px]" aria-label="Submit form">
-              Save
+            <Button type="submit" className="w-[120px]" aria-label={t("pages.components.form.form.submit_form")}>
+              {t("pages.components.form.form.save")}
             </Button>
           </Form.Actions>
         )}
@@ -553,7 +554,7 @@ Form.Indicator = () => {
     <div className={cn("form-indicator").toClassName()}>
       <Oneof value={state}>
         <span className={cn("form-indicator").elem("item").mod({ type: state }).toClassName()} case="success">
-          Saved!
+          {t("pages.components.form.form.saved")}
         </span>
       </Oneof>
     </div>

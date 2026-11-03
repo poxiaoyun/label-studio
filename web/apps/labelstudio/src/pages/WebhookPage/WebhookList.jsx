@@ -7,6 +7,7 @@ import { Toggle } from "../../components/Form";
 import { useAPI } from "../../providers/ApiProvider";
 import { WebhookDeleteModal } from "./WebhookDeleteModal";
 import { ABILITY, useAuth } from "@humansignal/core/providers/AuthProvider";
+import { t } from "@humansignal/i18n";
 
 const WebhookListItem = ({ webhook, onSelectActive, onActiveChange, onDelete, canChangeWebhooks }) => {
   return (
@@ -37,13 +38,13 @@ const WebhookListItem = ({ webhook, onSelectActive, onActiveChange, onDelete, ca
           </div>
         </div>
         <div className="text-neutral-content-subtler text-sm mt-1">
-          Created {format(new Date(webhook.created_at), "dd MMM yyyy, HH:mm")}
+          {t("pages.pages.webhook_page.webhook_list.created")} {format(new Date(webhook.created_at), "dd MMM yyyy, HH:mm")}
         </div>
       </div>
       {canChangeWebhooks && (
         <div className="hidden group-hover:flex gap-2">
           <Button variant="primary" look="outlined" onClick={() => onSelectActive(webhook.id)} icon={<IconPencil />}>
-            Edit
+            {t("pages.pages.webhook_page.webhook_list.edit")}
           </Button>
           <Button
             variant="negative"
@@ -55,7 +56,7 @@ const WebhookListItem = ({ webhook, onSelectActive, onActiveChange, onDelete, ca
             }
             icon={<IconCross />}
           >
-            Delete
+            {t("pages.pages.webhook_page.webhook_list.delete")}
           </Button>
         </div>
       )}
@@ -88,11 +89,11 @@ const WebhookList = ({ onSelectActive, onAddWebhook, webhooks, fetchWebhooks }) 
     <>
       <header className="mb-base">
         <Typography variant="headline" size="medium" className="mb-tight">
-          Webhooks
+          {t("pages.pages.webhook_page.webhook_list.webhooks")}
         </Typography>
         {webhooks.length > 0 && (
           <Typography size="small" className="text-neutral-content-subtler">
-            Setup integrations that subscribe to certain events using Webhooks. When an event is triggered, {"app name"}{" "}
+            {t("pages.pages.webhook_page.webhook_list.setup_integrations_that_subscribe_to")} {"app name"}{" "}
             sends an HTTP POST request to the configured webhook URL.
           </Typography>
         )}
@@ -104,16 +105,16 @@ const WebhookList = ({ onSelectActive, onAddWebhook, webhooks, fetchWebhooks }) 
               size="medium"
               variant="primary"
               icon={<IconWebhook />}
-              title="Add your first webhook"
-              description="Setup integrations that subscribe to certain events using Webhooks. When an event is triggered, Label Studio sends an HTTP POST request to the configured webhook URL."
+              title={t("pages.pages.webhook_page.webhook_list.add_your_first_webhook")}
+              description={t("pages.pages.webhook_page.webhook_list.setup_integrations_that_subscribe_to_2")}
               actions={
                 canChangeWebhooks ? (
                   <Button variant="primary" look="filled" onClick={onAddWebhook}>
-                    Add Webhook
+                    {t("pages.pages.webhook_page.webhook_list.add_webhook")}
                   </Button>
                 ) : (
                   <Typography variant="body" size="small">
-                    Contact your administrator to create Webhooks
+                    {t("pages.pages.webhook_page.webhook_list.contact_your_administrator_to_create")}
                   </Typography>
                 )
               }
@@ -125,9 +126,9 @@ const WebhookList = ({ onSelectActive, onAddWebhook, webhooks, fetchWebhooks }) 
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 hover:underline"
-                      aria-label="Learn more about webhooks (opens in new window)"
+                      aria-label={t("pages.pages.webhook_page.webhook_list.learn_more_about_webhooks_opens")}
                     >
-                      Learn more
+                      {t("pages.pages.webhook_page.webhook_list.learn_more")}
                       <IconExternal width={16} height={16} />
                     </a>
                   </Typography>
@@ -158,7 +159,7 @@ const WebhookList = ({ onSelectActive, onAddWebhook, webhooks, fetchWebhooks }) 
       {webhooks.length > 0 && canChangeWebhooks && (
         <div className="flex justify-end w-full mt-base">
           <Button variant="primary" look="filled" onClick={onAddWebhook}>
-            Add Webhook
+            {t("pages.pages.webhook_page.webhook_list.add_webhook")}
           </Button>
         </div>
       )}

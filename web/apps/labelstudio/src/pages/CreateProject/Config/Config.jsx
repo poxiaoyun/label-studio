@@ -21,6 +21,7 @@ import { Checkbox, CodeEditor, Select } from "@humansignal/ui";
 import { snakeCase } from "@humansignal/core";
 import { useConfigResizer } from "./useConfigResizer";
 import { EditorResizer } from "./EditorResizer";
+import { t } from "@humansignal/i18n";
 
 const wizardClass = cn("wizard");
 const configClass = cn("configure");
@@ -66,10 +67,9 @@ const AdaptivePreview = React.memo(({ config, hasPendingUpdate, onUpdatePreview,
 
 const EmptyConfigPlaceholder = () => (
   <div className={configClass.elem("empty-config").toClassName()}>
-    <p>Your labeling configuration is empty. It is required to label your data.</p>
+    <p>{t("pages.create_project.config.config.your_labeling_configuration_is_empty")}</p>
     <p>
-      Start from one of our predefined templates or create your own config on the Code panel. The labeling config is
-      XML-based and you can{" "}
+      {t("pages.create_project.config.config.start_from_one_of_our")}{" "}
       <a href="https://labelstud.io/tags/" target="_blank" rel="noreferrer">
         read about the available tags in our documentation
       </a>
@@ -139,7 +139,7 @@ const ConfigureControl = ({ control, template }) => {
     <div className={configClass.elem("labels").toClassName()}>
       <form className={configClass.elem("add-labels").toClassName()} action="">
         <h4>{tagname === "Choices" ? "Add choices" : "Add label names"}</h4>
-        <span>Use new line as a separator to add multiple labels</span>
+        <span>{t("pages.create_project.config.config.use_new_line_as_a")}</span>
         <textarea
           name="labels"
           id=""
@@ -149,8 +149,8 @@ const ConfigureControl = ({ control, template }) => {
           onKeyPress={onKeyPress}
           className="lsf-textarea-ls p-2 px-3"
         />
-        <Button type="button" size="small" look="outlined" onClick={onAddLabels} aria-label="Add labels">
-          Add
+        <Button type="button" size="small" look="outlined" onClick={onAddLabels} aria-label={t("pages.create_project.config.config.add_labels")}>
+          {t("pages.create_project.config.config.add")}
         </Button>
       </form>
       <div className={configClass.elem("current-labels").toClassName()}>
@@ -261,7 +261,7 @@ const ConfigureSettings = ({ template }) => {
   return (
     <ul className={configClass.elem("settings").toClassName()}>
       <li>
-        <h4>Configure settings</h4>
+        <h4>{t("pages.create_project.config.config.configure_settings")}</h4>
         <ul className={configClass.elem("object-settings").toClassName()}>{items}</ul>
       </li>
     </ul>
@@ -357,16 +357,15 @@ const ConfigureColumns = ({ columns, template }) => {
 
   return (
     <div className={configClass.elem("object").toClassName()}>
-      <h4>Configure data</h4>
+      <h4>{t("pages.create_project.config.config.configure_data")}</h4>
       {template.objects.length > 1 && columns?.length > 0 && columns.length < template.objects.length && (
         <p className={configClass.elem("object-error").toClassName()}>
-          This template requires more data then you have for now
+          {t("pages.create_project.config.config.this_template_requires_more_data")}
         </p>
       )}
       {columns?.length === 0 && (
         <p className={configClass.elem("object-error").toClassName()}>
-          To select which field(s) to label you need to upload the data. Alternatively, you can provide it using Code
-          mode.
+          {t("pages.create_project.config.config.to_select_which_field_s_to")}
         </p>
       )}
       {template.objects.map((obj) => (
@@ -613,7 +612,7 @@ const Configurator = ({
     <p className={configClass.elem("tags-link").toClassName()}>
       Configure the labeling interface with tags.&nbsp;
       <a href="https://labelstud.io/tags/" target="_blank" rel="noreferrer">
-        See all tags
+        {t("pages.create_project.config.config.see_all_tags")}
       </a>
       .
     </p>
@@ -629,7 +628,7 @@ const Configurator = ({
         }}
       >
         <div className="flex flex-col">
-          <h1>Labeling Interface{hasChanges ? " *" : ""}</h1>
+          <h1>{t("pages.create_project.config.config.labeling_interface")}{hasChanges ? " *" : ""}</h1>
           <header>
             <Button
               type="button"
@@ -637,9 +636,9 @@ const Configurator = ({
               onClick={onBrowse}
               size="small"
               look="outlined"
-              aria-label="Browse templates"
+              aria-label={t("pages.create_project.config.config.browse_templates")}
             >
-              Browse Templates
+              {t("pages.create_project.config.config.browse_templates_2")}
             </Button>
             <ToggleItems items={{ code: "Code", visual: "Visual" }} active={configure} onSelect={onSelect} />
           </header>
@@ -694,11 +693,11 @@ const Configurator = ({
               {saved && (
                 <div className={cn("form-indicator").toClassName()}>
                   <span className={cn("form-indicator").elem("item").mod({ type: "success" }).toClassName()}>
-                    Saved!
+                    {t("pages.create_project.config.config.saved")}
                   </span>
                 </div>
               )}
-              <Button className="w-[120px]" onClick={onSave} waiting={waiting} aria-label="Save configuration">
+              <Button className="w-[120px]" onClick={onSave} waiting={waiting} aria-label={t("pages.create_project.config.config.save_configuration")}>
                 {waiting ? "Saving..." : "Save"}
               </Button>
               {isFF(FF_UNSAVED_CHANGES) && <UnsavedChanges hasChanges={hasChanges} onSave={onSave} />}

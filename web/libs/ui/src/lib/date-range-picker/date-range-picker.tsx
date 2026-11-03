@@ -27,6 +27,7 @@ import { Sidebar } from "./sidebar";
 import { DateTimeInput } from "./date-time-input";
 import { Typography } from "../typography/typography";
 import styles from "./date-range-picker.module.scss";
+import { t } from "@humansignal/i18n";
 
 const today = new Date();
 const month = today.getMonth();
@@ -308,12 +309,12 @@ export const DateRangePicker = ({
           <div className={styles.timeToggle}>
             <Toggle data-testid="time-toggle" checked={timeMode} onChange={() => setTimeMode(!timeMode)} />
             <Typography variant="body" size="medium">
-              Include time
+              {t("ui.lib.date_range_picker.date_range_picker.include_time")}
             </Typography>
           </div>
           {onClear && (
             <Button
-              aria-label="Clear date selection"
+              aria-label={t("ui.lib.date_range_picker.date_range_picker.clear_date_selection")}
               variant="negative"
               look="outlined"
               className="clear"
@@ -323,11 +324,11 @@ export const DateRangePicker = ({
                 dropdown?.close();
               }}
             >
-              Clear
+              {t("ui.lib.date_range_picker.date_range_picker.clear")}
             </Button>
           )}
           <Button
-            aria-label="Reset date"
+            aria-label={t("ui.lib.date_range_picker.date_range_picker.reset_date")}
             variant="negative"
             look="outlined"
             className="reset"
@@ -341,18 +342,18 @@ export const DateRangePicker = ({
               }
             }}
           >
-            Reset
+            {t("ui.lib.date_range_picker.date_range_picker.reset")}
           </Button>
-          <Button aria-label="Close date picker" look="outlined" className="cancel" onClick={() => dropdown?.close()}>
-            Cancel
+          <Button aria-label={t("ui.lib.date_range_picker.date_range_picker.close_date_picker")} look="outlined" className="cancel" onClick={() => dropdown?.close()}>
+            {t("ui.lib.date_range_picker.date_range_picker.cancel")}
           </Button>
           <Button
-            aria-label="Apply date"
+            aria-label={t("ui.lib.date_range_picker.date_range_picker.apply_date")}
             className="apply"
             disabled={!((dateChanged || timeModeChanged) && validDates)}
             onClick={handleApply}
           >
-            Apply Range
+            {t("ui.lib.date_range_picker.date_range_picker.apply_range")}
           </Button>
         </Space>
       </div>

@@ -2,6 +2,7 @@ import { EnterpriseBadge, IconSpark } from "@humansignal/ui";
 import { Alert, AlertTitle, AlertDescription } from "@humansignal/shad/components/ui/alert";
 import { IconCloudProviderAzure } from "@humansignal/icons";
 import type { ProviderConfig } from "@humansignal/app-common/blocks/StorageProviderForm/types/provider";
+import { t } from "@humansignal/i18n";
 
 const azureSpiProvider: ProviderConfig = {
   name: "azure_spi",
@@ -18,16 +19,16 @@ const azureSpiProvider: ProviderConfig = {
       content: (
         <Alert variant="gradient">
           <IconSpark />
-          <AlertTitle>Enterprise Feature</AlertTitle>
+          <AlertTitle>{t("pages.storage_settings.providers.azure_spi.enterprise_feature")}</AlertTitle>
           <AlertDescription>
-            Azure Blob Storage with Service Principal is available in Label Studio Enterprise.{" "}
+            {t("pages.storage_settings.providers.azure_spi.azure_blob_storage_with_service")}{" "}
             <a
               href="https://docs.humansignal.com/guide/storage.html#Azure-Blob-Storage-with-Service-Principal-authentication"
               target="_blank"
               rel="noopener noreferrer"
               className="underline hover:no-underline"
             >
-              Learn more
+              {t("pages.storage_settings.providers.azure_spi.learn_more")}
             </a>
           </AlertDescription>
         </Alert>

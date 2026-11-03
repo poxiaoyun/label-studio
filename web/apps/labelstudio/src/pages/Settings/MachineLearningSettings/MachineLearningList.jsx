@@ -12,6 +12,7 @@ import { ApiContext } from "../../../providers/ApiProvider";
 import { cn } from "../../../utils/bem";
 
 import "./MachineLearningList.scss";
+import { t } from "@humansignal/i18n";
 
 export const MachineLearningList = ({ backends, fetchBackends, onEdit, onTestRequest, onStartTraining }) => {
   const api = useContext(ApiContext);
@@ -74,17 +75,17 @@ const BackendCard = ({ backend, onStartTrain, onEdit, onDelete, onTestRequest })
             align="right"
             content={
               <Menu size="medium" contextual>
-                <Menu.Item onClick={() => onEdit(backend)}>Edit</Menu.Item>
-                <Menu.Item onClick={() => onTestRequest(backend)}>Send Test Request</Menu.Item>
-                <Menu.Item onClick={() => onStartTrain(backend)}>Start Training</Menu.Item>
+                <Menu.Item onClick={() => onEdit(backend)}>{t("pages.settings.machine_learning_settings.machine_learning_list.edit")}</Menu.Item>
+                <Menu.Item onClick={() => onTestRequest(backend)}>{t("pages.settings.machine_learning_settings.machine_learning_list.send_test_request")}</Menu.Item>
+                <Menu.Item onClick={() => onStartTrain(backend)}>{t("pages.settings.machine_learning_settings.machine_learning_list.start_training")}</Menu.Item>
                 <Menu.Divider />
                 <Menu.Item onClick={() => confirmDelete(backend)} isDangerous>
-                  Delete
+                  {t("pages.settings.machine_learning_settings.machine_learning_list.delete")}
                 </Menu.Item>
               </Menu>
             }
           >
-            <Button look="string" size="small" className="!p-0" aria-label="Machine learning model options">
+            <Button look="string" size="small" className="!p-0" aria-label={t("pages.settings.machine_learning_settings.machine_learning_list.machine_learning_model_options")}>
               <IconEllipsis />
             </Button>
           </Dropdown.Trigger>
@@ -115,11 +116,11 @@ const BackendState = ({ backend }) => {
     <div className={cn("ml").elem("status").toClassName()}>
       <span className={cn("ml").elem("indicator").mod({ state }).toClassName()} />
       <Oneof value={state} className={cn("ml").elem("status-label").toClassName()}>
-        <span case="DI">Disconnected</span>
-        <span case="CO">Connected</span>
-        <span case="ER">Error</span>
-        <span case="TR">Training</span>
-        <span case="PR">Predicting</span>
+        <span case="DI">{t("pages.settings.machine_learning_settings.machine_learning_list.disconnected")}</span>
+        <span case="CO">{t("pages.settings.machine_learning_settings.machine_learning_list.connected")}</span>
+        <span case="ER">{t("pages.settings.machine_learning_settings.machine_learning_list.error")}</span>
+        <span case="TR">{t("pages.settings.machine_learning_settings.machine_learning_list.training")}</span>
+        <span case="PR">{t("pages.settings.machine_learning_settings.machine_learning_list.predicting")}</span>
       </Oneof>
     </div>
   );

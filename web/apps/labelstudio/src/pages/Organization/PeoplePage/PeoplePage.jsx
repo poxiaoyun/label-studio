@@ -14,6 +14,7 @@ import { IconPlus } from "@humansignal/icons";
 import { useToast } from "@humansignal/ui";
 import { InviteLink } from "./InviteLink";
 import { SelectedUser } from "./SelectedUser";
+import { t } from "@humansignal/i18n";
 
 export const PeoplePage = () => {
   const apiSettingsModal = useRef();
@@ -65,16 +66,16 @@ export const PeoplePage = () => {
 
           <Space>
             {isFF(FF_AUTH_TOKENS) && (
-              <Button look="outlined" onClick={showApiTokenSettingsModal} aria-label="Show API token settings">
-                API Tokens Settings
+              <Button look="outlined" onClick={showApiTokenSettingsModal} aria-label={t("pages.organization.people_page.people_page.show_api_token_settings")}>
+                {t("pages.organization.people_page.people_page.api_tokens_settings")}
               </Button>
             )}
             <Button
               leading={<IconPlus className="!h-4" />}
               onClick={() => setInvitationOpen(true)}
-              aria-label="Invite new member"
+              aria-label={t("pages.organization.people_page.people_page.invite_new_member")}
             >
-              Add Members
+              {t("pages.organization.people_page.people_page.add_members")}
             </Button>
           </Space>
         </Space>

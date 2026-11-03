@@ -21,6 +21,7 @@ import {
 } from "./date-utils";
 import styles from "./date-time-input.module.scss";
 import clsx from "clsx";
+import { t } from "@humansignal/i18n";
 
 type SimpleInputProps = {
   id?: string;
@@ -244,12 +245,12 @@ export const DateTimeInput = ({
         />
         {invalidDateOutOfFocus && !bothInvalid && (
           <Typography variant="body" size="smaller" className={styles.errorText}>
-            Select or enter a valid {side} date.
+            {t("ui.lib.date_range_picker.date_time_input.select_or_enter_a_valid")} {side} date.
           </Typography>
         )}
         {bothInvalid && (
           <Typography variant="body" size="smaller" className={styles.errorText}>
-            Select or enter a valid {side} date and time.
+            {t("ui.lib.date_range_picker.date_time_input.select_or_enter_a_valid")} {side} date and time.
           </Typography>
         )}
       </div>
@@ -266,7 +267,7 @@ export const DateTimeInput = ({
             />
             {invalidTimeOutOfFocus && !bothInvalid && (
               <Typography variant="body" size="smaller" className={styles.errorText}>
-                Enter a valid time.
+                {t("ui.lib.date_range_picker.date_time_input.enter_a_valid_time")}
               </Typography>
             )}
           </div>

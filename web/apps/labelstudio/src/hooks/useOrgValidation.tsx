@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { ToastType, useToast } from "@humansignal/ui";
+import { t } from "@humansignal/i18n";
 
 /**
  * Creates a shared AbortController, which can be used to abort requests.
@@ -13,7 +14,7 @@ export const useOrgValidation = (): void => {
     toast.show({
       message: (
         <>
-          Data will be persisted on the node running this container, but all data will be lost if this node goes away.
+          {t("pages.hooks.use_org_validation.data_will_be_persisted_on")}
         </>
       ),
       type: ToastType.alertError,

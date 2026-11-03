@@ -4,6 +4,7 @@ import { Button, Dropdown } from "@humansignal/ui";
 import { ApiContext } from "../../../providers/ApiProvider";
 import { StorageSummary } from "./StorageSummary";
 import { IconEllipsisVertical } from "@humansignal/icons";
+import { t } from "@humansignal/i18n";
 
 export const StorageCard = ({ rootClass, target, storage, onEditStorage, onDeleteStorage, storageTypes }) => {
   const [syncing, setSyncing] = useState(false);
@@ -45,12 +46,12 @@ export const StorageCard = ({ rootClass, target, storage, onEditStorage, onDelet
           align="right"
           content={
             <Menu size="compact" style={{ width: 110 }}>
-              <Menu.Item onClick={() => onEditStorage(storageData)}>Edit</Menu.Item>
-              <Menu.Item onClick={() => onDeleteStorage(storageData)}>Delete</Menu.Item>
+              <Menu.Item onClick={() => onEditStorage(storageData)}>{t("pages.settings.storage_settings.storage_card.edit")}</Menu.Item>
+              <Menu.Item onClick={() => onDeleteStorage(storageData)}>{t("pages.settings.storage_settings.storage_card.delete")}</Menu.Item>
             </Menu>
           }
         >
-          <Button look="string" className="-ml-3" aria-label="Storage options">
+          <Button look="string" className="-ml-3" aria-label={t("pages.settings.storage_settings.storage_card.storage_options")}>
             <IconEllipsisVertical />
           </Button>
         </Dropdown.Trigger>
@@ -69,13 +70,13 @@ export const StorageCard = ({ rootClass, target, storage, onEditStorage, onDelet
             waiting={syncing}
             onClick={startSync}
             disabled={notSyncedYet}
-            aria-label="Sync Storage"
+            aria-label={t("pages.settings.storage_settings.storage_card.sync_storage")}
           >
-            Sync Storage
+            {t("pages.settings.storage_settings.storage_card.sync_storage")}
           </Button>
           {notSyncedYet && (
             <div className={rootClass.elem("sync-count").toClassName()}>
-              Syncing may take some time, please refresh the page to see the current status.
+              {t("pages.settings.storage_settings.storage_card.syncing_may_take_some_time")}
             </div>
           )}
         </div>

@@ -12,6 +12,7 @@ type InputFileProps = HTMLAttributes<HTMLInputElement> & {
 import styles from "./InputFile.module.scss";
 import type React from "react";
 import { forwardRef, type HTMLAttributes, useCallback, useRef } from "react";
+import { t } from "@humansignal/i18n";
 export const InputFile = forwardRef(({ name, className, text, onChange, ...props }: InputFileProps, ref: any) => {
   if (!ref) {
     ref = useRef();
@@ -29,7 +30,7 @@ export const InputFile = forwardRef(({ name, className, text, onChange, ...props
   return (
     <label className={clsx(styles.inputWrapper, className)} onKeyDown={wrapperKeyDownHandler}>
       <span className={styles.labelContent}>
-        <IconUpload className={styles.icon} /> {text ?? <>Upload Image</>}
+        <IconUpload className={styles.icon} /> {text ?? <>{t("ui.lib.input_file.input_file.upload_image")}</>}
       </span>
       <input
         ref={ref}

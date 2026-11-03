@@ -1,4 +1,5 @@
 import { cn } from "@humansignal/ui";
+import { t } from "@humansignal/i18n";
 
 interface StepperProps {
   steps: { title: string }[];
@@ -99,7 +100,7 @@ export const Stepper = ({ steps, currentStep, onStepClick, isEditMode = false }:
                       strokeLinejoin="round"
                       className="w-3 h-3"
                     >
-                      <title>Line</title>
+                      <title>{t("appcommon.storage_provider_form.steps.stepper.line")}</title>
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                   ) : (

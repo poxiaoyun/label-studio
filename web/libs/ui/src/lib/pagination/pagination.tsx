@@ -5,6 +5,7 @@ import styles from "./pagination.module.scss";
 import { IconChevronLeft, IconChevronRight, IconFastForward, IconRewind } from "@humansignal/icons";
 import { Button } from "../button/button";
 import { Typography } from "../typography/typography";
+import { t } from "@humansignal/i18n";
 
 export interface PaginationProps {
   /** Current page number (1-indexed) */
@@ -199,7 +200,7 @@ export const Pagination: FC<PaginationProps> = ({
               className={cn(styles.button, styles["button-first"], currentPage === 1 && styles.disabled)}
               onClick={handleFirstPage}
               disabled={disabled || currentPage === 1}
-              aria-label="First page"
+              aria-label={t("ui.lib.pagination.pagination.first_page")}
             >
               <IconRewind width={24} height={24} />
             </Button>
@@ -212,7 +213,7 @@ export const Pagination: FC<PaginationProps> = ({
           className={cn(styles.button, styles["button-prev"], currentPage === 1 && styles.disabled)}
           onClick={handlePreviousPage}
           disabled={disabled || currentPage === 1}
-          aria-label="Previous page"
+          aria-label={t("ui.lib.pagination.pagination.previous_page")}
         >
           <IconChevronLeft width={24} height={24} />
         </Button>
@@ -264,7 +265,7 @@ export const Pagination: FC<PaginationProps> = ({
           className={cn(styles.button, styles["button-next"], currentPage >= displayTotalPages && styles.disabled)}
           onClick={handleNextPage}
           disabled={disabled || currentPage >= displayTotalPages}
-          aria-label="Next page"
+          aria-label={t("ui.lib.pagination.pagination.next_page")}
         >
           <IconChevronRight />
         </Button>
@@ -277,7 +278,7 @@ export const Pagination: FC<PaginationProps> = ({
               className={cn(styles.button, styles["button-last"], currentPage >= displayTotalPages && styles.disabled)}
               onClick={handleLastPage}
               disabled={disabled || currentPage >= displayTotalPages}
-              aria-label="Last page"
+              aria-label={t("ui.lib.pagination.pagination.last_page")}
             >
               <IconFastForward />
             </Button>

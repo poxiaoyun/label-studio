@@ -6,6 +6,7 @@ import { Userpic, cn, Typography } from "@humansignal/ui";
 import type { StateHistoryItem } from "../../hooks/useStateHistory";
 import { formatStateName, formatTimestamp, formatUserName } from "./utils";
 import { getStateVisuals } from "./state-visuals";
+import { t } from "@humansignal/i18n";
 
 export interface StateHistoryTimelineProps {
   history: StateHistoryItem[];
@@ -107,7 +108,7 @@ export function TimelineItem({ item, index, isLast }: TimelineItemProps) {
           {isSystem && (
             <>
               <Typography variant="body" size="smaller">
-                System
+                {t("appcommon.components.state_chips.state_history_timeline.system")}
               </Typography>
               {/* Dot separator */}
               <div className="size-[3px] rounded-full bg-neutral-content-subtler shrink-0" />

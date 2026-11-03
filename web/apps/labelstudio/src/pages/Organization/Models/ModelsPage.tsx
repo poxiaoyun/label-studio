@@ -4,6 +4,7 @@ import { cn } from "apps/labelstudio/src/utils/bem";
 import { Link } from "react-router-dom";
 import type { Page } from "../../types/Page";
 import { EmptyList } from "./@components/EmptyList";
+import { t } from "@humansignal/i18n";
 
 export const ModelsPage: Page = () => {
   useUpdatePageTitle("Models");
@@ -23,7 +24,7 @@ ModelsPage.context = () => {
   return (
     <Space size="small">
       <Link to="/prompt/settings" className={buttonVariant({ size: "small" })}>
-        Create Model
+        {t("pages.organization.models.models_page.create_model")}
       </Link>
     </Space>
   );

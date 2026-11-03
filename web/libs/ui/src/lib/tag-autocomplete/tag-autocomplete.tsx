@@ -16,6 +16,7 @@ import { Tag } from "./tag";
 import { useTagAutocomplete } from "./use-tag-autocomplete";
 import type { TagAutocompleteProps, NormalizedTagOption } from "./types";
 import styles from "./tag-autocomplete.module.scss";
+import { t } from "@humansignal/i18n";
 
 export const TagAutocomplete = forwardRef(
   <T = string>(props: TagAutocompleteProps<T>, ref: ForwardedRef<HTMLSelectElement>) => {
@@ -269,7 +270,7 @@ export const TagAutocomplete = forwardRef(
                 focusInput();
               }}
             >
-              <div ref={tagsContainerRef} className={styles.tagsContainer} aria-label="Selected tags">
+              <div ref={tagsContainerRef} className={styles.tagsContainer} aria-label={t("ui.lib.tag_autocomplete.tag_autocomplete.selected_tags")}>
                 {selectedOptions.map((option, index) => renderTagItem(option, index))}
 
                 <input
@@ -314,7 +315,7 @@ export const TagAutocomplete = forwardRef(
               id="tag-autocomplete-listbox"
               // biome-ignore lint/a11y/useSemanticElements: This is a combobox pattern, not a traditional select
               role="listbox"
-              aria-label="Available options"
+              aria-label={t("ui.lib.tag_autocomplete.tag_autocomplete.available_options")}
               className="bg-neutral-background rounded-md"
             >
               {isLoading ? (
@@ -323,7 +324,7 @@ export const TagAutocomplete = forwardRef(
                 </div>
               ) : (
                 <>
-                  {filteredOptions.length === 0 && !showCreateOption && <CommandEmpty>No options found.</CommandEmpty>}
+                  {filteredOptions.length === 0 && !showCreateOption && <CommandEmpty>{t("ui.lib.tag_autocomplete.tag_autocomplete.no_options_found")}</CommandEmpty>}
 
                   <CommandGroup>{filteredOptions.map((option, index) => renderOptionItem(option, index))}</CommandGroup>
 
@@ -346,7 +347,7 @@ export const TagAutocomplete = forwardRef(
                       <div className="flex items-center gap-2 w-full px-4 py-1 hover:bg-primary-emphasis-subtle hover:cursor-pointer group-focus-within:bg-primary-emphasis-subtle group-aria-selected:bg-primary-emphasis-subtle rounded-4 duration-150 ease-out">
                         <IconPlus className={styles.createIcon} />
                         <span>
-                          Add "<strong>{query.trim()}</strong>" tag
+                          {t("ui.lib.tag_autocomplete.tag_autocomplete.add")}<strong>{query.trim()}</strong>{t("ui.lib.tag_autocomplete.tag_autocomplete.tag")}
                         </span>
                       </div>
                     </CommandItem>

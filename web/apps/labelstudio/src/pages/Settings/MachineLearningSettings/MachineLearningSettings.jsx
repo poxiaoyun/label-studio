@@ -12,6 +12,7 @@ import { CustomBackendForm } from "./Forms";
 import { TestRequest } from "./TestRequest";
 import { StartModelTraining } from "./StartModelTraining";
 import "./MachineLearningSettings.scss";
+import { t } from "@humansignal/i18n";
 
 export const MachineLearningSettings = () => {
   const api = useAPI();
@@ -99,7 +100,7 @@ export const MachineLearningSettings = () => {
     <section>
       <div className="w-[42rem]">
         <Typography variant="headline" size="medium" className="mb-base">
-          Model
+          {t("pages.settings.machine_learning_settings.machine_learning_settings.model")}
         </Typography>
         {loading && <Spinner size={32} />}
         {loaded && backends.length === 0 && (
@@ -108,16 +109,16 @@ export const MachineLearningSettings = () => {
               size="medium"
               variant="primary"
               icon={<IconModels />}
-              title="Let's connect your first model"
+              title={t("pages.settings.machine_learning_settings.machine_learning_settings.lets_connect_your_first_model")}
               description="Connect a machine learning model to generate live predictions for your project. Compare predictions, accelerate labeling with automatic prelabeling, and direct your team to the most impactful tasks through active learning."
               actions={
                 <Button
                   variant="primary"
                   look="filled"
                   onClick={() => showMLFormModal()}
-                  aria-label="Add machine learning model"
+                  aria-label={t("pages.settings.machine_learning_settings.machine_learning_settings.add_machine_learning_model")}
                 >
-                  Connect Model
+                  {t("pages.settings.machine_learning_settings.machine_learning_settings.connect_model")}
                 </Button>
               }
               footer={
@@ -128,10 +129,10 @@ export const MachineLearningSettings = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       data-testid="ml-help-link"
-                      aria-label="Learn more about machine learning models (opens in new window)"
+                      aria-label={t("pages.settings.machine_learning_settings.machine_learning_settings.learn_more_about_machine_learning")}
                       className="inline-flex items-center gap-1 hover:underline"
                     >
-                      Learn more
+                      {t("pages.settings.machine_learning_settings.machine_learning_settings.learn_more")}
                       <IconExternal width={16} height={16} />
                     </a>
                   </Typography>
@@ -151,22 +152,21 @@ export const MachineLearningSettings = () => {
         {backends.length > 0 && (
           <div className="my-wide">
             <Typography size="small" className="text-neutral-content-subtler">
-              A connected model has been detected! If you wish to fetch predictions from this model, please follow these
-              steps:
+              {t("pages.settings.machine_learning_settings.machine_learning_settings.a_connected_model_has_been")}
             </Typography>
             <Typography size="small" className="text-neutral-content-subtler mt-base">
-              1. Navigate to the <i>Data Manager</i>.
+              {t("pages.settings.machine_learning_settings.machine_learning_settings.1_navigate_to_the")} <i>{t("pages.settings.machine_learning_settings.machine_learning_settings.data_manager")}</i>.
             </Typography>
             <Typography size="small" className="text-neutral-content-subtler mt-tighter">
-              2. Select the desired tasks.
+              {t("pages.settings.machine_learning_settings.machine_learning_settings.2_select_the_desired_tasks")}
             </Typography>
             <Typography size="small" className="text-neutral-content-subtler mt-tighter">
-              3. Click on <i>Batch predictions</i> from the <i>Actions</i> menu.
+              {t("pages.settings.machine_learning_settings.machine_learning_settings.3_click_on")} <i>{t("pages.settings.machine_learning_settings.machine_learning_settings.batch_predictions")}</i> from the <i>{t("pages.settings.machine_learning_settings.machine_learning_settings.actions")}</i> menu.
             </Typography>
             <Typography size="small" className="text-neutral-content-subtler mt-base">
-              If you want to use the model predictions for prelabeling, please configure this in the{" "}
+              {t("pages.settings.machine_learning_settings.machine_learning_settings.if_you_want_to_use")}{" "}
               <NavLink to="annotation" className="hover:underline">
-                Annotation settings
+                {t("pages.settings.machine_learning_settings.machine_learning_settings.annotation_settings")}
               </NavLink>
               .
             </Typography>
@@ -182,12 +182,12 @@ export const MachineLearningSettings = () => {
           {backends.length > 0 && (
             <div className="p-wide border border-neutral-border rounded-md">
               <Form.Row columnCount={1}>
-                <Label text="Configuration" large />
+                <Label text={t("pages.settings.machine_learning_settings.machine_learning_settings.configuration")} large />
 
                 <div>
                   <Toggle
-                    label="Start model training on annotation submission"
-                    description="This option will send a request to /train with information about annotations. You can use this to enable an Active Learning loop. You can also manually start training through model menu in its card."
+                    label={t("pages.settings.machine_learning_settings.machine_learning_settings.start_model_training_on_annotation")}
+                    description={t("pages.settings.machine_learning_settings.machine_learning_settings.this_option_will_send_a")}
                     name="start_training_on_annotation_update"
                   />
                 </div>
@@ -198,10 +198,10 @@ export const MachineLearningSettings = () => {
           {backends.length > 0 && (
             <Form.Actions>
               <Form.Indicator>
-                <span case="success">Saved!</span>
+                <span case="success">{t("pages.settings.machine_learning_settings.machine_learning_settings.saved")}</span>
               </Form.Indicator>
-              <Button type="submit" look="primary" className="w-[120px]" aria-label="Save machine learning settings">
-                Save
+              <Button type="submit" look="primary" className="w-[120px]" aria-label={t("pages.settings.machine_learning_settings.machine_learning_settings.save_machine_learning_settings")}>
+                {t("pages.settings.machine_learning_settings.machine_learning_settings.save")}
               </Button>
             </Form.Actions>
           )}

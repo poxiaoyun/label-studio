@@ -3,6 +3,7 @@ import { Button } from "@humansignal/ui";
 import { LeaveBlocker, type LeaveBlockerCallbacks } from "../../../components/LeaveBlocker/LeaveBlocker";
 import { modal } from "../../../components/Modal/Modal";
 import { Space } from "../../../components/Space/Space";
+import { t } from "@humansignal/i18n";
 
 type SaveAndLeaveButtonProps = {
   onSave: () => Promise<void>;
@@ -16,7 +17,7 @@ const SaveAndLeaveButton = ({ onSave, text = "Save and Leave" }: SaveAndLeaveBut
     setSaving(false);
   }, [onSave]);
   return (
-    <Button size="small" onClick={saveHandler} waiting={saving} aria-label="Save changes">
+    <Button size="small" onClick={saveHandler} waiting={saving} aria-label={t("pages.create_project.config.unsaved_changes.save_changes")}>
       {text}
     </Button>
   );

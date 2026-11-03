@@ -4,6 +4,7 @@ import { Modal } from "../components/Modal/ModalPopup";
 import { captureException } from "../config/Sentry";
 import { isFF } from "../utils/feature-flags";
 import { IMPROVE_GLOBAL_ERROR_MESSAGES } from "../providers/ApiProvider";
+import { t } from "@humansignal/i18n";
 
 export const ErrorContext = React.createContext();
 
@@ -58,7 +59,7 @@ export default class ErrorBoundary extends Component {
         <Modal onHide={() => location.reload()} style={{ width: "60vw" }} visible bare>
           <div style={{ padding: 40 }}>
             <ErrorWrapper
-              title="Runtime error"
+              title={t("pages.app.error_boundary.runtime_error")}
               message={error}
               stacktrace={stacktrace}
               onGoBack={goBack}
@@ -88,5 +89,5 @@ export default class ErrorBoundary extends Component {
 export const ErrorUI = () => {
   const context = React.useContext(ErrorContext);
 
-  return context.hasError && <div className="error">Error occurred</div>;
+  return context.hasError && <div className="error">{t("pages.app.error_boundary.error_occurred")}</div>;
 };

@@ -10,6 +10,7 @@ import { cn } from "../../../utils/bem";
 import { useRefresh } from "../../../utils/hooks";
 import { ImportPage } from "./Import";
 import { useImportPage } from "./useImportPage";
+import { t } from "@humansignal/i18n";
 
 export const Inner = () => {
   const history = useHistory();
@@ -63,7 +64,7 @@ export const Inner = () => {
 
   return (
     <Modal
-      title="Import data"
+      title={t("pages.create_project.import.import_modal.import_data")}
       ref={modal}
       onHide={() => backToDM()}
       closeOnClickOutside={false}
@@ -72,7 +73,7 @@ export const Inner = () => {
       bare
     >
       <Modal.Header divided>
-        <div className={cn("modal").elem("title").toClassName()}>Import Data</div>
+        <div className={cn("modal").elem("title").toClassName()}>{t("pages.create_project.import.import_modal.import_data_2")}</div>
 
         <Space>
           <Button
@@ -81,18 +82,18 @@ export const Inner = () => {
             look="outlined"
             waiting={waiting}
             onClick={onCancel}
-            aria-label="Cancel import"
+            aria-label={t("pages.create_project.import.import_modal.cancel_import")}
           >
-            Cancel
+            {t("pages.create_project.import.import_modal.cancel")}
           </Button>
           <Button
             size="small"
             onClick={onFinish}
             waiting={waiting || uploading}
             disabled={uploadDisabled}
-            aria-label="Finish import"
+            aria-label={t("pages.create_project.import.import_modal.finish_import")}
           >
-            Import
+            {t("pages.create_project.import.import_modal.import")}
           </Button>
         </Space>
       </Modal.Header>

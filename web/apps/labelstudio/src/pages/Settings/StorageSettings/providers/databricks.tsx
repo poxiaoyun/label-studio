@@ -2,6 +2,7 @@ import { EnterpriseBadge, IconSpark } from "@humansignal/ui";
 import { Alert, AlertTitle, AlertDescription } from "@humansignal/shad/components/ui/alert";
 import { IconCloudProviderDatabricks } from "@humansignal/icons";
 import type { ProviderConfig } from "@humansignal/app-common/blocks/StorageProviderForm/types/provider";
+import { t } from "@humansignal/i18n";
 
 const databricksProvider: ProviderConfig = {
   name: "databricks",
@@ -17,16 +18,16 @@ const databricksProvider: ProviderConfig = {
       content: (
         <Alert variant="gradient">
           <IconSpark />
-          <AlertTitle>Enterprise Feature</AlertTitle>
+          <AlertTitle>{t("pages.storage_settings.providers.databricks.enterprise_feature")}</AlertTitle>
           <AlertDescription>
-            Databricks Files (UC Volumes) is available in Label Studio Enterprise.{" "}
+            {t("pages.storage_settings.providers.databricks.databricks_files_uc_volumes_is")}{" "}
             <a
               href="https://docs.humansignal.com/guide/storage.html#Databricks-Files-UC-Volumes"
               target="_blank"
               rel="noopener noreferrer"
               className="underline hover:no-underline"
             >
-              Learn more
+              {t("pages.storage_settings.providers.databricks.learn_more")}
             </a>
           </AlertDescription>
         </Alert>

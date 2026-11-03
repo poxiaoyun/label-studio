@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { Button } from "@humansignal/ui";
 import { useAPI } from "../../../providers/ApiProvider";
 import { Typography } from "@humansignal/ui";
+import { t } from "@humansignal/i18n";
 
 export const StartModelTraining = ({ backend }) => {
   const api = useAPI();
@@ -23,8 +24,7 @@ export const StartModelTraining = ({ backend }) => {
   return (
     <div className="max-w-[680px]">
       <Typography size="small" className="text-neutral-content-subtler">
-        You're about to manually trigger your model's training process. This action will start the learning phase based
-        on how train method is implemented in the ML Backend. Proceed to begin this process.
+        {t("pages.settings.machine_learning_settings.start_model_training.youre_about_to_manually_trigger")}
       </Typography>
       <Typography size="small" className="text-neutral-content-subtler mt-base mb-wide">
         *Note: Currently, there is no built-in feedback loop within this interface for tracking the training progress.
@@ -37,7 +37,7 @@ export const StartModelTraining = ({ backend }) => {
             onStartTraining(backend);
           }}
         >
-          Start Training
+          {t("pages.settings.machine_learning_settings.start_model_training.start_training")}
         </Button>
       )}
 

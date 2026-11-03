@@ -10,6 +10,7 @@ import {
   IconClose,
 } from "@humansignal/icons";
 import styles from "./message.module.scss";
+import { t } from "@humansignal/i18n";
 
 // Variant configuration
 const variants = {
@@ -255,8 +256,8 @@ export const Message = forwardRef<HTMLDivElement, MessageProps>(
             size="smaller"
             className={cn("message__close", styles.close)}
             onClick={onClose}
-            tooltip="Dismiss"
-            aria-label="Dismiss message"
+            tooltip={t("ui.lib.message.message.dismiss")}
+            aria-label={t("ui.lib.message.message.dismiss_message")}
             data-testid="message-dismiss-button"
             leading={<IconClose />}
           />

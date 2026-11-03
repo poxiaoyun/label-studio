@@ -5,6 +5,7 @@ import styles from "./sparkles.module.scss";
 import clsx from "clsx";
 import type { SparkleAreaOptions, Sparkle } from "./types";
 import { randomPositionAvoidingCenter } from "./utils";
+import { t } from "@humansignal/i18n";
 
 /**
  * Props for the Sparkles component.
@@ -268,7 +269,7 @@ export const Sparkles: React.FC<SparklesProps> = ({
           height={buttonSize}
           className="absolute top-0 left-0 z-[2] pointer-events-none sparkles-area-overlay"
         >
-          <title>Sparkles area overlay</title>
+          <title>{t("ui.lib.sparkles.sparkles.sparkles_area_overlay")}</title>
           <defs>
             <mask id="sparkles-area-mask">
               {/* Full area is visible, cutout is transparent */}

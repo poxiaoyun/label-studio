@@ -4,6 +4,7 @@ import { IconCross } from "@humansignal/icons";
 import { Userpic, Button } from "@humansignal/ui";
 import { cn } from "../../../utils/bem";
 import "./SelectedUser.scss";
+import { t } from "@humansignal/i18n";
 
 const UserProjectsLinks = ({ projects }) => {
   return (
@@ -34,7 +35,7 @@ export const SelectedUser = ({ user, onClose }) => {
         look="string"
         onClick={onClose}
         className="absolute top-[20px] right-[24px]"
-        aria-label="Close user details"
+        aria-label={t("pages.organization.people_page.selected_user.close_user_details")}
       >
         <IconCross />
       </Button>
@@ -55,7 +56,7 @@ export const SelectedUser = ({ user, onClose }) => {
 
       {!!user.created_projects.length && (
         <div className={cn("user-info").elem("section").toClassName()}>
-          <div className={cn("user-info").elem("section-title").toClassName()}>Created Projects</div>
+          <div className={cn("user-info").elem("section-title").toClassName()}>{t("pages.organization.people_page.selected_user.created_projects")}</div>
 
           <UserProjectsLinks projects={user.created_projects} />
         </div>
@@ -63,14 +64,14 @@ export const SelectedUser = ({ user, onClose }) => {
 
       {!!user.contributed_to_projects.length && (
         <div className={cn("user-info").elem("section").toClassName()}>
-          <div className={cn("user-info").elem("section-title").toClassName()}>Contributed to</div>
+          <div className={cn("user-info").elem("section-title").toClassName()}>{t("pages.organization.people_page.selected_user.contributed_to")}</div>
 
           <UserProjectsLinks projects={user.contributed_to_projects} />
         </div>
       )}
 
       <p className={cn("user-info").elem("last-active").toClassName()}>
-        Last activity on: {format(new Date(user.last_activity), "dd MMM yyyy, KK:mm a")}
+        {t("pages.organization.people_page.selected_user.last_activity_on")} {format(new Date(user.last_activity), "dd MMM yyyy, KK:mm a")}
       </p>
     </div>
   );

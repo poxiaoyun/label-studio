@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { Button } from "@humansignal/ui";
 import { useAPI } from "../../../providers/ApiProvider";
 import { Typography } from "@humansignal/ui";
+import { t } from "@humansignal/i18n";
 
 export const TestRequest = ({ backend }) => {
   const api = useAPI();
@@ -29,15 +30,15 @@ export const TestRequest = ({ backend }) => {
           sendTestRequest(backend);
         }}
       >
-        Send Request
+        {t("pages.settings.machine_learning_settings.test_request.send_request")}
       </Button>
       <Typography size="smaller" className="my-tight">
-        This sends a test request to the prediction endpoint of the ML Backend using a random task.
+        {t("pages.settings.machine_learning_settings.test_request.this_sends_a_test_request")}
       </Typography>
       <div className="grid grid-cols-2 gap-4">
         <div className="flex flex-col gap-1">
           <Typography variant="title" size="medium">
-            Request
+            {t("pages.settings.machine_learning_settings.test_request.request")}
           </Typography>
           <div className="bg-neutral-surface rounded-md p-tight overflow-y-scroll max-h-[400px] min-h-[90px]">
             <pre className="whitespace-pre-wrap break-words text-body-small">
@@ -47,7 +48,7 @@ export const TestRequest = ({ backend }) => {
         </div>
         <div className="flex flex-col gap-1">
           <Typography variant="title" size="medium">
-            Response
+            {t("pages.settings.machine_learning_settings.test_request.response")}
           </Typography>
           <div className="bg-neutral-surface rounded-md p-tight overflow-y-scroll max-h-[400px] min-h-[90px]">
             <pre className="whitespace-pre-wrap break-words text-body-small">

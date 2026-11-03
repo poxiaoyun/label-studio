@@ -9,6 +9,7 @@ import {
   DialogTitle,
 } from "@humansignal/shad/components/ui/dialog";
 import { Alert, AlertDescription, AlertTitle } from "@humansignal/shad/components/ui/alert";
+import { t } from "@humansignal/i18n";
 
 // Type definitions
 interface Hotkey {
@@ -163,10 +164,9 @@ export const ImportDialog = ({ open, onOpenChange, onImport }: ImportDialogProps
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[525px] bg-neutral-surface">
         <DialogHeader>
-          <DialogTitle>Import Hotkeys</DialogTitle>
+          <DialogTitle>{t("appcommon.sections.hotkeys.import.import_hotkeys")}</DialogTitle>
           <DialogDescription>
-            Paste your exported hotkeys JSON below. This will replace your current hotkeys. Make sure the JSON contains
-            an array of hotkey objects with the required fields.
+            {t("appcommon.sections.hotkeys.import.paste_your_exported_hotkeys_json")}
           </DialogDescription>
         </DialogHeader>
 
@@ -175,7 +175,7 @@ export const ImportDialog = ({ open, onOpenChange, onImport }: ImportDialogProps
             htmlFor="import-json"
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
           >
-            Hotkeys JSON
+            {t("appcommon.sections.hotkeys.import.hotkeys_json")}
           </label>
           <textarea
             id="import-json"
@@ -188,7 +188,7 @@ export const ImportDialog = ({ open, onOpenChange, onImport }: ImportDialogProps
 
           {error && (
             <Alert variant="destructive" id="import-error">
-              <AlertTitle>Import Error</AlertTitle>
+              <AlertTitle>{t("appcommon.sections.hotkeys.import.import_error")}</AlertTitle>
               <AlertDescription>{error}</AlertDescription>
             </Alert>
           )}
@@ -196,10 +196,10 @@ export const ImportDialog = ({ open, onOpenChange, onImport }: ImportDialogProps
 
         <DialogFooter>
           <Button variant="neutral" onClick={handleCancel}>
-            Cancel
+            {t("appcommon.sections.hotkeys.import.cancel")}
           </Button>
           <Button onClick={handleImport} disabled={!importText.trim()}>
-            Import Hotkeys
+            {t("appcommon.sections.hotkeys.import.import_hotkeys")}
           </Button>
         </DialogFooter>
       </DialogContent>

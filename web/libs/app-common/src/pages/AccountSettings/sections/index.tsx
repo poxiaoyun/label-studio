@@ -9,6 +9,7 @@ import type { AuthTokenSettings } from "../types";
 import { ABILITY, type AuthPermissions } from "@humansignal/core/providers/AuthProvider";
 import { ff } from "@humansignal/core";
 import { Badge } from "@humansignal/ui";
+import { t } from "@humansignal/i18n";
 
 export type SectionType = {
   title: string | React.ReactNode;
@@ -29,9 +30,9 @@ export const accountSettingsSections = (settings: AuthTokenSettings, permissions
     {
       title: (
         <div className="flex items-center gap-tight">
-          <span>Hotkeys</span>
+          <span>{t("appcommon.account_settings.sections.index.hotkeys")}</span>
           <Badge variant="beta" style="solid" shape="rounded">
-            Beta
+            {t("appcommon.account_settings.sections.index.beta")}
           </Badge>
         </div>
       ),

@@ -1,6 +1,7 @@
 import { IconClose } from "@humansignal/icons";
 import { Button } from "../button/button";
 import { useModalControls } from "./ModalPopup";
+import { t } from "@humansignal/i18n";
 
 export const ModalCloseButton = () => {
   const modal = useModalControls();
@@ -9,7 +10,7 @@ export const ModalCloseButton = () => {
       look="string"
       className="!p-0 [&_svg]:!w-6 [&_svg]:!h-6"
       leading={<IconClose />}
-      aria-label="Close modal"
+      aria-label={t("ui.lib.modal.modal_close_button.close_modal")}
       onClick={() => modal?.hide()}
     />
   );

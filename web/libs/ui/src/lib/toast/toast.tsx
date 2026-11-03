@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { IconCross } from "../../assets/icons";
 import { nanoid } from "nanoid";
 import { cn } from "@humansignal/shad/utils";
+import { t } from "@humansignal/i18n";
 
 export type ToastViewportProps = ToastPrimitive.ToastViewportProps & any;
 export interface ToastProps extends Omit<ToastPrimitive.ToastProps, "type"> {
@@ -70,7 +71,7 @@ export const Toast: FC<ToastProps> = ({
         {action}
         {closeable && (
           <ToastPrimitive.Close asChild>
-            <div className={clsx(styles.toast__close)} aria-label="Close">
+            <div className={clsx(styles.toast__close)} aria-label={t("ui.lib.toast.toast.close")}>
               <span aria-hidden>
                 <IconCross />
               </span>

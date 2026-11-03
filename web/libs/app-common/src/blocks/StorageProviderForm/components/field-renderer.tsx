@@ -4,6 +4,7 @@ import Counter from "apps/labelstudio/src/components/Form/Elements/Counter/Count
 import Input from "apps/labelstudio/src/components/Form/Elements/Input/Input";
 import type { FieldDefinition } from "../types/common";
 import { isFieldRequired } from "../types/provider";
+import { t } from "@humansignal/i18n";
 
 interface FieldRendererProps {
   field: FieldDefinition;
@@ -208,6 +209,6 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
     }
 
     default:
-      return <div className="text-red-500">Unknown field type: {field.type}</div>;
+      return <div className="text-red-500">{t("appcommon.storage_provider_form.components.field_renderer.unknown_field_type")} {field.type}</div>;
   }
 };

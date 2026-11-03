@@ -6,6 +6,7 @@ import { KeyboardKey } from "./Key";
 import { HOTKEY_SECTIONS, URL_TO_SECTION_MAPPING } from "./defaults";
 import type { Hotkey, Section } from "./utils";
 import { getTypedDefaultHotkeys } from "./utils";
+import { t } from "@humansignal/i18n";
 
 // Type definitions for imported constants
 interface UrlMapping {
@@ -155,7 +156,7 @@ const HotkeyHelpModal = ({ sectionsToShow }: HotkeyHelpModalProps) => {
       <div className="max-w-3xl max-h-[90vh] h-full overflow-hidden w-full mx-4 flex flex-col">
         <div className="px-wide py-base border-b border-neutral-border">
           <div className="flex justify-between items-center">
-            <h2 className="text-lg font-semibold">Keyboard Shortcuts</h2>
+            <h2 className="text-lg font-semibold">{t("appcommon.sections.hotkeys.help.keyboard_shortcuts")}</h2>
           </div>
           <p className="text-sm text-neutral-content-subtler mt-1">
             View all available keyboard shortcuts.&nbsp;
@@ -164,7 +165,7 @@ const HotkeyHelpModal = ({ sectionsToShow }: HotkeyHelpModalProps) => {
               onClick={handleCustomizeClick}
               className="text-primary-content hover:underline hover:text-primary-content-hover"
             >
-              Customize
+              {t("appcommon.sections.hotkeys.help.customize")}
             </a>
           </p>
         </div>

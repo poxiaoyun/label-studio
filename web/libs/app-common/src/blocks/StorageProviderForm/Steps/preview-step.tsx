@@ -4,6 +4,7 @@ import { IconDocument, IconSearch } from "@humansignal/icons";
 import { formatDistanceToNow } from "date-fns";
 import type { ForwardedRef } from "react";
 import { getProviderConfig } from "../providers";
+import { t } from "@humansignal/i18n";
 
 interface PreviewStepProps {
   formData: any;
@@ -88,16 +89,16 @@ export const PreviewStep = ({
     <div className="space-y-6">
       <div>
         <h2 className="text-xl font-semibold">Configure Import Settings & Preview Data</h2>
-        <p className="text-muted-foreground">Set up filters for your files and preview what will be synchronized</p>
+        <p className="text-muted-foreground">{t("appcommon.storage_provider_form.steps.preview_step.set_up_filters_for_your")}</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Left Column Header */}
-        <h4>Import Configuration</h4>
+        <h4>{t("appcommon.storage_provider_form.steps.preview_step.import_configuration")}</h4>
 
         {/* Right Column Header with Button */}
         <div className="flex justify-between items-center">
-          <h4>Files Preview</h4>
+          <h4>{t("appcommon.storage_provider_form.steps.preview_step.files_preview")}</h4>
         </div>
 
         {/* Left Column: Configuration */}
@@ -144,8 +145,8 @@ export const PreviewStep = ({
 
               {/* Import Method */}
               <div className="space-y-2">
-                <Label text="Import Method (optional)" />
-                <p className="text-sm text-muted-foreground">Choose how to interpret your data from storage</p>
+                <Label text={t("appcommon.storage_provider_form.steps.preview_step.import_method_optional")} />
+                <p className="text-sm text-muted-foreground">{t("appcommon.storage_provider_form.steps.preview_step.choose_how_to_interpret_your")}</p>
                 <Select
                   name="use_blob_urls"
                   value={formData.use_blob_urls ? "Files" : "Tasks"}
@@ -174,14 +175,14 @@ export const PreviewStep = ({
                       },
                     ] as any
                   }
-                  placeholder="Select import method"
+                  placeholder={t("appcommon.storage_provider_form.steps.preview_step.select_import_method")}
                 />
               </div>
 
               {/* File Filter Section */}
               <div className="space-y-2">
-                <Label text="File Name Filter (optional)" />
-                <p className="text-sm text-muted-foreground">Use regex patterns to filter which files are imported</p>
+                <Label text={t("appcommon.storage_provider_form.steps.preview_step.file_name_filter_optional")} />
+                <p className="text-sm text-muted-foreground">{t("appcommon.storage_provider_form.steps.preview_step.use_regex_patterns_to_filter")}</p>
                 <Input
                   id="regex_filter"
                   name="regex_filter"
@@ -211,7 +212,7 @@ export const PreviewStep = ({
                 />
 
                 <div className="flex flex-wrap gap-x-2 items-center text-xs">
-                  <span className="text-muted-foreground">Common filters:</span>
+                  <span className="text-muted-foreground">{t("appcommon.storage_provider_form.steps.preview_step.common_filters")}</span>
                   {regexFilters
                     .filter((r) => r.blob === formData.use_blob_urls)
                     .map((r) => {
@@ -243,8 +244,8 @@ export const PreviewStep = ({
               {/* Scan All Subfolders */}
               <div className="flex items-center justify-between">
                 <div>
-                  <Label text="Scan all sub-folders" className="block mb-2" />
-                  <p className="text-sm text-muted-foreground">Include files from all nested folders</p>
+                  <Label text={t("appcommon.storage_provider_form.steps.preview_step.scan_all_sub_folders")} className="block mb-2" />
+                  <p className="text-sm text-muted-foreground">{t("appcommon.storage_provider_form.steps.preview_step.include_files_from_all_nested")}</p>
                 </div>
                 <Toggle
                   checked={formData.recursive_scan ?? false}
@@ -274,10 +275,9 @@ export const PreviewStep = ({
                 <div className="rounded-full bg-muted p-3 mb-4">
                   <IconDocument className="h-6 w-6 text-muted-foreground" />
                 </div>
-                <h3 className="font-medium mb-1">No Preview Available</h3>
+                <h3 className="font-medium mb-1">{t("appcommon.storage_provider_form.steps.preview_step.no_preview_available")}</h3>
                 <p className="text-sm text-muted-foreground max-w-md">
-                  Configure your import settings and click "Load Preview" to see a sample of files that will be
-                  imported.
+                  {t("appcommon.storage_provider_form.steps.preview_step.configure_your_import_settings_and")}
                 </p>
               </div>
             ) : filesPreview.length === 0 ? (
@@ -286,10 +286,9 @@ export const PreviewStep = ({
                 <div className="rounded-full bg-muted p-3 mb-4">
                   <IconSearch className="h-6 w-6 text-muted-foreground" />
                 </div>
-                <h3 className="font-medium mb-1">No Files Found</h3>
+                <h3 className="font-medium mb-1">{t("appcommon.storage_provider_form.steps.preview_step.no_files_found")}</h3>
                 <p className="text-sm text-muted-foreground max-w-md">
-                  No files matching your current criteria were found. Try adjusting your filter settings and reload the
-                  preview.
+                  {t("appcommon.storage_provider_form.steps.preview_step.no_files_matching_your_current")}
                 </p>
               </div>
             ) : (
@@ -321,7 +320,7 @@ export const PreviewStep = ({
                               file.key
                             )
                           ) : (
-                            <span className="italic">... preview limit reached ...</span>
+                            <span className="italic">{t("appcommon.storage_provider_form.steps.preview_step.preview_limit_reached")}</span>
                           )}
                         </div>
                       </Tooltip>

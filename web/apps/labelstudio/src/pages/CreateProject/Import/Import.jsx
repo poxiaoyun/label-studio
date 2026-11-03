@@ -14,6 +14,7 @@ import { Button, CodeBlock, SimpleCard, Spinner, Tooltip, Typography, Badge } fr
 import truncate from "truncate-middle";
 import samples from "./samples.json";
 import { importFiles } from "./utils";
+import { t } from "@humansignal/i18n";
 
 const importClass = cn("upload_page");
 const dropzoneClass = cn("dropzone");
@@ -381,9 +382,9 @@ export const ImportPage = ({
           method="POST"
           onSubmit={onLoadURL}
         >
-          <Input placeholder="Dataset URL" name="url" ref={urlRef} rawClassName="h-[40px]" />
-          <Button variant="primary" look="outlined" type="submit" aria-label="Add URL">
-            Add URL
+          <Input placeholder={t("pages.create_project.import.import.dataset_url")} name="url" ref={urlRef} rawClassName="h-[40px]" />
+          <Button variant="primary" look="outlined" type="submit" aria-label={t("pages.create_project.import.import.add_url")}>
+            {t("pages.create_project.import.import.add_url")}
           </Button>
         </form>
         <span>or</span>
@@ -393,9 +394,9 @@ export const ImportPage = ({
           type="button"
           onClick={() => document.getElementById("file-input").click()}
           leading={<IconUpload />}
-          aria-label="Upload file"
+          aria-label={t("pages.create_project.import.import.upload_file")}
         >
-          Upload {files.uploaded.length ? "More " : ""}Files
+          {t("pages.create_project.import.import.upload")} {files.uploaded.length ? "More " : ""}{t("pages.create_project.import.import.files")}
         </Button>
         {ff.isActive(ff.FF_SAMPLE_DATASETS) && (
           <SampleDatasetSelect samples={samples} sample={sample} onSampleApplied={onSampleDatasetSelect} />
@@ -406,12 +407,12 @@ export const ImportPage = ({
             .mod({ highlighted: highlightCsvHandling, hidden: !csvHandling })
             .toClassName()}
         >
-          <span>Treat CSV/TSV as</span>
+          <span>{t("pages.create_project.import.import.treat_csv_tsv_as")}</span>
           <label>
-            <input {...csvProps} value="tasks" checked={csvHandling === "tasks"} /> List of tasks
+            <input {...csvProps} value="tasks" checked={csvHandling === "tasks"} /> {t("pages.create_project.import.import.list_of_tasks")}
           </label>
           <label>
-            <input {...csvProps} value="ts" checked={csvHandling === "ts"} /> Time Series or Whole Text File
+            <input {...csvProps} value="ts" checked={csvHandling === "ts"} /> {t("pages.create_project.import.import.time_series_or_whole_text")}
           </label>
         </div>
         <div className={importClass.elem("status").toClassName()}>
@@ -440,20 +441,20 @@ export const ImportPage = ({
                     </header>
 
                     <dl>
-                      <dt>Images</dt>
+                      <dt>{t("pages.create_project.import.import.images")}</dt>
                       <dd>{supportedExtensions.image.join(", ")}</dd>
-                      <dt>Audio</dt>
+                      <dt>{t("pages.create_project.import.import.audio")}</dt>
                       <dd>{supportedExtensions.audio.join(", ")}</dd>
                       <dt>
                         <div className="flex items-center gap-1">
-                          Video
-                          <Tooltip title="Video format support depends on your browser. Click to learn more.">
+                          {t("pages.create_project.import.import.video")}
+                          <Tooltip title={t("pages.create_project.import.import.video_format_support_depends_on")}>
                             <a
                               href="https://labelstud.io/tags/video#Video-format"
                               target="_blank"
                               rel="noopener noreferrer"
                               className="inline-flex items-center"
-                              aria-label="Learn more about video format support (opens in a new tab)"
+                              aria-label={t("pages.create_project.import.import.learn_more_about_video_format")}
                             >
                               <IconInfoOutline className="w-4 h-4 text-primary-content hover:text-primary-content-hover" />
                             </a>
@@ -461,53 +462,53 @@ export const ImportPage = ({
                         </div>
                       </dt>
                       <dd>{supportedExtensions.video.join(", ")}</dd>
-                      <dt>HTML / HyperText</dt>
+                      <dt>{t("pages.create_project.import.import.html_hyper_text")}</dt>
                       <dd>{supportedExtensions.html.join(", ")}</dd>
-                      <dt>Text</dt>
+                      <dt>{t("pages.create_project.import.import.text")}</dt>
                       <dd>{supportedExtensions.text.join(", ")}</dd>
-                      <dt>Structured data</dt>
+                      <dt>{t("pages.create_project.import.import.structured_data")}</dt>
                       <dd>{supportedExtensions.structuredData.join(", ")}</dd>
-                      <dt>PDF</dt>
+                      <dt>{t("pages.create_project.import.import.pdf")}</dt>
                       <dd>{supportedExtensions.pdf.join(", ")}</dd>
                     </dl>
                     <div className="tips">
-                      <b>Important:</b>
+                      <b>{t("pages.create_project.import.import.important")}</b>
                       <ul className="mt-2 ml-4 list-disc font-normal">
                         <li>
-                          We recommend{" "}
+                          {t("pages.create_project.import.import.we_recommend")}{" "}
                           <a
                             href="https://labelstud.io/guide/storage.html"
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label="Cloud Storage documentation (opens in a new tab)"
+                            aria-label={t("pages.create_project.import.import.cloud_storage_documentation_opens_in")}
                           >
-                            Cloud Storage
+                            {t("pages.create_project.import.import.cloud_storage")}
                           </a>{" "}
                           over direct uploads due to{" "}
                           <a
                             href="https://labelstud.io/guide/tasks.html#Import-data-from-the-Label-Studio-UI"
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label="Upload limitations documentation (opens in a new tab)"
+                            aria-label={t("pages.create_project.import.import.upload_limitations_documentation_opens_in")}
                           >
                             upload limitations
                           </a>
                           .
                         </li>
                         <li>
-                          For PDFs, use{" "}
+                          {t("pages.create_project.import.import.for_pdfs_use")}{" "}
                           <a
                             href="https://labelstud.io/templates/multi-page-document-annotation"
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label="Multi-image labeling documentation (opens in a new tab)"
+                            aria-label={t("pages.create_project.import.import.multi_image_labeling_documentation_opens_in")}
                           >
                             multi-image labeling
                           </a>
-                          . JSONL or Parquet (Enterprise only) files require cloud storage.
+                          {t("pages.create_project.import.import.jsonl_or_parquet_enterprise")}
                         </li>
                         <li>
-                          Check the documentation to{" "}
+                          {t("pages.create_project.import.import.check_the_documentation_to")}{" "}
                           <a target="_blank" href="https://labelstud.io/guide/predictions.html" rel="noreferrer">
                             import preannotated data
                           </a>
@@ -523,7 +524,7 @@ export const ImportPage = ({
             {showList && (
               <div className="w-full">
                 <SimpleCard
-                  title="Files"
+                  title={t("pages.create_project.import.import.files")}
                   className="w-full h-full"
                   contentClassName="overflow-y-auto h-[calc(100%-48px)]"
                 >
@@ -534,7 +535,7 @@ export const ImportPage = ({
                           <td>
                             <div className="flex items-center gap-2">
                               {sample.title}
-                              <Badge>Sample</Badge>
+                              <Badge>{t("pages.create_project.import.import.sample")}</Badge>
                             </div>
                           </td>
                           <td>{sample.description}</td>
@@ -614,7 +615,7 @@ export const ImportPage = ({
               <div className="w-full h-full flex flex-col min-h-[400px]">
                 {projectConfigured ? (
                   <SimpleCard
-                    title="Expected Input Preview"
+                    title={t("pages.create_project.import.import.expected_input_preview")}
                     className="w-full h-full overflow-hidden flex flex-col"
                     contentClassName="h-[calc(100%-48px)]"
                     flushContent
@@ -622,7 +623,7 @@ export const ImportPage = ({
                     {sampleConfig.data ? (
                       <div className={importClass.elem("code-wrapper").toClassName()}>
                         <CodeBlock
-                          title="Expected Input Preview"
+                          title={t("pages.create_project.import.import.expected_input_preview")}
                           code={sampleConfig?.data ?? ""}
                           className="w-full h-full"
                         />
@@ -633,7 +634,7 @@ export const ImportPage = ({
                       </div>
                     ) : sampleConfig.isError ? (
                       <div className="w-[calc(100%-24px)] text-lg text-negative-content bg-negative-background border m-3 rounded-md border-negative-border-subtle p-4">
-                        Something went wrong, the sample data could not be loaded.
+                        {t("pages.create_project.import.import.something_went_wrong_the_sample")}
                       </div>
                     ) : null}
                   </SimpleCard>
@@ -644,9 +645,9 @@ export const ImportPage = ({
                         <IconCode className="w-6 h-6 text-primary-icon" />
                       </div>
                       <div className="flex flex-col items-center gap-tighter">
-                        <div className="text-label-small text-neutral-content font-medium">View JSON input format</div>
+                        <div className="text-label-small text-neutral-content font-medium">{t("pages.create_project.import.import.view_json_input_format")}</div>
                         <div className="text-body-small text-neutral-content-subtler text-center">
-                          Setup your{" "}
+                          {t("pages.create_project.import.import.setup_your")}{" "}
                           <Button
                             type="button"
                             look="string"

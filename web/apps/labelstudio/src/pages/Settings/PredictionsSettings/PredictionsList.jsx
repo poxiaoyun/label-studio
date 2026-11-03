@@ -10,6 +10,7 @@ import { ApiContext } from "../../../providers/ApiProvider";
 import { cn } from "../../../utils/bem";
 
 import "./PredictionsList.scss";
+import { t } from "@humansignal/i18n";
 
 export const PredictionsList = ({ project, versions, fetchVersions }) => {
   const api = useContext(ApiContext);
@@ -61,7 +62,7 @@ const VersionCard = ({ version, selected, onSelect, editable, onDelete }) => {
         <div className={rootClass.elem("title").toClassName()}>
           {version.model_version}
           {version.model_version === "undefined" && (
-            <Tooltip title="Model version is undefined. Likely means that model_version field was missing when predictions were imported.">
+            <Tooltip title={t("pages.settings.predictions_settings.predictions_list.model_version_is_undefined_likely")}>
               <IconInfoOutline className={cn("help-icon").toClassName()} width="14" height="14" />
             </Tooltip>
           )}
@@ -89,7 +90,7 @@ const VersionCard = ({ version, selected, onSelect, editable, onDelete }) => {
           content={
             <Menu size="medium" contextual>
               <Menu.Item onClick={() => confirmDelete(version)} isDangerous>
-                Delete
+                {t("pages.settings.predictions_settings.predictions_list.delete")}
               </Menu.Item>
             </Menu>
           }

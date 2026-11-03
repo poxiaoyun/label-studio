@@ -22,6 +22,7 @@ import type { Hotkey, Section, DirtyState, DuplicateConfirmDialog, ImportData } 
 import { HOTKEY_SECTIONS } from "./Hotkeys/defaults";
 import styles from "../AccountSettings.module.scss";
 import { useHotkeys } from "../hooks/useHotkeys";
+import { t } from "@humansignal/i18n";
 
 // Type the imported defaults
 const typedHotkeySections = HOTKEY_SECTIONS as Section[];
@@ -34,13 +35,13 @@ export const HotkeysHeaderButtons = () => {
     <>
       <div className={`${styles.flexRow} justify-end gap-tight`}>
         <Button variant="neutral" look="outlined" onClick={() => setImportDialogOpen(true)}>
-          Import
+          {t("appcommon.account_settings.sections.hotkeys.import")}
         </Button>
         <Button variant="neutral" look="outlined" onClick={handleExportHotkeys}>
-          Export
+          {t("appcommon.account_settings.sections.hotkeys.export")}
         </Button>
         <Button variant="negative" look="outlined" onClick={handleResetToDefaults}>
-          Reset to Defaults
+          {t("appcommon.account_settings.sections.hotkeys.reset_to_defaults")}
         </Button>
       </div>
 
@@ -324,9 +325,9 @@ export const HotkeysManager = () => {
       <Dialog open={duplicateConfirmDialog.open} onOpenChange={handleCancelDuplicate}>
         <DialogContent className="bg-neutral-surface">
           <DialogHeader>
-            <DialogTitle>Warning: Duplicate Hotkey Detected</DialogTitle>
+            <DialogTitle>{t("appcommon.account_settings.sections.hotkeys.warning_duplicate_hotkey_detected")}</DialogTitle>
             <DialogDescription>
-              The hotkey combination "<strong>{duplicateConfirmDialog.newKey}</strong>" is already being used by:
+              {t("appcommon.account_settings.sections.hotkeys.the_hotkey_combination")}<strong>{duplicateConfirmDialog.newKey}</strong>{t("appcommon.account_settings.sections.hotkeys.is_already_being_used_by")}
             </DialogDescription>
           </DialogHeader>
 
@@ -358,15 +359,15 @@ export const HotkeysManager = () => {
               <IconWarning className="text-warning-icon" />
             </div>
             <div>
-              Having duplicate hotkeys may cause conflicts and unexpected behavior. Are you sure you want to proceed?
+              {t("appcommon.account_settings.sections.hotkeys.having_duplicate_hotkeys_may_cause")}
             </div>
           </DialogDescription>
 
           <DialogFooter>
             <Button variant="neutral" onClick={handleCancelDuplicate}>
-              Cancel
+              {t("appcommon.account_settings.sections.hotkeys.cancel")}
             </Button>
-            <Button onClick={handleConfirmDuplicate}>Allow Duplicate</Button>
+            <Button onClick={handleConfirmDuplicate}>{t("appcommon.account_settings.sections.hotkeys.allow_duplicate")}</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

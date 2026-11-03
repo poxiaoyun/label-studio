@@ -8,6 +8,7 @@ import { Menu, Pagination } from "../../components";
 import { cn } from "../../utils/bem";
 import { absoluteURL } from "../../utils/helpers";
 import { ProjectStateChip } from "@humansignal/app-common";
+import { t } from "@humansignal/i18n";
 
 const DEFAULT_CARD_COLORS = ["#FFFFFF", "#FDFDFC"];
 
@@ -22,7 +23,7 @@ export const ProjectsList = ({ projects, currentPage, totalItems, loadNextPage, 
       <div className={cn("projects-page").elem("pages").toClassName()}>
         <Pagination
           name="projects-list"
-          label="Projects"
+          label={t("pages.pages.projects.projects_list.projects")}
           page={currentPage}
           totalItems={totalItems}
           urlParamName="page"
@@ -39,14 +40,14 @@ export const EmptyProjectsList = ({ openModal }) => {
   return (
     <div className={cn("empty-projects-page").toClassName()}>
       <img
-        alt="Heidi looking for projects"
+        alt={t("pages.pages.projects.projects_list.heidi_looking_for_projects")}
         className={cn("empty-projects-page").elem("heidi").toClassName()}
         src={absoluteURL("/static/images/opossum_looking.png")}
       />
-      <h1 className={cn("empty-projects-page").elem("header").toClassName()}>Heidi doesn't see any projects here!</h1>
-      <p>Create one and start labeling your data.</p>
-      <Button onClick={openModal} className="my-8" aria-label="Create new project">
-        Create Project
+      <h1 className={cn("empty-projects-page").elem("header").toClassName()}>{t("pages.pages.projects.projects_list.heidi_doesnt_see_any_projects")}</h1>
+      <p>{t("pages.pages.projects.projects_list.create_one_and_start_labeling")}</p>
+      <Button onClick={openModal} className="my-8" aria-label={t("pages.pages.projects.projects_list.create_new_project")}>
+        {t("pages.pages.projects.projects_list.create_project")}
       </Button>
     </div>
   );
@@ -99,12 +100,12 @@ const ProjectCard = ({ project }) => {
               <Dropdown.Trigger
                 content={
                   <Menu contextual>
-                    <Menu.Item href={`/projects/${project.id}/settings`}>Settings</Menu.Item>
-                    <Menu.Item href={`/projects/${project.id}/data?labeling=1`}>Label</Menu.Item>
+                    <Menu.Item href={`/projects/${project.id}/settings`}>{t("pages.pages.projects.projects_list.settings")}</Menu.Item>
+                    <Menu.Item href={`/projects/${project.id}/data?labeling=1`}>{t("pages.pages.projects.projects_list.label")}</Menu.Item>
                   </Menu>
                 }
               >
-                <Button size="smaller" look="string" aria-label="Project options">
+                <Button size="smaller" look="string" aria-label={t("pages.pages.projects.projects_list.project_options")}>
                   <IconEllipsis />
                 </Button>
               </Dropdown.Trigger>

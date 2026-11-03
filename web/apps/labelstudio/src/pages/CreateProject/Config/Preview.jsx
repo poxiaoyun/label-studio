@@ -5,6 +5,7 @@ import "./Config.scss";
 import { EMPTY_CONFIG } from "./Template";
 import { API_CONFIG } from "../../../config/ApiConfig";
 import { useAPI } from "../../../providers/ApiProvider";
+import { t } from "@humansignal/i18n";
 
 const configClass = cn("configure");
 
@@ -141,7 +142,7 @@ export const Preview = ({ config, data, error, loading, project }) => {
 
   return (
     <div className={configClass.elem("preview").toClassName()}>
-      <h3>Preview</h3>
+      <h3>{t("pages.create_project.config.preview.preview")}</h3>
       {error && (
         <div className={configClass.elem("preview-error").toClassName()}>
           <h2>

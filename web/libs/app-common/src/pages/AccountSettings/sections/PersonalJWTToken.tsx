@@ -16,6 +16,7 @@ import { Button } from "@humansignal/ui";
 import { modal, confirm } from "@humansignal/ui/lib/modal";
 import { Input, Label } from "apps/labelstudio/src/components/Form/Elements";
 import { Tooltip } from "@humansignal/ui";
+import { t } from "@humansignal/i18n";
 
 type Token = {
   token: string;
@@ -152,7 +153,7 @@ export function PersonalJWTToken() {
           <div>loading...</div>
         ) : tokens.isSuccess && tokens.data && tokens.data.length ? (
           <div>
-            <Label text="Access Token" className={styles.label} />
+            <Label text={t("appcommon.account_settings.sections.personal_jwttoken.access_token")} className={styles.label} />
             <div className="flex flex-col gap-2">
               {tokens.data.map((token, index) => {
                 return (
@@ -166,7 +167,7 @@ export function PersonalJWTToken() {
                       <div className={styles.tokenString}>{token.token}</div>
                     </div>
                     <Button variant="negative" look="outlined" onClick={() => revoke(token.token)}>
-                      Revoke
+                      {t("appcommon.account_settings.sections.personal_jwttoken.revoke")}
                     </Button>
                   </div>
                 );
@@ -174,13 +175,13 @@ export function PersonalJWTToken() {
             </div>
           </div>
         ) : tokens.isError ? (
-          <div>Unable to load tokens list</div>
+          <div>{t("appcommon.account_settings.sections.personal_jwttoken.unable_to_load_tokens_list")}</div>
         ) : null}
       </div>
-      <Tooltip title="You can only have one active token" disabled={!disallowAddingTokens}>
+      <Tooltip title={t("appcommon.account_settings.sections.personal_jwttoken.you_can_only_have_one")} disabled={!disallowAddingTokens}>
         <div style={{ width: "max-content" }}>
           <Button disabled={disallowAddingTokens || dialogOpened} onClick={openDialog}>
-            Create New Token
+            {t("appcommon.account_settings.sections.personal_jwttoken.create_new_token")}
           </Button>
         </div>
       </Tooltip>
@@ -198,11 +199,11 @@ function CreateTokenForm() {
 
   return (
     <div className="flex flex-col gap-2">
-      <p>Copy your new access token from below and keep it secure. </p>
+      <p>{t("appcommon.account_settings.sections.personal_jwttoken.copy_your_new_access_token")} </p>
 
       <div className="flex items-end w-full gap-2">
         <Input
-          label="Access Token"
+          label={t("appcommon.account_settings.sections.personal_jwttoken.access_token")}
           labelProps={{ className: "flex-1", rawClassName: "flex-1" }}
           className="w-full"
           readOnly
@@ -215,7 +216,7 @@ function CreateTokenForm() {
 
       {data?.expires_at && (
         <div>
-          <Label text="Token Expiry Date" />
+          <Label text={t("appcommon.account_settings.sections.personal_jwttoken.token_expiry_date")} />
           {data && format(new Date(data?.expires_at), "MMM dd, yyyy HH:mm z")}
         </div>
       )}
@@ -225,11 +226,10 @@ function CreateTokenForm() {
           <CalloutIcon>
             <IconWarning />
           </CalloutIcon>
-          <CalloutTitle>Manage your access tokens securely</CalloutTitle>
+          <CalloutTitle>{t("appcommon.account_settings.sections.personal_jwttoken.manage_your_access_tokens_securely")}</CalloutTitle>
         </CalloutHeader>
         <CalloutContent>
-          Do not share this key with anyone. If you suspect any keys have been compromised, you should revoke them and
-          create new ones.
+          {t("appcommon.account_settings.sections.personal_jwttoken.do_not_share_this_key")}
         </CalloutContent>
       </Callout>
     </div>

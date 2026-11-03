@@ -5,6 +5,7 @@ import { useAPI } from "../../providers/ApiProvider";
 import { cn } from "../../utils/bem";
 import "./VersionNotifier.scss";
 import { IconBell } from "@humansignal/icons";
+import { t } from "@humansignal/i18n";
 
 const VersionContext = createContext();
 
@@ -54,9 +55,9 @@ export const VersionNotifier = ({ showNewVersion, showCurrentVersion }) => {
         </div>
         <div className={cn("version-notifier").elem("content").toClassName()}>
           <div className={cn("version-notifier").elem("title").toClassName()} data-date={updateTime}>
-            {latestVersion} Available
+            {latestVersion} {t("pages.components.version_notifier.version_notifier.available")}
           </div>
-          <div className={cn("version-notifier").elem("description").toClassName()}>Current version: {version}</div>
+          <div className={cn("version-notifier").elem("description").toClassName()}>{t("pages.components.version_notifier.version_notifier.current_version")} {version}</div>
         </div>
       </a>
     </li>

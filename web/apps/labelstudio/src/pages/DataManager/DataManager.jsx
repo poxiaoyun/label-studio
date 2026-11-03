@@ -16,6 +16,7 @@ import { ExportPage } from "../ExportPage/ExportPage";
 import { APIConfig } from "./api-config";
 
 import "./DataManager.scss";
+import { t } from "@humansignal/i18n";
 
 const loadDependencies = () => [import("@humansignal/datamanager"), import("@humansignal/editor")];
 
@@ -214,10 +215,10 @@ export const DataManagerPage = ({ ...props }) => {
 
   return crashed ? (
     <div className={cn("crash").toClassName()}>
-      <div className={cn("crash").elem("info").toClassName()}>Project was deleted or not yet created</div>
+      <div className={cn("crash").elem("info").toClassName()}>{t("pages.pages.data_manager.data_manager.project_was_deleted_or_not")}</div>
 
-      <Button to="/projects" aria-label="Back to projects">
-        Back to projects
+      <Button to="/projects" aria-label={t("pages.pages.data_manager.data_manager.back_to_projects")}>
+        {t("pages.pages.data_manager.data_manager.back_to_projects")}
       </Button>
     </div>
   ) : (
@@ -307,7 +308,7 @@ DataManagerPage.context = ({ dmRef }) => {
             });
           }}
         >
-          Instructions
+          {t("pages.pages.data_manager.data_manager.instructions")}
         </Button>
       )}
 

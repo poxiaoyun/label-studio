@@ -6,6 +6,7 @@ import { Button } from "@humansignal/ui";
 import { HeidiSpeaking } from "../../assets/images";
 import type { HeidiTipProps, Tip } from "./types";
 import { createURL } from "./utils";
+import { t } from "@humansignal/i18n";
 
 const HeidiLink: FC<{ link: Tip["link"]; onClick: () => void }> = ({ link, onClick }) => {
   const url = useMemo(() => {
@@ -41,7 +42,7 @@ export const HeidiTip: FC<HeidiTipProps> = ({ tip, onDismiss, onLinkClick }) => 
         <div className={cn("heidy-tip").elem("header").toClassName()}>
           <div className={cn("heidy-tip").elem("title").toClassName()}>{tip.title}</div>
           {tip.closable && (
-            <Button tooltip="Don't show" look="string" size="small" onClick={handleClick} className="!p-0">
+            <Button tooltip={t("pages.components.heidi_tips.heidi_tip.dont_show")} look="string" size="small" onClick={handleClick} className="!p-0">
               <IconCross />
             </Button>
           )}

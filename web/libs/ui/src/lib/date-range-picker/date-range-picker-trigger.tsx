@@ -5,6 +5,7 @@ import { IconCalendar } from "@humansignal/icons";
 import type { DateOrDateTimeRange } from "./date-utils";
 import { formatDateString } from "./date-utils";
 import { cnm } from "../../utils/utils";
+import { t } from "@humansignal/i18n";
 
 type DateRangePickerTriggerProps = {
   /**
@@ -85,7 +86,7 @@ export const DateRangePickerTrigger = ({
     </div>
   ) : (
     <Typography variant="body" size="small" className="text-neutral-content-subtler">
-      Any time
+      {t("ui.lib.date_range_picker.date_range_picker_trigger.any_time")}
     </Typography>
   );
 

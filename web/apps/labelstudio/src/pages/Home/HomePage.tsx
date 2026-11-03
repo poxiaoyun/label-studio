@@ -19,6 +19,7 @@ import {
   sortedProjectsAtom,
   visitedIdsAtom,
 } from "./atoms";
+import { t } from "@humansignal/i18n";
 
 const resources = [
   {
@@ -136,10 +137,10 @@ export const HomePage: Page = () => {
         <section className="flex flex-col gap-6">
           <div className="flex flex-col gap-1">
             <Typography variant="headline" size="small">
-              Welcome 👋
+              {t("pages.pages.home.home_page.welcome")}
             </Typography>
             <Typography size="small" className="text-neutral-content-subtler">
-              Let's get you started.
+              {t("pages.pages.home.home_page.lets_get_you_started")}
             </Typography>
           </div>
           <div className="flex justify-start gap-4">
@@ -163,9 +164,9 @@ export const HomePage: Page = () => {
             title={
               data && data?.count > 0 ? (
                 <>
-                  Recent Projects{" "}
+                  {t("pages.pages.home.home_page.recent_projects")}{" "}
                   <a href="/projects" className="text-lg font-normal hover:underline">
-                    View All
+                    {t("pages.pages.home.home_page.view_all")}
                   </a>
                 </>
               ) : null
@@ -187,13 +188,13 @@ export const HomePage: Page = () => {
                   <IconFolderOpen />
                 </div>
                 <Typography variant="headline" size="small">
-                  Create your first project
+                  {t("pages.pages.home.home_page.create_your_first_project")}
                 </Typography>
                 <Typography size="small" className="text-neutral-content-subtler">
-                  Import your data and set up the labeling interface to start annotating
+                  {t("pages.pages.home.home_page.import_your_data_and_set")}
                 </Typography>
-                <Button className="mt-4" onClick={() => setModalIsOpen(true)} aria-label="Create new project">
-                  Create Project
+                <Button className="mt-4" onClick={() => setModalIsOpen(true)} aria-label={t("pages.pages.home.home_page.create_new_project")}>
+                  {t("pages.pages.home.home_page.create_project")}
                 </Button>
               </div>
             ) : isSuccess && data && sortedProjects.length > 0 ? (
@@ -207,7 +208,7 @@ export const HomePage: Page = () => {
         </section>
         <section className="flex flex-col gap-6">
           <HeidiTips collection="projectSettings" />
-          <SimpleCard title="Resources" description="Learn, explore and get help" data-testid="resources-card">
+          <SimpleCard title={t("pages.pages.home.home_page.resources")} description={t("pages.pages.home.home_page.learn_explore_and_get_help")} data-testid="resources-card">
             <ul>
               {resources.map((link) => {
                 return (
@@ -228,7 +229,7 @@ export const HomePage: Page = () => {
           </SimpleCard>
           <div className="flex gap-2 items-center">
             <IconHumanSignal />
-            <span className="text-neutral-content-subtle">Label Studio Version: Community</span>
+            <span className="text-neutral-content-subtle">{t("pages.pages.home.home_page.label_studio_version_community")}</span>
           </div>
         </section>
       </div>
@@ -264,7 +265,7 @@ function ProjectSimpleCard({ project }: { project: APIProject }) {
             <span className="text-neutral-content truncate">{project.title}</span>
           </Tooltip>
           <div className="text-neutral-content-subtler text-sm">
-            {finished} of {total} Tasks ({total > 0 ? Math.round((finished / total) * 100) : 0}%)
+            {finished} of {total} {t("pages.pages.home.home_page.tasks")}{total > 0 ? Math.round((finished / total) * 100) : 0}%)
           </div>
         </div>
         <div className="bg-neutral-surface rounded-full overflow-hidden w-full h-2 shadow-neutral-border-subtle shadow-border-1">

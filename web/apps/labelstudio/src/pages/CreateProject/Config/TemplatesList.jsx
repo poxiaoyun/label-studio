@@ -5,12 +5,13 @@ import { cn } from "../../../utils/bem";
 import "./Config.scss";
 import { IconInfo } from "@humansignal/icons";
 import { Button, EnterpriseBadge } from "@humansignal/ui";
+import { t } from "@humansignal/i18n";
 
 const listClass = cn("templates-list");
 
 const Arrow = () => (
   <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <title>Arrow Icon</title>
+    <title>{t("pages.create_project.config.templates_list.arrow_icon")}</title>
     <path opacity="0.9" d="M2 10L6 6L2 2" stroke="currentColor" strokeWidth="2" strokeLinecap="square" />
   </svg>
 );
@@ -97,9 +98,9 @@ export const TemplatesList = ({ selectedGroup, selectedRecipe, onCustomTemplate,
           size="small"
           onClick={onCustomTemplate}
           className="w-full"
-          aria-label="Create custom template"
+          aria-label={t("pages.create_project.config.templates_list.create_custom_template")}
         >
-          Custom template
+          {t("pages.create_project.config.templates_list.custom_template")}
         </Button>
       </aside>
       <main>
@@ -114,7 +115,7 @@ export const TemplatesList = ({ selectedGroup, selectedRecipe, onCustomTemplate,
       <footer className="flex items-center justify-center gap-1">
         <IconInfo className={listClass.elem("info-icon").toClassName()} width="20" height="20" />
         <span>
-          See the documentation to{" "}
+          {t("pages.create_project.config.templates_list.see_the_documentation_to")}{" "}
           <a href="https://labelstud.io/guide" target="_blank" rel="noreferrer">
             contribute a template
           </a>
