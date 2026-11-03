@@ -10,6 +10,8 @@ from core.utils.common import load_func
 from django.conf import settings
 from io_storages.moha.models import MohaExportStorage, MohaImportStorage, MohaImportStorageLink
 from io_storages.moha.serializers import MohaImportStorageSerializer
+from django.test import override_settings
+from io_storages.moha.serializers import _endpoint_allowlisted
 from rest_framework.exceptions import ValidationError
 from tasks.models import Annotation, Task
 
@@ -240,3 +242,27 @@ class TestSerializer:
     def test_models_live_in_the_shared_app(self):
         assert MohaImportStorage._meta.app_label == 'io_storages'
         assert MohaImportStorageLink._meta.app_label == 'io_storages'
+
+
+class TestEndpointAllowlist:
+    """MOHA_ENDPOINT_ALLOWLIST must accept host suffixes and IP networks."""
+
+    @override_settings(MOHA_ENDPOINT_ALLOWLIST='example.com')
+    def test_host_suffix(self):
+        assert _endpoint_allowlisted('https://moha.example.com')
+        assert not _endpoint_allowlisted('https://example.org')
+
+    @override_settings(MOHA_ENDPOINT_ALLOWLIST='192.168.0.0/16')
+    def test_cidr_with_ip_literal(self):
+        assert _endpoint_allowlisted('http://192.168.10.5:8080')
+        assert not _endpoint_allowlisted('http://10.1.2.3:8080')
+
+    @override_settings(MOHA_ENDPOINT_ALLOWLIST='10.0.0.0/8, example.com')
+    def test_multiple_entries(self):
+        assert _endpoint_allowlisted('http://10.2.3.4')
+        assert _endpoint_allowlisted('http://x.example.com')
+        assert not _endpoint_allowlisted('http://172.16.0.1')
+
+    @override_settings(MOHA_ENDPOINT_ALLOWLIST='')
+    def test_empty_allowlist_blocks_private(self):
+        assert not _endpoint_allowlisted('http://192.168.1.1')

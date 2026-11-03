@@ -3,7 +3,9 @@
 [moha] Serializers: field-level guarding, credential redaction and connection checks.
 """
 
+import ipaddress
 import logging
+import socket
 from urllib.parse import urlparse
 
 from core.utils.io import validate_url_for_ssrf
@@ -19,14 +21,58 @@ from .uri import REPO_TYPES
 logger = logging.getLogger(__name__)
 
 
+def _resolve_ips(host: str) -> set:
+    """Resolve ``host`` to IP addresses; tolerates IP literals and DNS failures."""
+    try:
+        infos = socket.getaddrinfo(host, None)
+    except OSError:
+        infos = []
+    addresses = set()
+    for info in infos:
+        try:
+            addresses.add(ipaddress.ip_address(info[4][0]))
+        except ValueError:
+            continue
+    if not addresses:
+        try:
+            addresses.add(ipaddress.ip_address(host))
+        except ValueError:
+            pass
+    return addresses
+
+
 def _endpoint_allowlisted(endpoint: str) -> bool:
-    """Allow internal (private) Moha endpoints without disabling SSRF protection globally."""
+    """Allow internal Moha endpoints without disabling SSRF protection globally.
+
+    Entries in ``MOHA_ENDPOINT_ALLOWLIST`` are either:
+
+    * host suffixes — ``example.com`` matches ``moha.example.com``;
+    * IP networks — ``192.168.0.0/16`` / ``10.1.2.3`` match after resolving the host.
+    """
     allowlist = getattr(settings, 'MOHA_ENDPOINT_ALLOWLIST', '') or ''
-    hosts = [item.strip().lower() for item in str(allowlist).split(',') if item.strip()]
-    if not hosts:
+    entries = [item.strip().lower() for item in str(allowlist).split(',') if item.strip()]
+    if not entries:
         return False
+
     host = (urlparse(endpoint).hostname or '').lower()
-    return any(host == allowed or host.endswith('.' + allowed) for allowed in hosts)
+    if not host:
+        return False
+
+    resolved = None
+    for entry in entries:
+        if '/' in entry:
+            try:
+                network = ipaddress.ip_network(entry, strict=False)
+            except ValueError:
+                logger.warning('[moha] ignoring invalid MOHA_ENDPOINT_ALLOWLIST entry %r', entry)
+                continue
+            if resolved is None:
+                resolved = _resolve_ips(host)
+            if any(address in network for address in resolved):
+                return True
+        elif host == entry or host.endswith('.' + entry):
+            return True
+    return False
 
 
 class MohaStorageSerializerMixin:

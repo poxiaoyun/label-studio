@@ -75,7 +75,7 @@ Server settings:
 
 | Setting | Default | Purpose |
 | --- | --- | --- |
-| `MOHA_ENDPOINT_ALLOWLIST` | empty | comma-separated host suffixes allowed to bypass SSRF private-IP blocking (internal deployments) |
+| `MOHA_ENDPOINT_ALLOWLIST` | empty | comma-separated host suffixes (`example.com`) **or IP networks** (`192.168.0.0/16`) allowed to bypass SSRF private-IP blocking (internal deployments) |
 | `MOHA_REQUEST_TIMEOUT` | `30` | metadata/listing timeout (s) |
 | `MOHA_STREAM_CONNECT_TIMEOUT` | `10` | proxy stream connect timeout (s) |
 
