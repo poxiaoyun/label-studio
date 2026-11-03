@@ -60,4 +60,7 @@ export interface ProviderConfig {
   icon?: FC<any>;
   disabled?: boolean;
   badge?: JSX.Element;
+  // [moha] Optional label for the "prefix" input on the import settings step
+  // (defaults to "Bucket Prefix"). Kept generic so other providers can reuse it.
+  prefixLabel?: string;
 }

@@ -3,6 +3,7 @@ import { Form, Input } from "apps/labelstudio/src/components/Form";
 import { IconDocument, IconSearch } from "@humansignal/icons";
 import { formatDistanceToNow } from "date-fns";
 import type { ForwardedRef } from "react";
+import { getProviderConfig } from "../providers";
 
 interface PreviewStepProps {
   formData: any;
@@ -80,6 +81,11 @@ export const PreviewStep = ({
   formatSize,
   onImportSettingsChange,
 }: PreviewStepProps) => {
+  // [moha] Providers can name the prefix input themselves ("Bucket Prefix" by
+  // default, "Repository prefix" for repository-based storages).
+  const prefixLabel =
+    getProviderConfig(type)?.prefixLabel ?? (type === "redis" ? "Path to Files" : "Bucket Prefix");
+
   return (
     <div className="space-y-6">
       <div>
@@ -112,11 +118,9 @@ export const PreviewStep = ({
               {/* Path/Bucket Prefix Section - Hide for localfiles since it has its own path field */}
               {type !== "localfiles" && (
                 <div className="space-y-2">
-                  <Label text={`${type === "redis" ? "Path to Files" : "Bucket Prefix"} (optional)`} />
+                  <Label text={`${prefixLabel} (optional)`} />
                   <p className="text-sm text-muted-foreground">
-                    {type === "redis"
-                      ? "Specify the folder path within your storage where your files are located"
-                      : "Specify the folder path within your bucket where your files are located"}
+                    Specify the folder path within your storage where your files are located
                   </p>
                   <Input
                     id={type === "redis" ? "path" : "prefix"}

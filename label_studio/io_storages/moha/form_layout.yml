@@ -1,0 +1,91 @@
+# [moha] Legacy storage form layout (used when FF_NEW_STORAGES is disabled).
+# Field names must match the model fields in models.py.
+
+title_repo: &title_repo
+  - type: text
+    name: title
+    label: Storage Name
+    required: true
+  - type: text
+    name: organization
+    label: Organization
+    allowEmpty: false
+    required: true
+  - type: text
+    name: repo_name
+    label: Repository
+    allowEmpty: false
+    required: true
+
+connection: &connection
+  - type: text
+    name: moha_endpoint
+    label: Endpoint
+    placeholder: https://rune.example.com
+    allowEmpty: false
+    required: true
+  - type: password
+    name: moha_token
+    label: Token
+    autoComplete: "new-password"
+    skipAutofill: true
+    allowEmpty: false
+    protectedValue: true
+  - type: select
+    name: repo_type
+    label: Repository Type
+    required: true
+    options:
+      - value: datasets
+        label: Dataset
+      - value: models
+        label: Model
+
+revision_prefix: &revision_prefix
+  - type: text
+    name: revision
+    label: Revision
+    placeholder: main (default branch)
+  - type: text
+    name: prefix
+    label: Repository Prefix
+    placeholder: path/to/files
+
+ImportStorage:
+  - columnCount: 3
+    fields: *title_repo
+  - columnCount: 3
+    fields: *connection
+  - columnCount: 2
+    fields: *revision_prefix
+  - columnCount: 1
+    fields:
+      - type: select
+        name: use_blob_urls
+        label: Import method
+        description: Choose how to import your data from storage
+        required: true
+        options:
+          - value: true
+            label: "Files - Automatically creates a task for each storage object (e.g. JPG, MP3, TXT)"
+          - value: false
+            label: "Tasks - Treat each JSON or JSONL file as a task definition"
+  - columnCount: 1
+    fields:
+      - type: text
+        name: regex_filter
+        label: File Filter Regex
+        placeholder: '.*\.(jpe?g|png)$'
+        validators:
+          - regexp
+      - type: toggle
+        name: recursive_scan
+        label: Scan all sub-folders
+
+ExportStorage:
+  - columnCount: 3
+    fields: *title_repo
+  - columnCount: 3
+    fields: *connection
+  - columnCount: 2
+    fields: *revision_prefix

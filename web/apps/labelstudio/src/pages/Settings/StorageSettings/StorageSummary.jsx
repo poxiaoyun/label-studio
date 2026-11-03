@@ -96,6 +96,7 @@ export const StorageSummary = ({ target, storage, className, storageTypes = [] }
           <AzureStorage case="azure" storage={storage} />
           <RedisStorage case="redis" storage={storage} />
           <LocalStorage case="localfiles" storage={storage} />
+          <MohaStorage case="moha" storage={storage} />
         </Oneof>
 
         <DescriptionList.Item
@@ -175,4 +176,17 @@ const RedisStorage = ({ storage }) => {
 
 const LocalStorage = ({ storage }) => {
   return <DescriptionList.Item term="Path">{storage.path}</DescriptionList.Item>;
+};
+
+// [moha] repository-based storage summary
+const MohaStorage = ({ storage }) => {
+  return (
+    <>
+      <DescriptionList.Item term="Repository">
+        {storage.organization}/{storage.repo_name}
+      </DescriptionList.Item>
+      <DescriptionList.Item term="Revision">{storage.revision || "default branch"}</DescriptionList.Item>
+      {storage.prefix ? <DescriptionList.Item term="Prefix">{storage.prefix}</DescriptionList.Item> : null}
+    </>
+  );
 };

@@ -55,6 +55,7 @@ dependencies = [
     "rules (==3.4)",
     "ujson (>=5.13.0)",
     "ijson (>=3.4.0,<4.0.0)",
+    "moha-hub[upload] (>=2.0.0,<3.0.0)",  # [moha] Moha Hub SDK (upload extra pulls GitPython)
     "xmljson (==0.2.1)",
     "colorama (>=0.4.4)",
     "pyboxen (>=1.3.0)",

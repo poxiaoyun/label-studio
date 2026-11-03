@@ -27,6 +27,15 @@ from .redis.models import (  # noqa: F401
     RedisExportStorageLink,
 )
 
+# [moha] Imported here (not from urls/registry) so Django registers the models
+# while the app registry is still being populated.
+from .moha.models import (  # noqa: F401,E402
+    MohaImportStorage,
+    MohaImportStorageLink,
+    MohaExportStorage,
+    MohaExportStorageLink,
+)
+
 from label_studio.core.utils.common import load_func
 
 
