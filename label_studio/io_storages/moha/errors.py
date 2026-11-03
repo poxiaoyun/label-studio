@@ -43,6 +43,11 @@ def describe(exc: BaseException) -> str:
         return 'Timed out connecting to the Moha endpoint. Check the URL and network reachability.'
     if name in ('ConnectionError', 'SSLError'):
         return 'Cannot reach the Moha endpoint. Check the URL, TLS certificate and network.'
+    if name in ('JSONDecodeError', 'ValueError') and 'expecting value' in str(exc).lower():
+        return (
+            'The endpoint returned a non-JSON response (usually the console or a login page). '
+            'Use the Moha service root URL, e.g. http://host:8000 — without /console or /moha.'
+        )
     if code and code >= 500:
         return f'Moha returned HTTP {code}. Try again later or contact the platform administrator.'
     if code:

@@ -11,7 +11,7 @@ from django.conf import settings
 from io_storages.moha.models import MohaExportStorage, MohaImportStorage, MohaImportStorageLink
 from io_storages.moha.serializers import MohaImportStorageSerializer
 from django.test import override_settings
-from io_storages.moha.serializers import _endpoint_allowlisted
+from io_storages.moha.serializers import _endpoint_allowlisted, normalize_endpoint
 from rest_framework.exceptions import ValidationError
 from tasks.models import Annotation, Task
 
@@ -266,3 +266,19 @@ class TestEndpointAllowlist:
     @override_settings(MOHA_ENDPOINT_ALLOWLIST='')
     def test_empty_allowlist_blocks_private(self):
         assert not _endpoint_allowlisted('http://192.168.1.1')
+
+
+class TestEndpointNormalization:
+    @pytest.mark.parametrize(
+        'value, expected',
+        [
+            ('http://192.168.0.170:8000/console', 'http://192.168.0.170:8000'),
+            ('http://192.168.0.170:8000/console/', 'http://192.168.0.170:8000'),
+            ('http://192.168.0.170:8000/moha/v1', 'http://192.168.0.170:8000'),
+            ('http://192.168.0.170:8000/console/moha', 'http://192.168.0.170:8000'),
+            ('https://rune.example.com/', 'https://rune.example.com'),
+            ('https://rune.example.com/hub', 'https://rune.example.com/hub'),
+        ],
+    )
+    def test_normalizes_console_suffixes(self, value, expected):
+        assert normalize_endpoint(value) == expected

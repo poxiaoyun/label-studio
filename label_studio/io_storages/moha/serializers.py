@@ -20,6 +20,25 @@ from .uri import REPO_TYPES
 
 logger = logging.getLogger(__name__)
 
+#: UI/API suffixes users tend to paste. The SDK appends ``/moha/v1/...`` itself, so
+#: keeping these would produce ``/console/moha/v1/...`` and an HTML error page.
+_ENDPOINT_SUFFIXES = ('/console', '/moha/v1', '/moha')
+
+
+def normalize_endpoint(value: str) -> str:
+    """Strip trailing slashes and accidental console/API suffixes from an endpoint."""
+    value = (value or '').strip().rstrip('/')
+    changed = True
+    while changed:
+        changed = False
+        lowered = value.lower()
+        for suffix in _ENDPOINT_SUFFIXES:
+            if lowered.endswith(suffix):
+                value = value[: -len(suffix)].rstrip('/')
+                changed = True
+                break
+    return value
+
 
 def _resolve_ips(host: str) -> set:
     """Resolve ``host`` to IP addresses; tolerates IP literals and DNS failures."""
@@ -96,7 +115,7 @@ class MohaStorageSerializerMixin:
     def validate_moha_endpoint(self, value):
         if not value:
             return value
-        value = value.strip().rstrip('/')
+        value = normalize_endpoint(value)
         if settings.SSRF_PROTECTION_ENABLED and not _endpoint_allowlisted(value):
             validate_url_for_ssrf(value)
         return value

@@ -3,6 +3,7 @@
 [moha] Adapter tests. A fake hub keeps these tests offline and SDK-free.
 """
 
+import json
 import unittest
 from dataclasses import dataclass
 from typing import Dict, List, Optional
@@ -258,6 +259,13 @@ class TestErrorMapping(unittest.TestCase):
             pass
 
         self.assertNotIn('Bearer', describe(Weird('Authorization: Bearer abc')))
+
+    def test_non_json_response_is_explained(self):
+        with self.assertRaises(json.JSONDecodeError) as ctx:
+            json.loads('<html>console</html>')
+        message = describe(ctx.exception)
+        self.assertIn('non-JSON', message)
+        self.assertIn('/console', message)
 
 
 if __name__ == '__main__':
