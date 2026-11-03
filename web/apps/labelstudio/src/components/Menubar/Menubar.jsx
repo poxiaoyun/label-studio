@@ -23,6 +23,7 @@ import { absoluteURL, isDefined } from "../../utils/helpers";
 import { Breadcrumbs } from "../Breadcrumbs/Breadcrumbs";
 import { Dropdown } from "@humansignal/ui";
 import { Hamburger } from "../Hamburger/Hamburger";
+import { LanguageSwitcher } from "../LanguageSwitcher/LanguageSwitcher"; // [pxs-i18n]
 import { Menu } from "../Menu/Menu";
 import { VersionNotifier, VersionProvider } from "../VersionNotifier/VersionNotifier";
 import "./Menubar.scss";
@@ -33,6 +34,7 @@ import { pages } from "@humansignal/app-common";
 import { isFF } from "../../utils/feature-flags";
 import { ff } from "@humansignal/core";
 import { openHotkeyHelp } from "@humansignal/app-common/pages/AccountSettings/sections/Hotkeys/Help";
+import { t } from "@humansignal/i18n";
 
 export const MenubarContext = createContext();
 
@@ -139,7 +141,7 @@ export const Menubar = ({ enabled, defaultOpened, defaultPinned, children, onSid
         <div className={menubarClass}>
           <Dropdown.Trigger dropdown={menuDropdownRef} closeOnClickOutside={!sidebarPinned}>
             <div className={`${menubarClass.elem("trigger")} main-menu-trigger`}>
-              <LSLogo className={`${menubarClass.elem("logo")}`} alt="Label Studio Logo" />
+              <LSLogo className={`${menubarClass.elem("logo")}`} alt={t("pages.components.menubar.menubar.label_studio_logo")} />
               <Hamburger opened={sidebarOpened} />
             </div>
           </Dropdown.Trigger>
@@ -150,11 +152,15 @@ export const Menubar = ({ enabled, defaultOpened, defaultPinned, children, onSid
           </div>
 
           <div className={menubarClass.elem("hotkeys").toClassName()}>
+            {/* [pxs-i18n] language switch, left of the hotkeys button */}
+            <div className={menubarClass.elem("hotkeys-button").toClassName()}>
+              <LanguageSwitcher />
+            </div>
             <div className={menubarClass.elem("hotkeys-button").toClassName()}>
               <Button
                 variant="neutral"
                 look="outlined"
-                tooltip="Keyboard Shortcuts"
+                tooltip={t("pages.components.menubar.menubar.keyboard_shortcuts")}
                 data-testid="hotkeys-button"
                 size="small"
                 onClick={() => {
@@ -183,11 +189,11 @@ export const Menubar = ({ enabled, defaultOpened, defaultPinned, children, onSid
               <Menu>
                 <Menu.Item
                   icon={<IconPersonInCircle />}
-                  label="Account &amp; Settings"
+                  label="Account & Settings"
                   href={pages.AccountSettingsPage.path}
                 />
                 {/* <Menu.Item label="Dark Mode"/> */}
-                <Menu.Item icon={<IconDoor />} label="Log Out" href={absoluteURL("/logout")} data-external />
+                <Menu.Item icon={<IconDoor />} label={t("pages.components.menubar.menubar.log_out")} href={absoluteURL("/logout")} data-external />
                 {showNewsletterDot && (
                   <>
                     <Menu.Divider />
@@ -223,30 +229,30 @@ export const Menubar = ({ enabled, defaultOpened, defaultPinned, children, onSid
               style={{ width: 240 }}
             >
               <Menu>
-                {isFF(FF_HOMEPAGE) && <Menu.Item label="Home" to="/" icon={<IconHome />} data-external exact />}
-                <Menu.Item label="Projects" to="/projects" icon={<IconFolder />} data-external exact />
-                <Menu.Item label="Organization" to="/organization" icon={<IconPeople />} data-external exact />
+                {isFF(FF_HOMEPAGE) && <Menu.Item label={t("pages.components.menubar.menubar.home")} to="/" icon={<IconHome />} data-external exact />}
+                <Menu.Item label={t("pages.components.menubar.menubar.projects")} to="/projects" icon={<IconFolder />} data-external exact />
+                <Menu.Item label={t("pages.components.menubar.menubar.organization")} to="/organization" icon={<IconPeople />} data-external exact />
 
                 <Menu.Spacer />
 
                 <VersionNotifier showNewVersion />
 
                 <Menu.Item
-                  label="API"
+                  label={t("pages.components.menubar.menubar.api")}
                   href="https://api.labelstud.io/api-reference/introduction/getting-started"
                   icon={<IconTerminal />}
                   target="_blank"
                 />
-                <Menu.Item label="Docs" href="https://labelstud.io/guide" icon={<IconBook />} target="_blank" />
+                <Menu.Item label={t("pages.components.menubar.menubar.docs")} href="https://labelstud.io/guide" icon={<IconBook />} target="_blank" />
                 <Menu.Item
-                  label="GitHub"
+                  label={t("pages.components.menubar.menubar.git_hub")}
                   href="https://github.com/HumanSignal/label-studio"
                   icon={<IconGithub />}
                   target="_blank"
                   rel="noreferrer"
                 />
                 <Menu.Item
-                  label="Slack Community"
+                  label={t("pages.components.menubar.menubar.slack_community")}
                   href="https://slack.labelstud.io/?source=product-menu"
                   icon={<IconSlack />}
                   target="_blank"

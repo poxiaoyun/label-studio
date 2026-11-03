@@ -443,7 +443,13 @@ GRAPHIQL = True
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
-USE_I18N = False
+# [pxs-i18n] Chinese UI for the Django-rendered pages (login/signup/errors).
+LANGUAGES = [
+    ('en', 'English'),
+    ('zh-hans', '简体中文'),
+]
+LOCALE_PATHS = [os.path.join(os.path.dirname(BASE_DIR), 'locale')]
+USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
