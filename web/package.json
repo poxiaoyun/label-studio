@@ -40,7 +40,8 @@
     "storybook:serve": "nx storybook storybook",
     "storybook:build": "nx build-storybook storybook",
     "playground:serve": "FRONTEND_HOSTNAME=http://localhost:4200 MODE=standalone-playground nx run playground:serve:development",
-    "playground:build": "NODE_ENV=production MODE=standalone-playground nx run playground:build:production && mv dist/apps/playground/playground-assets/index.html dist/apps/playground/index.html"
+    "playground:build": "NODE_ENV=production MODE=standalone-playground nx run playground:build:production && mv dist/apps/playground/playground-assets/index.html dist/apps/playground/index.html",
+    "i18n:check": "node libs/i18n/scripts/check-coverage.js"
   },
   "private": true,
   "dependencies": {
