@@ -127,6 +127,11 @@ one, so the driver's history stays continuous and a bad merge is one revert away
 
 ### Merge-forward on a new release
 
+> The working copy this branch was prepared in is a **shallow** sparse clone
+> (`--depth 1`), so it has no history behind `1.23.2` and cannot merge a newer
+> tag. Either run `git fetch --unshallow` once, or clone the fork normally
+> (`git clone git@github.com:poxiaoyun/label-studio.git`).
+
 ```bash
 git fetch origin --tags              # fork; use `upstream` if its tags lag
 git switch -c 1.24.0-pxs 1.24.0      # new branch on the new tag
