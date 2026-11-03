@@ -1,9 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-  <!-- [moha] Moha brand mark: a repository volume with a commit graph inside. -->
-  <path d="M16 3 27 9.2v13.6L16 29 5 22.8V9.2L16 3Z" fill="#3352E8"/>
-  <path d="M16 3 27 9.2v13.6L16 29V3Z" fill="#4C6FFF"/>
-  <path d="M16 10v12.5" stroke="#FFFFFF" stroke-width="2.1" stroke-linecap="round" opacity="0.95"/>
-  <circle cx="16" cy="9.6" r="2.5" fill="#FFFFFF"/>
-  <path d="M16 17.2 22 20.4" stroke="#FFFFFF" stroke-width="2.1" stroke-linecap="round" opacity="0.9"/>
-  <circle cx="22.6" cy="21.4" r="2.3" fill="#7CF5CE"/>
+  <!-- [moha] Moha brand mark: three capsule bars forming an M.
+       Colors are sampled from the official logo (cyan #82DDEC, indigo #615DFF, amber #FBBC17);
+       bar widths 1:1:1, gaps 1/4 bar, middle bar 1/2 height from the top. -->
+  <rect x="2" y="2" width="8" height="28" rx="4" fill="#82DDEC"/>
+  <rect x="12" y="3.2" width="8" height="13.7" rx="4" fill="#615DFF"/>
+  <rect x="22" y="2" width="8" height="28" rx="4" fill="#FBBC17"/>
 </svg>
