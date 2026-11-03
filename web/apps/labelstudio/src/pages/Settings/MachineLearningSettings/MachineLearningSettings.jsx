@@ -40,7 +40,7 @@ export const MachineLearningSettings = () => {
   const startTrainingModal = useCallback(
     (backend) => {
       const modalProps = {
-        title: "Start Model Training",
+        title: t("settings.ml.start_training"),
         style: { width: 760 },
         closeOnClickOutside: true,
         body: <StartModelTraining backend={backend} />,
@@ -54,7 +54,7 @@ export const MachineLearningSettings = () => {
   const showRequestModal = useCallback(
     (backend) => {
       const modalProps = {
-        title: "Test Request",
+        title: t("settings.ml.test_request"),
         style: { width: 760 },
         closeOnClickOutside: true,
         body: <TestRequest backend={backend} />,
@@ -69,7 +69,7 @@ export const MachineLearningSettings = () => {
     (backend) => {
       const action = backend ? "updateMLBackend" : "addMLBackend";
       const modalProps = {
-        title: `${backend ? "Edit" : "Connect"} Model`,
+        title: backend ? t("settings.ml.edit_model") : t("settings.ml.connect_model"),
         style: { width: 760 },
         closeOnClickOutside: false,
         body: (
@@ -161,7 +161,7 @@ export const MachineLearningSettings = () => {
               {t("pages.settings.machine_learning_settings.machine_learning_settings.2_select_the_desired_tasks")}
             </Typography>
             <Typography size="small" className="text-neutral-content-subtler mt-tighter">
-              {t("pages.settings.machine_learning_settings.machine_learning_settings.3_click_on")} <i>{t("pages.settings.machine_learning_settings.machine_learning_settings.batch_predictions")}</i> from the <i>{t("pages.settings.machine_learning_settings.machine_learning_settings.actions")}</i> menu.
+              {t("pages.settings.machine_learning_settings.machine_learning_settings.3_click_on")} <i>{t("pages.settings.machine_learning_settings.machine_learning_settings.batch_predictions")}</i>{t("settings.ml.from_the_menu_prefix")}<i>{t("pages.settings.machine_learning_settings.machine_learning_settings.actions")}</i>{t("settings.ml.from_the_menu_suffix")}
             </Typography>
             <Typography size="small" className="text-neutral-content-subtler mt-base">
               {t("pages.settings.machine_learning_settings.machine_learning_settings.if_you_want_to_use")}{" "}
@@ -211,5 +211,5 @@ export const MachineLearningSettings = () => {
   );
 };
 
-MachineLearningSettings.title = "Model";
+MachineLearningSettings.title = t("settings.nav.model");
 MachineLearningSettings.path = "/ml";

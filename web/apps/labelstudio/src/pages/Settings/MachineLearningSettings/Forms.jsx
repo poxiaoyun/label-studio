@@ -36,8 +36,8 @@ const CustomBackendForm = ({ action, backend, project, onSubmit }) => {
           name="auth_method"
           label={t("pages.settings.machine_learning_settings.forms.select_authentication_method")}
           options={[
-            { label: "No Authentication", value: "NONE" },
-            { label: "Basic Authentication", value: "BASIC_AUTH" },
+            { label: t("settings.ml.no_auth"), value: "NONE" },
+            { label: t("settings.ml.basic_auth"), value: "BASIC_AUTH" },
           ]}
           value={selectedAuthMethod}
           onChange={setAuthMethod}

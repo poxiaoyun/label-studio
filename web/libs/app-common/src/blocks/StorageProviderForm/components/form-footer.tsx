@@ -63,14 +63,14 @@ export const FormFooter = ({
               })}
               style={connectionChecked ? { textShadow: "none" } : {}}
             >
-              {connectionChecked ? "Connection Verified" : "Test Connection"}
+              {connectionChecked ? t("storage.form.footer.connection_verified") : t("storage.form.footer.test_connection")}
             </Button>
           </>
         )}
 
         {(isEditMode ? currentStep === 1 : currentStep === 2) && (
           <Button waiting={loadPreview.isLoading} onClick={loadPreview.mutate} disabled={filesPreview !== null}>
-            {filesPreview !== null ? "✓ Preview Loaded" : "Load Preview"}
+            {filesPreview !== null ? t("storage.form.footer.preview_loaded") : t("storage.form.footer.load_preview")}
           </Button>
         )}
 
@@ -83,13 +83,17 @@ export const FormFooter = ({
           look={currentStep === totalSteps - 1 && target !== "export" ? "outlined" : undefined}
           tooltip={
             currentStep === 1 && !connectionChecked
-              ? "Test connection before continuing"
+              ? t("storage.form.footer.test_before_continue")
               : currentStep === 0 && isProviderDisabled
-                ? "This provider is not available in the current version"
+                ? t("storage.form.footer.provider_unavailable")
                 : undefined
           }
         >
-          {currentStep < totalSteps - 1 ? "Next" : target === "export" ? "Save" : "Save & Sync"}
+          {currentStep < totalSteps - 1
+            ? t("storage.form.footer.next")
+            : target === "export"
+              ? t("storage.form.save")
+              : t("storage.form.footer.save_and_sync")}
         </Button>
 
         {currentStep === totalSteps - 1 && target !== "export" && onSave && (

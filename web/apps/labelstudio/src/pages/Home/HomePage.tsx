@@ -23,35 +23,35 @@ import { t } from "@humansignal/i18n";
 
 const resources = [
   {
-    title: "Documentation",
+    title: t("home.resources.documentation"),
     url: "https://labelstud.io/guide/",
   },
   {
-    title: "API Documentation",
+    title: t("home.resources.api"),
     url: "https://api.labelstud.io/api-reference/introduction/getting-started",
   },
   {
-    title: "Release Notes",
+    title: t("home.resources.release_notes"),
     url: "https://labelstud.io/learn/categories/release-notes/",
   },
   {
-    title: "LabelStud.io Blog",
+    title: t("home.resources.blog"),
     url: "https://labelstud.io/blog/",
   },
   {
-    title: "Slack Community",
+    title: t("home.resources.slack"),
     url: "https://slack.labelstud.io",
   },
 ];
 
 const actions = [
   {
-    title: "Create Project",
+    title: t("home.actions.create_project"),
     icon: IconFolderAdd,
     type: "createProject",
   },
   {
-    title: "Invite Members",
+    title: t("home.actions.invite_members"),
     icon: IconUserAdd,
     type: "inviteMembers",
   },
@@ -239,7 +239,7 @@ export const HomePage: Page = () => {
   );
 };
 
-HomePage.title = "Home";
+HomePage.title = t("home.title");
 HomePage.path = "/";
 HomePage.exact = true;
 
@@ -265,7 +265,11 @@ function ProjectSimpleCard({ project }: { project: APIProject }) {
             <span className="text-neutral-content truncate">{project.title}</span>
           </Tooltip>
           <div className="text-neutral-content-subtler text-sm">
-            {finished} of {total} {t("pages.pages.home.home_page.tasks")}{total > 0 ? Math.round((finished / total) * 100) : 0}%)
+            {t("home.project_progress", {
+              finished,
+              total,
+              percent: total > 0 ? Math.round((finished / total) * 100) : 0,
+            })}
           </div>
         </div>
         <div className="bg-neutral-surface rounded-full overflow-hidden w-full h-2 shadow-neutral-border-subtle shadow-border-1">

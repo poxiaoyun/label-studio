@@ -159,7 +159,7 @@ const HotkeyHelpModal = ({ sectionsToShow }: HotkeyHelpModalProps) => {
             <h2 className="text-lg font-semibold">{t("appcommon.sections.hotkeys.help.keyboard_shortcuts")}</h2>
           </div>
           <p className="text-sm text-neutral-content-subtler mt-1">
-            View all available keyboard shortcuts.&nbsp;
+            {t("hotkeys.help.subtitle")}&nbsp;
             <a
               href="/user/account/hotkeys"
               onClick={handleCustomizeClick}

@@ -81,3 +81,8 @@
     margin-top: 5px;
   }
 }
+
+/* [pxs-i18n] the required marker is rendered by CSS; follow <html lang> */
+html[lang="zh-CN"] .field-label[data-required] .field-label__text::after {
+  content: "必填";
+}

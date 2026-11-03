@@ -8,6 +8,7 @@ import { MachineLearningSettings } from "./MachineLearningSettings/MachineLearni
 import { PredictionsSettings } from "./PredictionsSettings/PredictionsSettings";
 import { StorageSettings } from "./StorageSettings/StorageSettings";
 import "./settings.scss";
+import { t } from "@humansignal/i18n";
 
 export const MenuLayout = ({ children, ...routeProps }) => {
   return (
@@ -39,7 +40,7 @@ const pages = {
 };
 
 export const SettingsPage = {
-  title: "Settings",
+  title: t("settings.nav.settings"),
   path: "/settings",
   exact: true,
   layout: MenuLayout,

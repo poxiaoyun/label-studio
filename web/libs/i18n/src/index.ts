@@ -18,6 +18,7 @@
  */
 import en from "./locales/en.json";
 import zhCN from "./locales/zh-CN.json";
+import templates from "./locales/templates.json";
 
 export type Locale = "en" | "zh-CN";
 
@@ -112,6 +113,19 @@ export function t(key: string, vars?: Record<string, unknown>): string {
   const template = RESOURCES[current]?.[key] ?? RESOURCES.en[key];
   if (template === undefined) return key;
   return interpolate(template, vars);
+}
+
+const TEMPLATE_GROUPS = templates.groups as Record<string, string>;
+const TEMPLATE_TITLES = templates.titles as Record<string, string>;
+
+/**
+ * Translate a value from the template catalogue (`annotation_templates/*.yml`):
+ * groups and titles arrive from the API in English, so they are looked up by
+ * their English text and fall back to it when there is no translation.
+ */
+export function tTemplate(value: string): string {
+  if (!value || getLanguage() !== "zh-CN") return value;
+  return TEMPLATE_GROUPS[value] ?? TEMPLATE_TITLES[value] ?? value;
 }
 
 /** Language switch without reload (tests, storybook). */

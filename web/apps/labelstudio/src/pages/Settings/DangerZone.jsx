@@ -20,7 +20,7 @@ export const DangerZone = () => {
   const toast = useToast();
   const [processing, setProcessing] = useState(null);
 
-  useUpdatePageTitle(createTitleFromSegments([project?.title, "Danger Zone"]));
+  useUpdatePageTitle(createTitleFromSegments([project?.title, t("settings.nav.danger_zone")]));
 
   const showDangerConfirmation = ({ title, message, requiredWord, buttonText, onConfirm }) => {
     const isDev = process.env.NODE_ENV === "development";
@@ -39,7 +39,7 @@ export const DangerZone = () => {
               {message}
             </Typography>
             <Input
-              label={`To proceed, type "${requiredWord}" in the field below:`}
+              label={t("settings.danger_zone.type_to_proceed", { word: requiredWord })}
               value={inputValue}
               onChange={(e) => ctrl?.setState({ inputValue: e.target.value })}
               autoFocus
@@ -84,34 +84,34 @@ export const DangerZone = () => {
   const handleOnClick = (type) => () => {
     const actionConfig = {
       reset_cache: {
-        title: "Reset Cache",
+        title: t("settings.danger_zone.reset_cache"),
         message: (
           <>
             {t("pages.pages.settings.danger_zone.you_are_about_to_reset")} <strong>{project.title}</strong>{t("pages.pages.settings.danger_zone.this_action_cannot_be")}
           </>
         ),
         requiredWord: "cache",
-        buttonText: "Reset Cache",
+        buttonText: t("settings.danger_zone.reset_cache"),
       },
       tabs: {
-        title: "Drop All Tabs",
+        title: t("settings.danger_zone.drop_all_tabs"),
         message: (
           <>
             {t("pages.pages.settings.danger_zone.you_are_about_to_drop")} <strong>{project.title}</strong>{t("pages.pages.settings.danger_zone.this_action_cannot_be")}
           </>
         ),
         requiredWord: "tabs",
-        buttonText: "Drop All Tabs",
+        buttonText: t("settings.danger_zone.drop_all_tabs"),
       },
       project: {
-        title: "Delete Project",
+        title: t("settings.danger_zone.delete_project"),
         message: (
           <>
             {t("pages.pages.settings.danger_zone.you_are_about_to_delete")} <strong>{project.title}</strong>{t("pages.pages.settings.danger_zone.this_action_cannot_be")}
           </>
         ),
         requiredWord: "delete",
-        buttonText: "Delete Project",
+        buttonText: t("settings.danger_zone.delete_project"),
       },
     };
 
@@ -132,25 +132,25 @@ export const DangerZone = () => {
                 pk: project.id,
               },
             });
-            toast.show({ message: "Cache reset successfully" });
+            toast.show({ message: t("settings.danger_zone.cache_reset_ok") });
           } else if (type === "tabs") {
             await api.callApi("deleteTabs", {
               body: {
                 project: project.id,
               },
             });
-            toast.show({ message: "All tabs dropped successfully" });
+            toast.show({ message: t("settings.danger_zone.tabs_dropped_ok") });
           } else if (type === "project") {
             await api.callApi("deleteProject", {
               params: {
                 pk: project.id,
               },
             });
-            toast.show({ message: "Project deleted successfully" });
+            toast.show({ message: t("settings.danger_zone.project_deleted_ok") });
             history.replace("/projects");
           }
         } catch (error) {
-          toast.show({ message: `Error: ${error.message}`, type: "error" });
+          toast.show({ message: t("settings.danger_zone.error", { message: error.message }), type: "error" });
         } finally {
           setProcessing(null);
         }
@@ -163,35 +163,32 @@ export const DangerZone = () => {
       {
         type: "annotations",
         disabled: true, //&& !project.total_annotations_number,
-        label: `Delete ${project.total_annotations_number} Annotations`,
+        label: t("settings.danger_zone.delete_n_annotations", { count: project.total_annotations_number }),
       },
       {
         type: "tasks",
         disabled: true, //&& !project.task_number,
-        label: `Delete ${project.task_number} Tasks`,
+        label: t("settings.danger_zone.delete_n_tasks", { count: project.task_number }),
       },
       {
         type: "predictions",
         disabled: true, //&& !project.total_predictions_number,
-        label: `Delete ${project.total_predictions_number} Predictions`,
+        label: t("settings.danger_zone.delete_n_predictions", { count: project.total_predictions_number }),
       },
       {
         type: "reset_cache",
-        help:
-          "Reset Cache may help in cases like if you are unable to modify the labeling configuration due " +
-          "to validation errors concerning existing labels, but you are confident that the labels don't exist. You can " +
-          "use this action to reset the cache and try again.",
-        label: "Reset Cache",
+        help: t("settings.danger_zone.reset_cache_help"),
+        label: t("settings.danger_zone.reset_cache"),
       },
       {
         type: "tabs",
-        help: "If the Data Manager is not loading, dropping all Data Manager tabs can help.",
-        label: "Drop All Tabs",
+        help: t("settings.danger_zone.drop_all_tabs_help"),
+        label: t("settings.danger_zone.drop_all_tabs"),
       },
       {
         type: "project",
-        help: "Deleting a project removes all tasks, annotations, and project data from the database.",
-        label: "Delete Project",
+        help: t("settings.danger_zone.delete_project_help"),
+        label: t("settings.danger_zone.delete_project"),
       },
     ],
     [project],
@@ -244,5 +241,5 @@ export const DangerZone = () => {
   );
 };
 
-DangerZone.title = "Danger Zone";
+DangerZone.title = t("settings.nav.danger_zone");
 DangerZone.path = "/danger-zone";

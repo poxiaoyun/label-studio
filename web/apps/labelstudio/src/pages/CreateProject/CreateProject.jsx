@@ -120,7 +120,7 @@ export const CreateProject = ({ onClose }) => {
   const steps = {
     name: <span className={tabClass.mod({ disabled: !!error }).toClassName()}>{t("pages.pages.create_project.create_project.project_name")}</span>,
     import: <span className={tabClass.mod({ disabled: uploadDisabled }).toClassName()}>{t("pages.pages.create_project.create_project.data_import")}</span>,
-    config: "Labeling Setup",
+    config: t("create_project.steps.labeling_setup"),
   };
 
   // name intentionally skipped from deps:

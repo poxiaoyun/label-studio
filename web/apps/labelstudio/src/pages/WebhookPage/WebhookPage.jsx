@@ -7,6 +7,7 @@ import { useProject } from "../../providers/ProjectProvider";
 import WebhookDetail from "./WebhookDetail";
 import WebhookList from "./WebhookList";
 import { createTitleFromSegments, useUpdatePageTitle } from "@humansignal/core";
+import { t } from "@humansignal/i18n";
 
 const Webhook = () => {
   const [activeWebhook, setActiveWebhook] = useState(null);
@@ -113,7 +114,7 @@ const Webhook = () => {
 };
 
 export const WebhookPage = {
-  title: "Webhooks",
+  title: t("settings.nav.webhooks"),
   path: "/webhooks",
   component: Webhook,
 };

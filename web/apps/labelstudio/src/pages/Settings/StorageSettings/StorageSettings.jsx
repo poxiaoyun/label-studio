@@ -78,7 +78,7 @@ export const StorageSettings = () => {
           <StorageSet
             ref={sourceStorageRef}
             title={t("pages.settings.storage_settings.storage_settings.source_cloud_storage")}
-            buttonLabel="Add Source Storage"
+            buttonLabel={t("storage.set.add_source_aria")}
             rootClass={rootClass}
             storageTypes={sourceStorage.storageTypes}
             storages={sourceStorage.storages}
@@ -92,7 +92,7 @@ export const StorageSettings = () => {
             ref={targetStorageRef}
             title={t("pages.settings.storage_settings.storage_settings.target_cloud_storage")}
             target="export"
-            buttonLabel="Add Target Storage"
+            buttonLabel={t("storage.set.add_target_aria")}
             rootClass={rootClass}
             storageTypes={targetStorage.storageTypes}
             storages={targetStorage.storages}
@@ -181,5 +181,5 @@ export const StorageSettings = () => {
   );
 };
 
-StorageSettings.title = "Cloud Storage";
+StorageSettings.title = t("settings.nav.cloud_storage");
 StorageSettings.path = "/storage";

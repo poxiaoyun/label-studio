@@ -9,6 +9,7 @@ import { step1Schema, getProviderSchema } from "./schemas";
 import { addProvider } from "./providers";
 import type { ProviderConfig } from "./types/provider";
 import { InlineError } from "apps/labelstudio/src/components/Error/InlineError";
+import { t } from "@humansignal/i18n";
 
 interface StorageProviderFormProps {
   onSubmit: () => void;
@@ -60,23 +61,23 @@ export const StorageProviderForm = forwardRef<unknown, StorageProviderFormProps>
     const steps = isEditMode
       ? [
           {
-            title: "Configure Connection",
+            title: t("storage.form.step.configure_connection"),
             schema: getProviderSchema(type || "s3", isEditMode, effectiveTarget),
           },
           // Only include preview and review steps for import storages
           ...(effectiveTarget === "import"
-            ? [{ title: "Import Settings & Preview" }, { title: "Review & Confirm" }]
+            ? [{ title: t("storage.form.step.import_settings") }, { title: t("storage.form.step.review_confirm") }]
             : []),
         ]
       : [
-          { title: "Select Provider", schema: step1Schema },
+          { title: t("storage.form.step.select_provider"), schema: step1Schema },
           {
-            title: "Configure Connection",
+            title: t("storage.form.step.configure_connection"),
             schema: getProviderSchema(type || "s3", isEditMode, effectiveTarget),
           },
           // Only include preview and review steps for import storages
           ...(effectiveTarget === "import"
-            ? [{ title: "Import Settings & Preview" }, { title: "Review & Confirm" }]
+            ? [{ title: t("storage.form.step.import_settings") }, { title: t("storage.form.step.review_confirm") }]
             : []),
         ];
 
@@ -116,23 +117,23 @@ export const StorageProviderForm = forwardRef<unknown, StorageProviderFormProps>
       const newSteps = isEditMode
         ? [
             {
-              title: "Configure Connection",
+              title: t("storage.form.step.configure_connection"),
               schema: getProviderSchema(formData.provider || type || "s3", isEditMode, effectiveTarget),
             },
             // Only include preview and review steps for import storages
             ...(effectiveTarget === "import"
-              ? [{ title: "Import Settings & Preview" }, { title: "Review & Confirm" }]
+              ? [{ title: t("storage.form.step.import_settings") }, { title: t("storage.form.step.review_confirm") }]
               : []),
           ]
         : [
-            { title: "Select Provider", schema: step1Schema },
+            { title: t("storage.form.step.select_provider"), schema: step1Schema },
             {
-              title: "Configure Connection",
+              title: t("storage.form.step.configure_connection"),
               schema: getProviderSchema(formData.provider || type || "s3", isEditMode, effectiveTarget),
             },
             // Only include preview and review steps for import storages
             ...(effectiveTarget === "import"
-              ? [{ title: "Import Settings & Preview" }, { title: "Review & Confirm" }]
+              ? [{ title: t("storage.form.step.import_settings") }, { title: t("storage.form.step.review_confirm") }]
               : []),
           ];
       setCurrentSteps(newSteps);

@@ -52,8 +52,8 @@ const LocalFilesServingWarning = () => {
 
 export const localFilesProvider: ProviderConfig = {
   name: "localfiles",
-  title: "Local Files",
-  description: "Configure your local file storage connection with all required Label Studio settings",
+  title: t("providers.local.title"),
+  description: t("providers.local.description"),
   icon: () => (
     <IconFolderOpen
       width={40}
@@ -73,12 +73,12 @@ export const localFilesProvider: ProviderConfig = {
     {
       name: "path",
       type: "text",
-      label: "Absolute local path",
+      label: t("providers.local.path"),
       required: true,
       placeholder: defaultPathExample || "/data/my-folder/subdirectory",
       schema: pathSchema,
       defaultValue: defaultPathExample,
-      description: `This path must be an absolute path on the host machine where Label Studio is running and start with \n"${localFilesDocumentRoot}" (LOCAL_FILES_DOCUMENT_ROOT).`,
+      description: t("providers.local.path_help", { root: localFilesDocumentRoot }),
     },
   ],
   layout: [{ fields: ["serving_warning"] }, { fields: ["path"] }],

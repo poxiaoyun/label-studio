@@ -11,6 +11,7 @@ import { projectAtom } from "../../../providers/ProjectProvider";
 import { providers } from "./providers";
 import { StorageCard } from "./StorageCard";
 import { StorageForm } from "./StorageForm";
+import { t } from "@humansignal/i18n";
 
 export const StorageSet = forwardRef(
   (
@@ -36,9 +37,9 @@ export const StorageSet = forwardRef(
 
     const showStorageFormModal = useCallback(
       (storage) => {
-        const action = storage ? "Edit" : "Connect";
-        const actionTarget = target === "export" ? "Target" : "Source";
-        const title = `${action} ${actionTarget} Storage`;
+        const title = storage
+          ? t(target === "export" ? "storage.set.modal_edit_target" : "storage.set.modal_edit_source")
+          : t(target === "export" ? "storage.set.modal_connect_target" : "storage.set.modal_connect_source");
 
         const modalRef = modal({
           title,
@@ -104,8 +105,8 @@ export const StorageSet = forwardRef(
     const onDeleteStorage = useCallback(
       async (storage) => {
         confirm({
-          title: "Deleting storage",
-          body: "This action cannot be undone. Are you sure?",
+          title: t("storage.set.delete_title"),
+          body: t("storage.set.delete_body"),
           buttonLook: "negative",
           onOk: async () => {
             const response = await api.callApi("deleteStorage", {
@@ -131,7 +132,7 @@ export const StorageSet = forwardRef(
             disabled={loading}
             look="outlined"
             data-testid={`add-${target === "export" ? "target" : "source"}-storage-button`}
-            aria-label={`Add ${target === "export" ? "Target" : "Source"} Storage`}
+            aria-label={t(target === "export" ? "storage.set.add_target_aria" : "storage.set.add_source_aria")}
           >
             {buttonLabel}
           </Button>

@@ -183,3 +183,8 @@ label {
   margin-bottom: 4px;
   display: block;
 }
+
+/* [pxs-i18n] the required marker is rendered by CSS; follow <html lang> */
+html[lang="zh-CN"] .label-ls[data-required] .label-ls__text span::after {
+  content: "必填";
+}

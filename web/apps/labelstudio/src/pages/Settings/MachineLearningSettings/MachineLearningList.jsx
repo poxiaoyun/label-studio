@@ -49,7 +49,7 @@ const BackendCard = ({ backend, onStartTrain, onEdit, onDelete, onTestRequest })
   const confirmDelete = useCallback(
     (backend) => {
       confirm({
-        title: "Delete ML Backend",
+        title: t("settings.ml.delete_backend"),
         body: "This action cannot be undone. Are you sure?",
         buttonLook: "destructive",
         onOk() {
@@ -97,7 +97,7 @@ const BackendCard = ({ backend, onStartTrain, onEdit, onDelete, onTestRequest })
         <div className={rootClass.elem("group").toClassName()}>
           <Tooltip title={format(parseISO(backend.created_at), "yyyy-MM-dd HH:mm:ss")}>
             <span>
-              Created&nbsp;
+              {t("settings.ml.created")}&nbsp;
               {formatDistanceToNow(parseISO(backend.created_at), {
                 addSuffix: true,
               })}

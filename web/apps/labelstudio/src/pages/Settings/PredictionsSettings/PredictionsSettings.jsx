@@ -54,7 +54,7 @@ export const PredictionsSettings = () => {
             <Typography size="small" className="text-neutral-content-subtler mt-base mb-wider">
               {t("pages.settings.predictions_settings.predictions_settings.list_of_predictions_available_in")}{" "}
               <a href="https://labelstud.io/guide/predictions.html" target="_blank" rel="noreferrer">
-                see&nbsp;the&nbsp;documentation
+                {t("settings.predictions.see_docs")}
               </a>
               .
             </Typography>
@@ -98,5 +98,5 @@ export const PredictionsSettings = () => {
   );
 };
 
-PredictionsSettings.title = "Predictions";
+PredictionsSettings.title = t("settings.nav.predictions");
 PredictionsSettings.path = "/predictions";

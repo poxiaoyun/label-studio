@@ -5,7 +5,7 @@ import { cn } from "../../../utils/bem";
 import "./Config.scss";
 import { IconInfo } from "@humansignal/icons";
 import { Button, EnterpriseBadge } from "@humansignal/ui";
-import { t } from "@humansignal/i18n";
+import { t, tTemplate } from "@humansignal/i18n";
 
 const listClass = cn("templates-list");
 
@@ -35,11 +35,11 @@ const TemplatesInGroup = ({ templates, group, onSelectRecipe, isEdition }) => {
             key={recipe.title}
             onClick={() => !isDisabled && onSelectRecipe(recipe)}
             className={listClass.elem("template").mod({ disabled: isDisabled }).toClassName()}
-            title={isDisabled ? "Enterprise feature - Available in Label Studio Enterprise" : ""}
+            title={isDisabled ? t("templates.enterprise_tooltip") : ""}
           >
             <img src={recipe.image} alt={""} />
             <div className="flex flex-col items-center w-full">
-              <h3 className="flex flex-1 justify-center text-center w-full">{recipe.title}</h3>
+              <h3 className="flex flex-1 justify-center text-center w-full">{tTemplate(recipe.title)}</h3>
               {isEnterpriseTemplate && isCommunityEdition && <EnterpriseBadge className="mb-base" />}
             </div>
           </li>
@@ -86,7 +86,7 @@ export const TemplatesList = ({ selectedGroup, selectedRecipe, onCustomTemplate,
                 })
                 .toClassName()}
             >
-              {group}
+              {tTemplate(group)}
               <Arrow />
             </li>
           ))}
@@ -117,7 +117,7 @@ export const TemplatesList = ({ selectedGroup, selectedRecipe, onCustomTemplate,
         <span>
           {t("pages.create_project.config.templates_list.see_the_documentation_to")}{" "}
           <a href="https://labelstud.io/guide" target="_blank" rel="noreferrer">
-            contribute a template
+            {t("templates.footer.contribute")}
           </a>
           .
         </span>

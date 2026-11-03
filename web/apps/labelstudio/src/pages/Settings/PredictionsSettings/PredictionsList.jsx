@@ -45,7 +45,7 @@ const VersionCard = ({ version, selected, onSelect, editable, onDelete }) => {
   const confirmDelete = useCallback(
     (version) => {
       confirm({
-        title: "Delete Predictions",
+        title: t("settings.predictions.delete"),
         body: "This action cannot be undone. Are you sure?",
         buttonLook: "destructive",
         onOk() {
@@ -73,7 +73,7 @@ const VersionCard = ({ version, selected, onSelect, editable, onDelete }) => {
             &nbsp;{version.count}
           </div>
           <div className={rootClass.elem("group").toClassName()}>
-            Last prediction created&nbsp;
+            {t("settings.predictions.last_created")}&nbsp;
             <Tooltip title={format(parseISO(version.latest), "yyyy-MM-dd HH:mm:ss")}>
               <span>
                 {formatDistanceToNow(parseISO(version.latest), {

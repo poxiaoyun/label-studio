@@ -387,7 +387,7 @@ export const ImportPage = ({
             {t("pages.create_project.import.import.add_url")}
           </Button>
         </form>
-        <span>or</span>
+        <span>{t("create_project.import.or")}</span>
         <Button
           variant="primary"
           look="outlined"
@@ -435,9 +435,9 @@ export const ImportPage = ({
                   <div className={`${dropzoneClass.elem("content")} w-full`}>
                     <IconFileUpload height="64" className={dropzoneClass.elem("icon").toClassName()} />
                     <header>
-                      Drag & drop files here
+                      {t("create_project.import.drag_drop")}
                       <br />
-                      or click to browse
+                      {t("create_project.import.or_click_browse")}
                     </header>
 
                     <dl>
@@ -484,14 +484,14 @@ export const ImportPage = ({
                           >
                             {t("pages.create_project.import.import.cloud_storage")}
                           </a>{" "}
-                          over direct uploads due to{" "}
+                          {t("create_project.import.over_direct")}{" "}
                           <a
                             href="https://labelstud.io/guide/tasks.html#Import-data-from-the-Label-Studio-UI"
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label={t("pages.create_project.import.import.upload_limitations_documentation_opens_in")}
                           >
-                            upload limitations
+                            {t("create_project.import.upload_limits")}
                           </a>
                           .
                         </li>
@@ -503,14 +503,14 @@ export const ImportPage = ({
                             rel="noopener noreferrer"
                             aria-label={t("pages.create_project.import.import.multi_image_labeling_documentation_opens_in")}
                           >
-                            multi-image labeling
+                            {t("create_project.import.multi_image_limits")}
                           </a>
                           {t("pages.create_project.import.import.jsonl_or_parquet_enterprise")}
                         </li>
                         <li>
                           {t("pages.create_project.import.import.check_the_documentation_to")}{" "}
                           <a target="_blank" href="https://labelstud.io/guide/predictions.html" rel="noreferrer">
-                            import preannotated data
+                            {t("create_project.import.import_preannotated")}
                           </a>
                           .
                         </li>
@@ -654,9 +654,9 @@ export const ImportPage = ({
                             onClick={openConfig}
                             className="border-none bg-none p-0 m-0 text-primary-content underline"
                           >
-                            labeling configuration
+                            {t("create_project.import.labeling_config_link")}
                           </Button>{" "}
-                          first to preview the expected JSON data format
+                          {t("create_project.import.configure_first_to_preview")}
                         </div>
                       </div>
                     </div>

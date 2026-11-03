@@ -71,7 +71,7 @@ const EmptyConfigPlaceholder = () => (
     <p>
       {t("pages.create_project.config.config.start_from_one_of_our")}{" "}
       <a href="https://labelstud.io/tags/" target="_blank" rel="noreferrer">
-        read about the available tags in our documentation
+        {t("create_project.config.tags_link")}
       </a>
       .
     </p>
@@ -108,7 +108,7 @@ const Label = ({ label, template, color }) => {
         size="smaller"
         variant="negative"
         onClick={() => template.removeLabel(label)}
-        aria-label="delete label"
+        aria-label={t("create_project.config.delete_label")}
         className="hidden !p-0 z-10 absolute right-0 [&_span]:!p-0 group-hover:inline-flex"
         leading={<IconTrash className="w-4 h-4 fill-[currentColor]" />}
       />
@@ -610,7 +610,7 @@ const Configurator = ({
 
   const extra = (
     <p className={configClass.elem("tags-link").toClassName()}>
-      Configure the labeling interface with tags.&nbsp;
+      {t("create_project.config.tags_help")}&nbsp;
       <a href="https://labelstud.io/tags/" target="_blank" rel="noreferrer">
         {t("pages.create_project.config.config.see_all_tags")}
       </a>

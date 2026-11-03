@@ -25,22 +25,22 @@ interface PreviewStepProps {
 
 const regexFilters = [
   {
-    title: "Images",
+    title: t("storage.form.preview.filter_images"),
     regex: ".*.(jpe?g|png|gif)$",
     blob: true,
   },
   {
-    title: "Videos",
+    title: t("storage.form.preview.filter_videos"),
     regex: ".*\\.(mp4|avi|mov|wmv|webm)$",
     blob: true,
   },
   {
-    title: "Audio",
+    title: t("storage.form.preview.filter_audio"),
     regex: ".*\\.(mp3|wav|ogg|flac)$",
     blob: true,
   },
   {
-    title: "Tabular",
+    title: t("storage.form.preview.filter_tabular"),
     regex: ".*\\.(csv|tsv)$",
     blob: true,
   },
@@ -55,12 +55,12 @@ const regexFilters = [
     blob: false,
   },
   {
-    title: "Parquet",
+    title: t("storage.form.preview.filter_parquet"),
     regex: ".*\\.parquet$",
     blob: false,
   },
   {
-    title: "All Tasks Files",
+    title: t("storage.form.preview.filter_all_tasks"),
     regex: ".*\\.(json|jsonl|parquet)$",
     blob: false,
   },
@@ -83,12 +83,12 @@ export const PreviewStep = ({
   onImportSettingsChange,
 }: PreviewStepProps) => {
   // [moha] Providers may name the prefix input (e.g. "Repository prefix").
-  const prefixLabel = getProviderConfig(type)?.prefixLabel ?? (type === "redis" ? "Path to Files" : "Bucket Prefix");
+  const prefixLabel = getProviderConfig(type)?.prefixLabel ?? (type === "redis" ? t("storage.form.preview.filter_path_to_files") : t("storage.form.preview.bucket_prefix"));
 
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-xl font-semibold">Configure Import Settings & Preview Data</h2>
+        <h2 className="text-xl font-semibold">{t("storage.form.preview.title")}</h2>
         <p className="text-muted-foreground">{t("appcommon.storage_provider_form.steps.preview_step.set_up_filters_for_your")}</p>
       </div>
 
@@ -117,11 +117,11 @@ export const PreviewStep = ({
               {/* Path/Bucket Prefix Section - Hide for localfiles since it has its own path field */}
               {type !== "localfiles" && (
                 <div className="space-y-2">
-                  <Label text={`${prefixLabel} (optional)`} />
+                  <Label text={t("storage.form.preview.prefix_optional", { label: prefixLabel })} />
                   <p className="text-sm text-muted-foreground">
                     {type === "redis"
-                      ? "Specify the folder path within your storage where your files are located"
-                      : "Specify the folder path within your bucket where your files are located"}
+                      ? t("storage.form.preview.prefix_help_redis")
+                      : t("storage.form.preview.prefix_help_bucket")}
                   </p>
                   <Input
                     id={type === "redis" ? "path" : "prefix"}
@@ -132,7 +132,7 @@ export const PreviewStep = ({
                       // Reset preview when prefix/path changes
                       onImportSettingsChange?.();
                     }}
-                    placeholder="path/to/files/ or leave empty for root"
+                    placeholder={t("storage.form.preview.prefix_placeholder")}
                     style={{ width: "100%" }}
                     required={false}
                     skip={false}
@@ -167,11 +167,11 @@ export const PreviewStep = ({
                     [
                       {
                         value: "Files",
-                        label: "Files - Automatically creates a task for each storage object (e.g. JPG, MP3, TXT)",
+                        label: t("storage.form.preview.files_option"),
                       },
                       {
                         value: "Tasks",
-                        label: "Tasks - Treat each JSON, JSONL, or Parquet as one or more task definitions per file",
+                        label: t("storage.form.preview.tasks_option"),
                       },
                     ] as any
                   }

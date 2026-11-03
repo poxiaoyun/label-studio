@@ -43,8 +43,8 @@ export const StartModelTraining = ({ backend }) => {
 
       {!!response && (
         <>
-          <pre>Request Sent!</pre>
-          <pre>Response: {JSON.stringify(response, null, 2)}</pre>
+          <pre>{t("settings.ml.request_sent")}</pre>
+          <pre>{t("settings.ml.response")} {JSON.stringify(response, null, 2)}</pre>
         </>
       )}
     </div>

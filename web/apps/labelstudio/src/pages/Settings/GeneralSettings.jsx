@@ -20,8 +20,8 @@ export const GeneralSettings = () => {
   const colors = ["#FDFDFC", "#FF4C25", "#FF750F", "#ECB800", "#9AC422", "#34988D", "#617ADA", "#CC6FBE"];
 
   const samplings = [
-    { value: "Sequential", label: "Sequential", description: "Tasks are ordered by Task ID" },
-    { value: "Uniform", label: "Random", description: "Tasks are chosen with uniform random" },
+    { value: "Sequential", label: t("settings.general.sampling_sequential"), description: t("settings.general.sampling_sequential_help") },
+    { value: "Uniform", label: t("settings.general.sampling_random"), description: t("settings.general.sampling_random_help") },
   ];
 
   return (
@@ -132,6 +132,6 @@ export const GeneralSettings = () => {
   );
 };
 
-GeneralSettings.menuItem = "General";
+GeneralSettings.menuItem = t("settings.nav.general");
 GeneralSettings.path = "/";
 GeneralSettings.exact = true;

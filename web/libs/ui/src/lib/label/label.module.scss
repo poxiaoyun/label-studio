@@ -55,6 +55,11 @@
     margin-left: 0.325rem;
   }
 
+  /* [pxs-i18n] the required marker is rendered by CSS, so it follows <html lang> */
+  :global(html[lang="zh-CN"]) &[data-required] &__text::after {
+    content: "必填";
+  }
+
   &_placement_right {
     display: inline-flex;
     flex-direction: row-reverse;

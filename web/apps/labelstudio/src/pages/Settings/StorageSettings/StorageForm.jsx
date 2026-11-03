@@ -35,7 +35,7 @@ export const StorageForm = forwardRef(({ onSubmit, target, project, rootClass, s
         skip: true,
         type: "select",
         name: "storage_type",
-        label: "Storage Type",
+        label: t("storage.form.storage_type"),
         disabled: !!storage,
         options: storageTypes.map(({ name, title }) => ({
           value: name,
@@ -123,7 +123,7 @@ export const StorageForm = forwardRef(({ onSubmit, target, project, rootClass, s
             {t("pages.settings.storage_settings.storage_form.check_connection")}
           </Button>
           <Button type="submit" aria-label={storage ? "Save storage settings" : "Add storage"}>
-            {storage ? "Save" : "Add Storage"}
+            {storage ? t("storage.form.save") : t("storage.form.add_storage")}
           </Button>
         </div>
       </Form.Actions>

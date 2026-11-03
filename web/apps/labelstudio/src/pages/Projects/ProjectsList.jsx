@@ -8,7 +8,7 @@ import { Menu, Pagination } from "../../components";
 import { cn } from "../../utils/bem";
 import { absoluteURL } from "../../utils/helpers";
 import { ProjectStateChip } from "@humansignal/app-common";
-import { t } from "@humansignal/i18n";
+import { t, getLanguage } from "@humansignal/i18n";
 
 const DEFAULT_CARD_COLORS = ["#FFFFFF", "#FDFDFC"];
 
@@ -142,7 +142,10 @@ const ProjectCard = ({ project }) => {
         <div className={cn("project-card").elem("description").toClassName()}>{project.description}</div>
         <div className={cn("project-card").elem("info").toClassName()}>
           <div className={cn("project-card").elem("created-date").toClassName()}>
-            {format(new Date(project.created_at), "dd MMM yyyy, HH:mm")}
+            {format(
+              new Date(project.created_at),
+              getLanguage() === "zh-CN" ? "yyyy年M月d日 HH:mm" : "dd MMM yyyy, HH:mm",
+            )}
           </div>
           <div className={cn("project-card").elem("created-by").toClassName()}>
             <Userpic src="#" user={project.created_by} showUsernameTooltip />
