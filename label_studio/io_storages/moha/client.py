@@ -16,7 +16,7 @@ import os
 import re
 import tempfile
 from dataclasses import dataclass
-from typing import BinaryIO, Dict, Iterable, Iterator, List, Optional, Tuple
+from typing import Dict, Iterator, List, Optional, Tuple
 from urllib.parse import quote
 
 logger = logging.getLogger(__name__)
@@ -300,7 +300,7 @@ class MohaClient:
         skip, limit = 0, None
         content_range = response.headers.get('Content-Range')
         if range_header and response.status_code == 200:
-            skip, limit = _parse_range(range_header, response.headers.get('Content-Length'))
+            skip, limit = _parse_range(range_header)
 
         content_length = response.headers.get('Content-Length')
         try:
@@ -332,7 +332,6 @@ class MohaClient:
         message: str,
         revision: Optional[str] = None,
     ) -> None:
-        c = self.config
         fd, tmp = tempfile.mkstemp(prefix='moha-put-', suffix='.json')
         try:
             with os.fdopen(fd, 'wb') as handle:
@@ -409,7 +408,7 @@ def _iso(commit) -> Optional[str]:
     return value.isoformat() if hasattr(value, 'isoformat') else str(value)
 
 
-def _parse_range(range_header: str, content_length: Optional[str]) -> Tuple[int, Optional[int]]:
+def _parse_range(range_header: str) -> Tuple[int, Optional[int]]:
     """Translate ``bytes=start-end`` into ``(skip, length)`` for local trimming."""
     try:
         spec = range_header.split('=', 1)[1]
@@ -417,13 +416,6 @@ def _parse_range(range_header: str, content_length: Optional[str]) -> Tuple[int,
         start = int(start_raw) if start_raw else 0
     except (IndexError, ValueError):
         return 0, None
-
-    total = None
-    if content_length is not None:
-        try:
-            total = int(content_length)
-        except (TypeError, ValueError):
-            total = None
 
     if not end_raw:
         return start, None
@@ -436,16 +428,10 @@ def _parse_range(range_header: str, content_length: Optional[str]) -> Tuple[int,
     return start, end - start + 1
 
 
-def iter_file_chunks(stream: ResponseStream, chunk_size: int = 64 * 1024) -> Iterable[bytes]:
-    """Small helper kept public for tests."""
-    return stream.iter_chunks(chunk_size=chunk_size)
-
-
 __all__ = [
     'CONTENTS_PAGE_SIZE_HINT',
     'MohaClient',
     'MohaConfig',
     'MohaObject',
     'ResponseStream',
-    'iter_file_chunks',
 ]

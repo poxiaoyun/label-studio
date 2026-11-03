@@ -31,28 +31,32 @@ Frontend:
 
 ## 2. Upstream touch points
 
-Only **9 files** are modified, **+56 / −4 lines**, every line tagged `[moha]`.
-The only removed lines are the 4 hardcoded prefix-label lines in `preview-step.tsx`
-that `prefixLabel` replaces.
+**10 files** are modified, **+44 / −16 lines**, every change tagged `[moha]`.
+Deletions are budgeted and intentional: the provider grid drops unused providers
+(product decision) and `logo.svg` swaps the brand glyph while keeping the
+`Label Studio` wordmark.
 
-| File | Change |
-| --- | --- |
-| `core/settings/label_studio.py` | `GET_STORAGE_LIST` override, link name append, `MOHA_*` settings |
-| `core/urls.py` | one `include('io_storages.moha.urls')` |
-| `io_storages/models.py` | one import so Django registers the models early |
-| `pyproject.toml` | `moha-hub` dependency |
-| `web/.../providers/index.ts` | register `moha` |
-| `web/libs/ui/src/assets/icons/index.ts` | export `IconCloudProviderMoha` |
-| `web/.../types/common.ts` | optional `prefixLabel` on `ProviderConfig` |
-| `web/.../Steps/preview-step.tsx` | use `prefixLabel` instead of a hardcoded label |
-| `web/.../StorageSummary.jsx` | `SummaryMoha` row |
+| File | Add / Del | Change |
+| --- | --- | --- |
+| `core/settings/label_studio.py` | +8 / 0 | `GET_STORAGE_LIST` override, link name append, `MOHA_*` settings |
+| `core/urls.py` | +1 / 0 | one `include('io_storages.moha.urls')` |
+| `io_storages/models.py` | +3 / 0 | one import so Django registers the models early |
+| `pyproject.toml` | +1 / 0 | `moha-hub` dependency |
+| `web/.../StorageSettings/providers/index.ts` | +5 / −13 | Moha first, unused providers removed |
+| `web/.../StorageSettings/StorageSummary.jsx` | +12 / 0 | repository / revision / prefix rows |
+| `web/.../StorageProviderForm/Steps/preview-step.tsx` | +6 / −1 | `prefixLabel` instead of a hardcoded label |
+| `web/.../StorageProviderForm/types/common.ts` | +3 / 0 | optional `prefixLabel` on `ProviderConfig` |
+| `web/libs/ui/src/assets/icons/index.ts` | +1 / 0 | export `IconCloudProviderMoha` |
+| `web/.../assets/images/logo.svg` | +4 / −2 | Moha glyph, wordmark untouched |
 
 Deliberately **not** touched: `io_storages/base_models.py`, `api.py`,
 `proxy_api.py`, `functions.py`, `serializers.py`, `all_api.py`, `urls.py`,
 `core/settings/base.py`, and the `StorageProviderForm` engine
 (`index.tsx`, `hooks/`, `components/provider-form.tsx`).
 
-`python label_studio/io_storages/moha/selfcheck.py` enforces all of the above.
+`python label_studio/io_storages/moha/selfcheck.py` enforces all of the above —
+bookkeeping checks always run, and when `.git` is present it also diffs against
+the `1.23.2` tag and fails on any file outside `DIFF_BUDGET` or above its budget.
 
 ## 3. Configuration
 
@@ -119,8 +123,10 @@ pytest label_studio/io_storages/tests/test_moha_*.py -q
 # its dependencies; never edit 0001-0022.
 ```
 
-Conflicts can only appear in the 9 files above, and every one of them is a single
-appended line: keep both sides.
+Conflicts can only appear in the 10 files above. Nine of them take a single
+appended line or block (keep both sides); the exceptions are
+`providers/index.ts` and `logo.svg`, which are short files that the fork owns —
+re-apply the `[moha]` lines after a rebase.
 
 Run from the repository root with Label Studio's test environment
 (`DJANGO_SETTINGS_MODULE=core.settings.label_studio`).

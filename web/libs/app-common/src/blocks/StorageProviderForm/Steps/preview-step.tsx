@@ -81,10 +81,8 @@ export const PreviewStep = ({
   formatSize,
   onImportSettingsChange,
 }: PreviewStepProps) => {
-  // [moha] Providers can name the prefix input themselves ("Bucket Prefix" by
-  // default, "Repository prefix" for repository-based storages).
-  const prefixLabel =
-    getProviderConfig(type)?.prefixLabel ?? (type === "redis" ? "Path to Files" : "Bucket Prefix");
+  // [moha] Providers may name the prefix input (e.g. "Repository prefix").
+  const prefixLabel = getProviderConfig(type)?.prefixLabel ?? (type === "redis" ? "Path to Files" : "Bucket Prefix");
 
   return (
     <div className="space-y-6">
@@ -120,7 +118,9 @@ export const PreviewStep = ({
                 <div className="space-y-2">
                   <Label text={`${prefixLabel} (optional)`} />
                   <p className="text-sm text-muted-foreground">
-                    Specify the folder path within your storage where your files are located
+                    {type === "redis"
+                      ? "Specify the folder path within your storage where your files are located"
+                      : "Specify the folder path within your bucket where your files are located"}
                   </p>
                   <Input
                     id={type === "redis" ? "path" : "prefix"}

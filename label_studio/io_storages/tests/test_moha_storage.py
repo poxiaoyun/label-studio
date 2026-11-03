@@ -8,11 +8,14 @@ from unittest.mock import MagicMock
 import pytest
 from core.utils.common import load_func
 from django.conf import settings
+from django.test import override_settings
 from io_storages.moha.client import MohaObject
 from io_storages.moha.models import MohaExportStorage, MohaImportStorage, MohaImportStorageLink
-from io_storages.moha.serializers import MohaImportStorageSerializer
-from django.test import override_settings
-from io_storages.moha.serializers import _endpoint_allowlisted, normalize_endpoint
+from io_storages.moha.serializers import (
+    MohaImportStorageSerializer,
+    _endpoint_allowlisted,
+    normalize_endpoint,
+)
 from rest_framework.exceptions import ValidationError
 from tasks.models import Annotation, Task
 

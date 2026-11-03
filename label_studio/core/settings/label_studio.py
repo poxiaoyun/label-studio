@@ -65,17 +65,9 @@ except IOError:
 STORAGE_PERSISTENCE = get_bool_env('STORAGE_PERSISTENCE', True)
 
 
-# [moha] Moha cloud storage driver registration.
-#
-# The driver lives in ``io_storages/moha`` and registers itself through settings
-# overrides instead of patching ``io_storages/functions.py`` or ``base.py`` so that
-# upstream upgrades only ever conflict on these few lines (see moha/README.md).
+# [moha] Registration + settings for the Moha driver (see io_storages/moha/README.md).
 GET_STORAGE_LIST = 'io_storages.moha.registry.get_storage_list'
 IO_STORAGES_IMPORT_LINK_NAMES = [*IO_STORAGES_IMPORT_LINK_NAMES, 'io_storages_mohaimportstoragelink']
-
-# Moha/client settings.
 MOHA_ENDPOINT_ALLOWLIST = get_env('MOHA_ENDPOINT_ALLOWLIST', '')
 MOHA_REQUEST_TIMEOUT = float(get_env('MOHA_REQUEST_TIMEOUT', '30'))
 MOHA_STREAM_CONNECT_TIMEOUT = float(get_env('MOHA_STREAM_CONNECT_TIMEOUT', '10'))
-
-# [moha] end

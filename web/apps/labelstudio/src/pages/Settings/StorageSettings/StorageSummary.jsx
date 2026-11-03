@@ -179,14 +179,12 @@ const LocalStorage = ({ storage }) => {
 };
 
 // [moha] repository-based storage summary
-const MohaStorage = ({ storage }) => {
-  return (
-    <>
-      <DescriptionList.Item term="Repository">
-        {storage.organization}/{storage.repo_name}
-      </DescriptionList.Item>
-      <DescriptionList.Item term="Revision">{storage.revision || "default branch"}</DescriptionList.Item>
-      {storage.prefix ? <DescriptionList.Item term="Prefix">{storage.prefix}</DescriptionList.Item> : null}
-    </>
-  );
-};
+const MohaStorage = ({ storage }) => (
+  <>
+    <DescriptionList.Item term="Repository">
+      {storage.organization}/{storage.repo_name}
+    </DescriptionList.Item>
+    <DescriptionList.Item term="Revision">{storage.revision || "default branch"}</DescriptionList.Item>
+    {storage.prefix ? <DescriptionList.Item term="Prefix">{storage.prefix}</DescriptionList.Item> : null}
+  </>
+);

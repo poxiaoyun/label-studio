@@ -7,11 +7,14 @@ Runs without Django and without the SDK so it can be used right after a rebase:
     python label_studio/io_storages/moha/selfcheck.py
 
 It verifies that every upstream anchor the driver relies on still exists and that
-the "no invasive edits" budget (see README.md) is respected. ``pytest`` runs the
-same checks in ``test_moha_integration_anchors.py``.
+the "no invasive edits" budget (see README.md) is respected. When the checkout has
+git metadata the diff against ``BASE_REF`` is measured as well; without git that
+single check is skipped so the driver still self-checks inside build containers.
+``pytest`` runs the same checks in ``test_moha_integration_anchors.py``.
 """
 
 import re
+import subprocess
 import sys
 from pathlib import Path
 from typing import Iterable, List
@@ -24,6 +27,37 @@ ALLOWED_UPSTREAM_EDITS = (
     'label_studio/core/urls.py',
     'label_studio/io_storages/models.py',
 )
+
+#: Frontend counterpart of ``ALLOWED_UPSTREAM_EDITS``.
+ALLOWED_FRONTEND_EDITS = (
+    'web/apps/labelstudio/src/pages/Settings/StorageSettings/providers/index.ts',
+    'web/apps/labelstudio/src/pages/Settings/StorageSettings/StorageSummary.jsx',
+    'web/libs/app-common/src/blocks/StorageProviderForm/Steps/preview-step.tsx',
+    'web/libs/app-common/src/blocks/StorageProviderForm/types/common.ts',
+    'web/libs/ui/src/assets/icons/index.ts',
+    'web/apps/labelstudio/src/assets/images/logo.svg',
+)
+
+#: Per-file diff budget against the imported upstream ref: ``(added, deleted)``.
+#:
+#: Deletions are only budgeted where the fork deliberately replaces upstream
+#: content: the provider grid (product decision to drop unused providers) and the
+#: brand glyph inside ``logo.svg``. Everything else is additive.
+DIFF_BUDGET = {
+    'label_studio/core/settings/label_studio.py': (8, 0),
+    'label_studio/core/urls.py': (1, 0),
+    'label_studio/io_storages/models.py': (3, 0),
+    'pyproject.toml': (1, 0),
+    'web/apps/labelstudio/src/assets/images/logo.svg': (4, 2),
+    'web/apps/labelstudio/src/pages/Settings/StorageSettings/StorageSummary.jsx': (12, 0),
+    'web/apps/labelstudio/src/pages/Settings/StorageSettings/providers/index.ts': (5, 13),
+    'web/libs/app-common/src/blocks/StorageProviderForm/Steps/preview-step.tsx': (6, 1),
+    'web/libs/app-common/src/blocks/StorageProviderForm/types/common.ts': (3, 0),
+    'web/libs/ui/src/assets/icons/index.ts': (1, 0),
+}
+
+#: Upstream ref the budget is measured against (the release we forked from).
+BASE_REF = '1.23.2'
 
 # Files that must stay untouched. A marker in any of them means the driver has
 # started to patch upstream internals, which makes rebases expensive.
@@ -65,7 +99,7 @@ ANCHORS = (
     ),
     (
         'label_studio/io_storages/models.py',
-        'from .moha.models import',
+        'from .moha import models',
         'model registration import',
     ),
     (
@@ -155,7 +189,7 @@ def check_edit_budget(root: Path) -> List[str]:
             continue
         if MARKER in body:
             failures.append(f'{relative} must not be patched ({MARKER} found)')
-    for relative in ALLOWED_UPSTREAM_EDITS:
+    for relative in (*ALLOWED_UPSTREAM_EDITS, *ALLOWED_FRONTEND_EDITS):
         try:
             body = _read(root, relative)
         except FileNotFoundError:
@@ -163,6 +197,46 @@ def check_edit_budget(root: Path) -> List[str]:
             continue
         if MARKER not in body:
             failures.append(f'{relative} lost its {MARKER} marker')
+    return failures
+
+
+def _git(root: Path, *args: str) -> str:
+    return subprocess.check_output(['git', '-C', str(root), *args], text=True, stderr=subprocess.DEVNULL)
+
+
+def check_diff_budget(root: Path) -> List[str]:
+    """Measure the fork against BASE_REF.
+
+    Skipped when the checkout has no git metadata (e.g. the driver copied into a
+    build container) or when the base ref is not fetched.
+    """
+    if not (root / '.git').exists():
+        return []
+    try:
+        _git(root, 'rev-parse', '--verify', '--quiet', BASE_REF)
+        tracked = set(_git(root, 'ls-tree', '-r', '--name-only', BASE_REF).splitlines())
+        changed = _git(root, 'diff', '--name-status', BASE_REF, '--').splitlines()
+    except (subprocess.CalledProcessError, OSError):
+        return []
+
+    failures = []
+    for line in changed:
+        parts = line.split('\t')
+        path = parts[-1]
+        if path in tracked and path not in DIFF_BUDGET:
+            failures.append(f'{path} is an upstream file outside the diff budget')
+
+    budgeted = sorted(DIFF_BUDGET)
+    numstat = _git(root, 'diff', '--numstat', BASE_REF, '--', *budgeted)
+    for line in numstat.splitlines():
+        added, deleted, path = line.split('\t')
+        if added == '-' or deleted == '-':
+            continue
+        max_added, max_deleted = DIFF_BUDGET[path]
+        if int(added) > max_added or int(deleted) > max_deleted:
+            failures.append(
+                f'{path} exceeds its diff budget: +{added}/-{deleted} (allowed +{max_added}/-{max_deleted})'
+            )
     return failures
 
 
@@ -223,6 +297,7 @@ def check_frontend_registration(root: Path) -> List[str]:
 CHECKS = (
     check_anchors,
     check_edit_budget,
+    check_diff_budget,
     check_sdk_boundary,
     check_no_feature_flags,
     check_frontend_registration,
@@ -238,7 +313,10 @@ def run_checks(root: Path = None) -> List[str]:
 
 
 def main() -> int:
-    failures = run_checks()
+    root = repo_root()
+    failures = run_checks(root)
+    if not (root / '.git').exists():
+        print('[moha] note: no git metadata here, diff budget check skipped')
     if failures:
         print(f'[moha] integration self check FAILED ({len(failures)} issue(s)):')
         for item in failures:
