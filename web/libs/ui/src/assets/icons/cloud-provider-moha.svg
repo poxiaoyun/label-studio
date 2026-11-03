@@ -1,8 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-  <!-- [moha] Moha repository mark: stacked revisions of a dataset repository. -->
-  <path d="M16 3.5 27 9v14L16 28.5 5 23V9L16 3.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-  <path d="M5 9l11 5.5L27 9" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-  <path d="M16 14.5V28" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-  <path d="M10.5 6.4 21.5 11.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity="0.55"/>
-  <path d="M10.5 11.4 21.5 16.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity="0.3"/>
+  <!-- [moha] Moha brand mark: a repository volume with a commit graph inside. -->
+  <path d="M16 3 27 9.2v13.6L16 29 5 22.8V9.2L16 3Z" fill="#3352E8"/>
+  <path d="M16 3 27 9.2v13.6L16 29V3Z" fill="#4C6FFF"/>
+  <path d="M16 10v12.5" stroke="#FFFFFF" stroke-width="2.1" stroke-linecap="round" opacity="0.95"/>
+  <circle cx="16" cy="9.6" r="2.5" fill="#FFFFFF"/>
+  <path d="M16 17.2 22 20.4" stroke="#FFFFFF" stroke-width="2.1" stroke-linecap="round" opacity="0.9"/>
+  <circle cx="22.6" cy="21.4" r="2.3" fill="#7CF5CE"/>
 </svg>
