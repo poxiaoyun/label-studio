@@ -113,6 +113,8 @@ task.data = moha://org/datasets/repo/main/images/1.jpg
 ### Branch model
 
 Fork: `git@github.com:poxiaoyun/label-studio.git`, which tracks upstream.
+In a working copy `origin` is the fork and `upstream` is `HumanSignal/label-studio`
+(fetch `upstream` when the fork's tags lag behind).
 
 | Branch | Meaning |
 | --- | --- |
@@ -126,14 +128,14 @@ one, so the driver's history stays continuous and a bad merge is one revert away
 ### Merge-forward on a new release
 
 ```bash
-git fetch pxs --tags                 # or: git fetch upstream --tags
+git fetch origin --tags              # fork; use `upstream` if its tags lag
 git switch -c 1.24.0-pxs 1.24.0      # new branch on the new tag
 git merge 1.23.2-pxs                 # expect conflicts only in the 10 files below
 
 MOHA_BASE_REF=1.24.0 python label_studio/io_storages/moha/selfcheck.py
 pytest label_studio/io_storages/tests/test_moha_*.py -q
 
-git push -u pxs 1.24.0-pxs
+git push -u origin 1.24.0-pxs
 ```
 
 `MOHA_BASE_REF` moves the diff budget onto the new tag, so the same self check
