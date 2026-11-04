@@ -15,10 +15,12 @@ spec, while every other parameter can come from either source.
 
 import os
 
+from core.management.commands._labeling_config import describe_fields, fetch_sample, infer_label_config
 from core.utils.io import find_dir, read_yaml
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand, CommandError
 from django.db import IntegrityError, transaction
+from io_storages.moha.client import MohaClient, MohaConfig
 from io_storages.moha.models import MohaImportStorage
 from io_storages.moha.serializers import normalize_endpoint
 from io_storages.moha.uri import REPO_TYPES
@@ -269,8 +271,47 @@ class Command(BaseCommand):
             return inline
 
         name = options['template']
-        if not name:
-            raise CommandError('--template, --label-config, BOOTSTRAP_TEMPLATE or BOOTSTRAP_LABEL_CONFIG is required')
+        if name and name != 'auto':
+            return self._builtin_label_config(name)
+
+        return self._auto_label_config(options)
+
+    def _auto_label_config(self, options):
+        """Read one record from the source repository and pick a config by field shape."""
+        endpoint = normalize_endpoint(options['moha_endpoint'] or '')
+        dataset = options['moha_dataset'] or ''
+        if not endpoint or not dataset or not options['moha_token']:
+            raise CommandError(
+                'no template given and the Moha source is not configured; '
+                'set --template, --label-config, or the storage parameters so it can be inferred'
+            )
+
+        client = MohaClient(
+            MohaConfig(
+                endpoint=endpoint,
+                token=options['moha_token'],
+                organization=options['moha_organization'] or '',
+                repo_type=options['moha_repo_type'] or REPO_TYPES[0],
+                repo_name=dataset,
+                revision=options['moha_revision'] or '',
+            )
+        )
+        path, record = fetch_sample(client)
+        if record is None:
+            raise CommandError(f'no JSON record found in {dataset}; pass --template or --label-config')
+
+        config, reason = infer_label_config(record)
+        if config is None:
+            raise CommandError(
+                f'cannot infer a labeling config from {path} (fields: {describe_fields(record)}); '
+                'pass --template or --label-config'
+            )
+
+        Project.validate_label_config(config)
+        self._log('labeling config: inferred %s from %s', reason, path)
+        return config
+
+    def _builtin_label_config(self, name):
 
         root = find_dir('annotation_templates')
         candidate = os.path.realpath(os.path.join(root, name))
