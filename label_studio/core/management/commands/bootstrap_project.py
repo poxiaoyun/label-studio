@@ -217,8 +217,7 @@ class Command(BaseCommand):
         return project
 
     def _ensure_storage(self, options, project):
-        endpoint = normalize_endpoint(options['moha_endpoint'] or '')
-        dataset = options['moha_dataset'] or ''
+        endpoint, organization, dataset = self._moha_target(options)
         if not endpoint or not dataset:
             self._log('storage: skipped (no Moha endpoint or dataset configured)')
             return None
@@ -231,7 +230,7 @@ class Command(BaseCommand):
         lookup = {
             'project': project,
             'moha_endpoint': endpoint,
-            'organization': options['moha_organization'] or '',
+            'organization': organization,
             'repo_type': repo_type,
             'repo_name': dataset,
         }
@@ -276,10 +275,25 @@ class Command(BaseCommand):
 
         return self._auto_label_config(options)
 
+    def _moha_target(self, options):
+        """Return ``(endpoint, organization, dataset)``.
+
+        The dataset picker in the chart returns ``organization/name``, the same
+        shape llamafactory uses, so the organization does not have to be entered
+        separately. An explicit ``--moha-organization`` still wins.
+        """
+        endpoint = normalize_endpoint(options['moha_endpoint'] or '')
+        organization = options['moha_organization'] or ''
+        dataset = options['moha_dataset'] or ''
+        if '/' in dataset:
+            prefix, _, rest = dataset.partition('/')
+            if prefix and rest and not organization:
+                organization, dataset = prefix, rest
+        return endpoint, organization, dataset
+
     def _auto_label_config(self, options):
         """Read one record from the source repository and pick a config by field shape."""
-        endpoint = normalize_endpoint(options['moha_endpoint'] or '')
-        dataset = options['moha_dataset'] or ''
+        endpoint, organization, dataset = self._moha_target(options)
         if not endpoint or not dataset or not options['moha_token']:
             raise CommandError(
                 'no template given and the Moha source is not configured; '
@@ -290,7 +304,7 @@ class Command(BaseCommand):
             MohaConfig(
                 endpoint=endpoint,
                 token=options['moha_token'],
-                organization=options['moha_organization'] or '',
+                organization=organization,
                 repo_type=options['moha_repo_type'] or REPO_TYPES[0],
                 repo_name=dataset,
                 revision=options['moha_revision'] or '',
