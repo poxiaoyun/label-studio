@@ -111,7 +111,9 @@ export const Filters = injector(({ store, views, currentView, filters, projectId
           onClick={() => currentView.createFilter()}
           leading={<IconPlus className="!h-3 !w-3" />}
         >
-          {t("dm.components.filters.filters.add")} {filters.length ? "Another Filter" : "Filter"}
+          {filters.length
+            ? t("dm.components.filters.filters.add_another_filter")
+            : t("dm.components.filters.filters.add_filter")}
         </Button>
 
         <div className={cn("filters").elem("actions-right").toClassName()}>

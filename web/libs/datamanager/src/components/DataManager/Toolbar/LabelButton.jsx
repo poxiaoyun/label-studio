@@ -81,7 +81,17 @@ export const LabelButton = injector(({ store, canLabel, size, target, selectedCo
     borderTopRightRadius: 0,
   };
 
-  selectedCount;
+  // [pxs-i18n] the label used to be assembled from "Label" + count + "Task(s)",
+  // which is ungrammatical once translated (word order and plurals differ).
+  // Keep whole sentences in the catalogue instead.
+  const labelText = selectedCount
+    ? t(
+        selectedCount > 1
+          ? "dm.data_manager.toolbar.label_button.label_selected_tasks"
+          : "dm.data_manager.toolbar.label_button.label_selected_task",
+        { count: selectedCount },
+      )
+    : t("dm.data_manager.toolbar.label_button.label_all_tasks");
 
   return canLabel ? (
     <Interface name="labelButton">
@@ -95,8 +105,7 @@ export const LabelButton = injector(({ store, canLabel, size, target, selectedCo
             style={primaryStyle}
             onClick={onLabelAll}
           >
-            {t("dm.data_manager.toolbar.label_button.label")} {selectedCount ? selectedCount : "All"} {t("dm.data_manager.toolbar.label_button.task")}
-            {!selectedCount || selectedCount > 1 ? "s" : ""}
+            {labelText}
           </Button>
           <Dropdown.Trigger
             alignment="bottom-right"

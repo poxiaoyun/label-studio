@@ -245,12 +245,20 @@ export const DateTimeInput = ({
         />
         {invalidDateOutOfFocus && !bothInvalid && (
           <Typography variant="body" size="smaller" className={styles.errorText}>
-            {t("ui.lib.date_range_picker.date_time_input.select_or_enter_a_valid")} {side} date.
+            {t(
+              side === Side.start
+                ? "ui.lib.date_range_picker.date_time_input.invalid_start_date"
+                : "ui.lib.date_range_picker.date_time_input.invalid_end_date",
+            )}
           </Typography>
         )}
         {bothInvalid && (
           <Typography variant="body" size="smaller" className={styles.errorText}>
-            {t("ui.lib.date_range_picker.date_time_input.select_or_enter_a_valid")} {side} date and time.
+            {t(
+              side === Side.start
+                ? "ui.lib.date_range_picker.date_time_input.invalid_start_date_time"
+                : "ui.lib.date_range_picker.date_time_input.invalid_end_date_time",
+            )}
           </Typography>
         )}
       </div>

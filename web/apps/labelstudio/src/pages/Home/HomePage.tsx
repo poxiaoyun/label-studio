@@ -1,11 +1,10 @@
-import { IconExternal, IconFolderAdd, IconHumanSignal, IconUserAdd, IconFolderOpen } from "@humansignal/icons";
+import { IconFolderAdd, IconUserAdd, IconFolderOpen } from "@humansignal/icons";
 import { Button, SimpleCard, Spinner, Tooltip, Typography } from "@humansignal/ui";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useUpdatePageTitle } from "@humansignal/core";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { HeidiTips } from "../../components/HeidiTips/HeidiTips";
 import { useAPI } from "../../providers/ApiProvider";
 import { CreateProject } from "../CreateProject/CreateProject";
 import { InviteLink } from "../Organization/PeoplePage/InviteLink";
@@ -20,29 +19,6 @@ import {
   visitedIdsAtom,
 } from "./atoms";
 import { t } from "@humansignal/i18n";
-
-const resources = [
-  {
-    title: t("home.resources.documentation"),
-    url: "https://labelstud.io/guide/",
-  },
-  {
-    title: t("home.resources.api"),
-    url: "https://api.labelstud.io/api-reference/introduction/getting-started",
-  },
-  {
-    title: t("home.resources.release_notes"),
-    url: "https://labelstud.io/learn/categories/release-notes/",
-  },
-  {
-    title: t("home.resources.blog"),
-    url: "https://labelstud.io/blog/",
-  },
-  {
-    title: t("home.resources.slack"),
-    url: "https://slack.labelstud.io",
-  },
-];
 
 const actions = [
   {
@@ -133,7 +109,7 @@ export const HomePage: Page = () => {
 
   return (
     <main className="p-6">
-      <div className="grid grid-cols-[minmax(0,1fr)_450px] gap-6">
+      <div className="flex flex-col gap-6">
         <section className="flex flex-col gap-6">
           <div className="flex flex-col gap-1">
             <Typography variant="headline" size="small">
@@ -205,32 +181,6 @@ export const HomePage: Page = () => {
               </div>
             ) : null}
           </SimpleCard>
-        </section>
-        <section className="flex flex-col gap-6">
-          <HeidiTips collection="projectSettings" />
-          <SimpleCard title={t("pages.pages.home.home_page.resources")} description={t("pages.pages.home.home_page.learn_explore_and_get_help")} data-testid="resources-card">
-            <ul>
-              {resources.map((link) => {
-                return (
-                  <li key={link.title}>
-                    <a
-                      href={link.url}
-                      className="py-2 px-1 flex justify-between items-center text-neutral-content"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {link.title}
-                      <IconExternal className="text-primary-icon" />
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          </SimpleCard>
-          <div className="flex gap-2 items-center">
-            <IconHumanSignal />
-            <span className="text-neutral-content-subtle">{t("pages.pages.home.home_page.label_studio_version_community")}</span>
-          </div>
         </section>
       </div>
       {modalIsOpen && <CreateProject onClose={() => setModalIsOpen(false)} />}

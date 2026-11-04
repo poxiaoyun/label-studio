@@ -142,7 +142,11 @@ const OutlinerTreeComponent: FC<OutlinerTreeComponentProps> = observer(({ region
                 <div className={cn("filters-info").toClassName()}>
                   <IconInfo width={21} height={20} />
                   <div className={cn("filters-info").elem("filters-title").toClassName()}>
-                    {t("lsf.side_panels.outliner_panel.outliner_panel.there")} {hiddenRegions === 1 ? "is" : "are"} {hiddenRegions} hidden region{hiddenRegions > 1 && "s"}
+                    {hiddenRegions === 1
+                      ? t("lsf.side_panels.outliner_panel.outliner_panel.one_hidden_region")
+                      : t("lsf.side_panels.outliner_panel.outliner_panel.n_hidden_regions", {
+                          count: hiddenRegions,
+                        })}
                   </div>
                   <div className={cn("filters-info").elem("filters-description").toClassName()}>
                     {t("lsf.side_panels.outliner_panel.outliner_panel.adjust_or_remove_filters_to")}
