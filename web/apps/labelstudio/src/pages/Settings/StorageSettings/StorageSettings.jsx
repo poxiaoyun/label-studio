@@ -2,8 +2,7 @@ import {
   Button,
   EmptyState,
   IconCloudCustom,
-  IconCloudProviderAzure,
-  IconCloudProviderGCS,
+  IconCloudProviderMoha,
   IconCloudProviderRedis,
   IconCloudProviderS3,
   IconExternal,
@@ -115,19 +114,14 @@ export const StorageSettings = () => {
             description={t("pages.settings.storage_settings.storage_settings.use_cloud_or_database_storage_2")}
             additionalContent={
               <div className="flex items-center justify-center gap-base" data-testid="dm-storage-provider-icons">
+                <Tooltip title="Moha">
+                  <div className="flex items-center justify-center p-2" aria-label="Moha">
+                    <IconCloudProviderMoha width={32} height={32} className="text-neutral-content-subtler" />
+                  </div>
+                </Tooltip>
                 <Tooltip title={t("pages.settings.storage_settings.storage_settings.amazon_s3")}>
                   <div className="flex items-center justify-center p-2" aria-label={t("pages.settings.storage_settings.storage_settings.amazon_s3")}>
                     <IconCloudProviderS3 width={32} height={32} className="text-neutral-content-subtler" />
-                  </div>
-                </Tooltip>
-                <Tooltip title={t("pages.settings.storage_settings.storage_settings.google_cloud_storage")}>
-                  <div className="flex items-center justify-center p-2" aria-label={t("pages.settings.storage_settings.storage_settings.google_cloud_storage")}>
-                    <IconCloudProviderGCS width={32} height={32} className="text-neutral-content-subtler" />
-                  </div>
-                </Tooltip>
-                <Tooltip title={t("pages.settings.storage_settings.storage_settings.azure_blob_storage")}>
-                  <div className="flex items-center justify-center p-2" aria-label={t("pages.settings.storage_settings.storage_settings.azure_blob_storage")}>
-                    <IconCloudProviderAzure width={32} height={32} className="text-neutral-content-subtler" />
                   </div>
                 </Tooltip>
                 <Tooltip title={t("pages.settings.storage_settings.storage_settings.redis_storage")}>

@@ -140,8 +140,13 @@ node_modules/.bin/nx run-many -t build -p editor datamanager --configuration=pro
 | 注册页 | 删除 `how_find_us`、补充说明输入、newsletter 勾选（后端字段本就是 `required=False`） |
 | 推广卡片 | `HeidiTips` 用 `SHOW_ENTERPRISE_TIPS = false` 关掉，组件保留 |
 | 数据管理器 | 「Label All Tasks」等拼接文案改为整句词条 |
+| 云存储空状态 | 提供商图标行改为「Moha、S3、Redis」，去掉 Google Cloud 与 Azure；Moha 排第一。改的是 `StorageSettings.jsx` 与 DM 的 `EmptyState.tsx` 两处 |
+| 连接存储弹窗 | 默认选中的 provider 由 `s3` 改为 `moha`：`useStorageForm.ts` 的初始态与 `resetForm`、`atoms.ts` 的初值。源存储与目标存储共用同一套表单 |
 
 **保留但未生效**：设置页的「不确定性采样」带 enterprise 徽标，位于 feature flag `FF_LSDV_E_297` 之后且 `disabled`，未处理。
+
+> 默认 provider 改在 `useStorageForm` / `atoms`，而**不要**动
+> `StorageProviderForm/index.tsx`（在 selfcheck 的 `FORBIDDEN_UPSTREAM_EDITS` 里）。
 
 ---
 
@@ -200,6 +205,9 @@ Helm Chart 安装时用它一次性建好账号、工作区、项目、标注配
 句对/NLI、问答对、文本分类，以及认不出时的通用界面（展示前 4 个文本字段 + 评审选项）。
 字段名走同义词表（`instruction` / `prompt` / `question` / `query`…）。
 
+**没配数据源时**：装出来是空平台，标注配置退化为一段占位
+`<View><Text name="text" value="$text"/></View>` 并打日志，等接入数据源后由用户在项目设置里改。
+
 **不支持的形态**：ShareGPT 的 `conversations: [{from, value}]` —— Label Studio 的 Chat 控件只认
 `role`/`content`，模板层无法转换，只能报错提示。
 
@@ -226,6 +234,7 @@ Helm Chart 安装时用它一次性建好账号、工作区、项目、标注配
 | 2026-11-04 | `5bb3168` `c672528` | 新增 `bootstrap_project` 与镜像 workflow；修幂等与 token 认证 |
 | 2026-11-04 | `ab18f15` `600ff6a` | ACR 拒绝 attestation 空层（`provenance: false`）；修存储参数重复 + 支持 `--label-config` |
 | 2026-11-04 | `26673d6` `f1cbb8e` | 标注配置自动推断；数据源支持 `组织/数据集` |
+| 2026-11-04 | 本次 | 云存储空状态图标行改为 Moha/S3/Redis；连接源/目标存储默认选中 Moha；无数据源时用占位标注配置而非报错 |
 
 ---
 

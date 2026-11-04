@@ -5,9 +5,8 @@ import {
   IconCheck,
   IconSearch,
   IconInbox,
+  IconCloudProviderMoha,
   IconCloudProviderS3,
-  IconCloudProviderGCS,
-  IconCloudProviderAzure,
   IconCloudProviderRedis,
 } from "@humansignal/icons";
 import { Button, IconExternal, Typography, Tooltip } from "@humansignal/ui";
@@ -138,19 +137,14 @@ const renderEmptyStateLayout = ({
 // Storage provider icons component
 const StorageProviderIcons = () => (
   <div className="flex items-center justify-center gap-base mb-wide" data-testid="dm-storage-provider-icons">
+    <Tooltip title="Moha">
+      <div className="flex items-center justify-center p-2" aria-label="Moha">
+        <IconCloudProviderMoha width={32} height={32} className="text-neutral-content-subtler" />
+      </div>
+    </Tooltip>
     <Tooltip title={t("dm.data_view.empty_state.empty_state.amazon_s3")}>
       <div className="flex items-center justify-center p-2" aria-label={t("dm.data_view.empty_state.empty_state.amazon_s3")}>
         <IconCloudProviderS3 width={32} height={32} className="text-neutral-content-subtler" />
-      </div>
-    </Tooltip>
-    <Tooltip title={t("dm.data_view.empty_state.empty_state.google_cloud_storage")}>
-      <div className="flex items-center justify-center p-2" aria-label={t("dm.data_view.empty_state.empty_state.google_cloud_storage")}>
-        <IconCloudProviderGCS width={32} height={32} className="text-neutral-content-subtler" />
-      </div>
-    </Tooltip>
-    <Tooltip title={t("dm.data_view.empty_state.empty_state.azure_blob_storage")}>
-      <div className="flex items-center justify-center p-2" aria-label={t("dm.data_view.empty_state.empty_state.azure_blob_storage")}>
-        <IconCloudProviderAzure width={32} height={32} className="text-neutral-content-subtler" />
       </div>
     </Tooltip>
     <Tooltip title={t("dm.data_view.empty_state.empty_state.redis_storage")}>

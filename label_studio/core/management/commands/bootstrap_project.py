@@ -295,10 +295,13 @@ class Command(BaseCommand):
         """Read one record from the source repository and pick a config by field shape."""
         endpoint, organization, dataset = self._moha_target(options)
         if not endpoint or not dataset or not options['moha_token']:
-            raise CommandError(
-                'no template given and the Moha source is not configured; '
-                'set --template, --label-config, or the storage parameters so it can be inferred'
-            )
+            # Nothing to infer from: the instance is being installed before a data
+            # source exists. Create the project with a minimal config instead of
+            # failing the whole bootstrap; the owner can change it in project settings.
+            config = '<View><Text name="text" value="$text"/></View>'
+            Project.validate_label_config(config)
+            self._log('labeling config: placeholder (no data source configured)')
+            return config
 
         client = MohaClient(
             MohaConfig(

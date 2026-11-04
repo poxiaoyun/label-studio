@@ -20,7 +20,8 @@ export const useStorageForm = ({ project, isEditMode, steps, storage, defaultVal
     currentStep: 0,
     formData: {
       project,
-      provider: "s3",
+      // [moha] Moha is the only provider this build ships for; keep the form opening on it
+      provider: "moha",
       title: "",
       use_blob_urls: false,
       recursive_scan: false,
@@ -392,7 +393,8 @@ export const useStorageForm = ({ project, isEditMode, steps, storage, defaultVal
       currentStep: 0,
       formData: {
         project,
-        provider: "s3",
+        // [moha] Moha is the only provider this build ships for; keep the form opening on it
+        provider: "moha",
         title: "",
         use_blob_urls: false,
         recursive_scan: false,
