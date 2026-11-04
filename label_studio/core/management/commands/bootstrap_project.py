@@ -52,6 +52,11 @@ class Command(BaseCommand):
             default=env('BOOTSTRAP_TEMPLATE'),
             help='Built-in labeling template, e.g. natural-language-processing/question-answering.',
         )
+        parser.add_argument(
+            '--label-config',
+            default=env('BOOTSTRAP_LABEL_CONFIG'),
+            help='Labeling config XML; takes precedence over --template.',
+        )
         parser.add_argument('--moha-endpoint', default=env('BOOTSTRAP_MOHA_ENDPOINT'), help='Moha base URL.')
         parser.add_argument('--moha-token', default=env('BOOTSTRAP_MOHA_TOKEN'), help='Moha access token.')
         parser.add_argument('--moha-organization', default=env('BOOTSTRAP_MOHA_ORGANIZATION'), help='Moha organization.')
@@ -72,7 +77,7 @@ class Command(BaseCommand):
         if not email:
             raise CommandError('--email or BOOTSTRAP_USER_EMAIL is required')
 
-        label_config = self._label_config(options['template'])
+        label_config = self._label_config(options)
 
         try:
             with transaction.atomic():
@@ -238,7 +243,6 @@ class Command(BaseCommand):
 
         storage = MohaImportStorage(
             title='Moha',
-            project=project,
             moha_token=token,
             revision=options['moha_revision'] or '',
             prefix=options['moha_prefix'] or '',
@@ -254,9 +258,19 @@ class Command(BaseCommand):
 
     # ---------------------------------------------------------------- helpers
 
-    def _label_config(self, name):
+    def _label_config(self, options):
+        inline = (options['label_config'] or '').strip()
+        if inline:
+            try:
+                Project.validate_label_config(inline)
+            except Exception as exc:
+                raise CommandError(f'inline labeling config is invalid: {exc}') from exc
+            self._log('labeling config: inline, %d characters', len(inline))
+            return inline
+
+        name = options['template']
         if not name:
-            raise CommandError('--template or BOOTSTRAP_TEMPLATE is required')
+            raise CommandError('--template, --label-config, BOOTSTRAP_TEMPLATE or BOOTSTRAP_LABEL_CONFIG is required')
 
         root = find_dir('annotation_templates')
         candidate = os.path.realpath(os.path.join(root, name))
