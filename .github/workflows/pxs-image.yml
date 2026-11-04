@@ -1,0 +1,67 @@
+# [pxs] Build and publish the fork image.
+#
+# The chart defaults to a fixed tag, so the tag has to be stable per build:
+# `1.23.2-pxs.<run_number>` is the one to pin in values.yaml, and the sha tag
+# exists so a running instance can be traced back to an exact commit.
+#
+# Required repository secrets: ACR_USERNAME, ACR_PASSWORD (write access to
+# registry.cn-hangzhou.aliyuncs.com/xiaoshiai).
+
+name: pxs image
+
+on:
+  push:
+    branches:
+      - 1.23.2-pxs
+    paths:
+      - Dockerfile
+      - pyproject.toml
+      - poetry.lock
+      - label_studio/**
+      - web/**
+      - .github/workflows/pxs-image.yml
+  workflow_dispatch:
+
+concurrency:
+  group: pxs-image-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  REGISTRY: registry.cn-hangzhou.aliyuncs.com
+  IMAGE: registry.cn-hangzhou.aliyuncs.com/xiaoshiai/label-studio-pxs
+
+jobs:
+  build:
+    # The k8s01-cd runner pool already carries docker + buildx.
+    runs-on: [self-hosted, Linux, X64, k8s01-cd]
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to the registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.IMAGE }}:1.23.2-pxs.${{ github.run_number }}
+            ${{ env.IMAGE }}:1.23.2-pxs.sha-${{ github.sha }}
+          cache-from: type=registry,ref=${{ env.IMAGE }}:buildcache
+          cache-to: type=registry,ref=${{ env.IMAGE }}:buildcache,mode=max
+
+      - name: Summary
+        run: |
+          echo "### pxs image published" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "- \`${{ env.IMAGE }}:1.23.2-pxs.${{ github.run_number }}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- \`${{ env.IMAGE }}:1.23.2-pxs.sha-${{ github.sha }}\`" >> "$GITHUB_STEP_SUMMARY"
