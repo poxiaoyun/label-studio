@@ -104,7 +104,7 @@ export function PersonalAccessTokenDescription() {
       {!window.APP_SETTINGS?.whitelabel_is_active && (
         <>
           {" "}
-          See{" "}
+          {t("account.token.see")}{" "}
           <a href="https://labelstud.io/guide/api.html" target="_blank" rel="noreferrer" className="inline-flex gap-1">
             {t("appcommon.account_settings.sections.personal_access_token.docs")}{" "}
             <span>

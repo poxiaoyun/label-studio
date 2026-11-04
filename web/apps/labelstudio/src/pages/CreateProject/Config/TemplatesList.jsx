@@ -68,13 +68,24 @@ export const TemplatesList = ({ selectedGroup, selectedRecipe, onCustomTemplate,
     fetchData();
   }, []);
 
-  const selected = selectedGroup || groups[0];
+  // [pxs] the picker only offers templates this build can actually use:
+  // enterprise-only entries would just render disabled
+  const visibleTemplates = React.useMemo(
+    () => (templates || []).filter((recipe) => recipe.type !== "enterprise"),
+    [templates],
+  );
+  const visibleGroups = React.useMemo(
+    () => groups.filter((group) => visibleTemplates.some((recipe) => recipe.group === group)),
+    [groups, visibleTemplates],
+  );
+
+  const selected = selectedGroup && visibleGroups.includes(selectedGroup) ? selectedGroup : visibleGroups[0];
 
   return (
     <div className={listClass}>
       <aside className={listClass.elem("sidebar").toClassName()}>
         <ul>
-          {groups.map((group) => (
+          {visibleGroups.map((group) => (
             <li
               key={group}
               onClick={() => onSelectGroup(group)}
@@ -106,7 +117,7 @@ export const TemplatesList = ({ selectedGroup, selectedRecipe, onCustomTemplate,
       <main>
         {!templates && <Spinner style={{ width: "100%", height: 200 }} />}
         <TemplatesInGroup
-          templates={templates || []}
+          templates={visibleTemplates}
           group={selected}
           onSelectRecipe={onSelectRecipe}
           isEdition={isEdition}

@@ -2,6 +2,7 @@ import { useCallback, useMemo, useRef, useState } from "react";
 import { Checkbox, Spinner } from "@humansignal/ui";
 import { useAuth } from "@humansignal/core/providers/AuthProvider";
 import { ff, useAPI } from "@humansignal/core";
+import { t } from "@humansignal/i18n";
 
 /**
  * FIXME: This is legacy imports. We're not supposed to use such statements
@@ -68,8 +69,8 @@ export const EmailPreferences = () => {
 
   const message = useMemo(() => {
     return window.APP_SETTINGS?.whitelabel_is_active
-      ? "Subscribe for news and tips"
-      : "Subscribe to HumanSignal news and tips from Heidi";
+      ? t("account.email.subscribe_news")
+      : t("account.email.subscribe_heidi");
   }, []);
 
   return (

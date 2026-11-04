@@ -112,10 +112,10 @@ export function PersonalJWTToken() {
   const revoke = useCallback(
     async (token: string) => {
       confirm({
-        title: "Revoke Token",
-        body: `Are you sure you want to delete this access token? Any application using this token will need a new token to be able to access ${
-          window?.APP_SETTINGS?.app_name || "Label Studio"
-        }`,
+        title: t("account.token.revoke_title"),
+        body: t("account.token.revoke_body", {
+          app: window?.APP_SETTINGS?.app_name || "Label Studio",
+        }),
         okText: "Revoke",
         buttonLook: "negative",
         onOk: async () => {
@@ -135,7 +135,7 @@ export function PersonalJWTToken() {
     setDialogOpened(true);
     modal({
       visible: true,
-      title: "New Auth Token",
+      title: t("account.token.new_title"),
       style: { width: 680 },
       body: CreateTokenForm,
       closeOnClickOutside: false,
@@ -150,7 +150,7 @@ export function PersonalJWTToken() {
     <div className={styles.personalAccessToken}>
       <div className={tokensListClassName}>
         {tokens.isLoading ? (
-          <div>loading...</div>
+          <div>{t("account.token.loading")}</div>
         ) : tokens.isSuccess && tokens.data && tokens.data.length ? (
           <div>
             <Label text={t("appcommon.account_settings.sections.personal_jwttoken.access_token")} className={styles.label} />

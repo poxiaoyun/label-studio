@@ -9,6 +9,7 @@ import clsx from "clsx";
 import { useAtomValue } from "jotai";
 import { settingsAtom } from "./atoms";
 import { useAuth } from "@humansignal/core/providers/AuthProvider";
+import { t } from "@humansignal/i18n";
 
 /**
  * FIXME: This is legacy imports. We're not supposed to use such statements
@@ -35,11 +36,11 @@ const AccountSettingsSection = () => {
 
   // Update page title to reflect the current section
   const pageTitleText = useMemo(() => {
-    if (!currentSection) return "My Account";
+    if (!currentSection) return t("account.title");
 
     // If title is a string, use it directly
     if (typeof currentSection.title === "string") {
-      return createTitleFromSegments([currentSection.title, "My Account"]);
+      return createTitleFromSegments([currentSection.title, t("account.title")]);
     }
 
     // For non-string titles (like JSX elements), derive from the section ID
@@ -48,7 +49,7 @@ const AccountSettingsSection = () => {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
 
-    return createTitleFromSegments([titleFromId, "My Account"]);
+    return createTitleFromSegments([titleFromId, t("account.title")]);
   }, [currentSection]);
 
   useUpdatePageTitle(pageTitleText);
@@ -123,12 +124,12 @@ const AccountSettingsPage = () => {
   );
 };
 
-AccountSettingsPage.title = "My Account";
+AccountSettingsPage.title = t("account.title");
 AccountSettingsPage.path = "/user/account";
 AccountSettingsPage.exact = false;
 AccountSettingsPage.routes = () => [
   {
-    title: () => "My Account",
+    title: () => t("account.title"),
     path: "/account",
     component: () => <Redirect to={AccountSettingsPage.path} />,
   },

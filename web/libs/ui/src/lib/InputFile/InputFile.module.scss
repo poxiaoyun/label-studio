@@ -1,10 +1,22 @@
 .input {
-  border: 0 none;
+  position: absolute;
+  width: 1px;
+  height: 1px;
   padding: 0;
-  display: inline;
-  width: 100%;
+  border: 0 none;
+  opacity: 0;
+  pointer-events: none;
   cursor: pointer;
   outline: none;
+}
+
+.fileName {
+  margin-left: var(--spacing-tight);
+  color: var(--color-neutral-content-subtler);
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .input::file-selector-button {
@@ -26,6 +38,7 @@
 }
 
 .inputWrapper {
+  position: relative;
   display: flex;
   width: auto;
   height: 42px;

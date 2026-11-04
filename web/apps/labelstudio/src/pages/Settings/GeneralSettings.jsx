@@ -1,4 +1,4 @@
-import { Badge, Button, Select, Typography, Tooltip, EnterpriseBadge } from "@humansignal/ui";
+import { Badge, Button, Tooltip } from "@humansignal/ui";
 import { useCallback, useContext } from "react";
 import { IconSpark } from "@humansignal/icons";
 import { Form, Input, TextArea } from "../../components/Form";
@@ -34,32 +34,6 @@ export const GeneralSettings = () => {
               <Input name="title" label={t("pages.pages.settings.general_settings.project_name")} />
 
               <TextArea name="description" label={t("pages.pages.settings.general_settings.description")} style={{ minHeight: 128 }} />
-              {isFF(FF_LSDV_E_297) && (
-                <div className={cn("workspace-placeholder").toClassName()}>
-                  <div className={cn("workspace-placeholder").elem("badge-wrapper").toClassName()}>
-                    <div className={cn("workspace-placeholder").elem("title").toClassName()}>{t("pages.pages.settings.general_settings.workspace")}</div>
-                    <EnterpriseBadge size="small" className="ml-2" />
-                  </div>
-                  <Select placeholder={t("pages.pages.settings.general_settings.select_an_option")} disabled options={[]} />
-                  <Typography size="small" className="my-tight">
-                    {t("pages.pages.settings.general_settings.simplify_project_management_by_organizing")}{" "}
-                    <a
-                      target="_blank"
-                      href={createURL(
-                        "https://docs.humansignal.com/guide/manage_projects#Create-workspaces-to-organize-projects",
-                        {
-                          experiment: "project_settings_tip",
-                          treatment: "simplify_project_management",
-                        },
-                      )}
-                      rel="noreferrer"
-                      className="underline hover:no-underline"
-                    >
-                      {t("pages.pages.settings.general_settings.learn_more")}
-                    </a>
-                  </Typography>
-                </div>
-              )}
               <RadioGroup name="color" label={t("pages.pages.settings.general_settings.color")} size="large" labelProps={{ size: "large" }}>
                 {colors.map((color) => (
                   <RadioGroup.Button key={color} value={color}>
@@ -73,7 +47,7 @@ export const GeneralSettings = () => {
                   <RadioGroup.Button
                     key={value}
                     value={`${value} sampling`}
-                    label={`${label} sampling`}
+                    label={t("settings.general.sampling_option", { label })}
                     description={description}
                   />
                 ))}
