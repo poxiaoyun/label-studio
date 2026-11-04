@@ -53,6 +53,9 @@ jobs:
         with:
           context: .
           push: true
+          # ACR rejects the empty OCI manifest buildx adds for attestations
+          provenance: false
+          sbom: false
           tags: |
             ${{ env.IMAGE }}:1.23.2-pxs.${{ github.run_number }}
             ${{ env.IMAGE }}:1.23.2-pxs.sha-${{ github.sha }}
