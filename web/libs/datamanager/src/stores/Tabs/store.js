@@ -9,6 +9,7 @@ import { TabFilterType } from "./tab_filter_type";
 import { TabHiddenColumns } from "./tab_hidden_columns";
 import { serializeJsonForUrl, deserializeJsonFromUrl } from "@humansignal/core";
 import { isEmpty } from "../../utils/helpers";
+import { t } from "@humansignal/i18n";
 
 const storeValue = (name, value) => {
   window.localStorage.setItem(name, value);
@@ -194,7 +195,7 @@ export const TabStore = types
         ...(existingTab ?? viewSnapshot ?? {}),
       };
       const lastView = self.views[self.views.length - 1];
-      const newTitle = snapshot.title ?? `New Tab ${self.views.length + 1}`;
+      const newTitle = snapshot.title ?? t("dm.tabs.new_tab", { n: self.views.length + 1 });
       const newID = snapshot.id ?? (lastView?.id ? lastView.id + 1 : 0);
 
       const defaultHiddenColumns = self.defaultHidden
@@ -257,7 +258,7 @@ export const TabStore = types
     createDefaultView: flow(function* () {
       self.views.push({
         id: 0,
-        title: "Default",
+        title: t("dm.tabs.default"),
         hiddenColumns: self.defaultHidden,
       });
 

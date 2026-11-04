@@ -3,6 +3,7 @@ import { inject, observer } from "mobx-react";
 import React from "react";
 import { cn } from "../../utils/bem";
 import { Menu } from "./Menu/Menu";
+import { t } from "@humansignal/i18n";
 
 const injector = inject(({ store }) => {
   return {
@@ -39,7 +40,7 @@ const FieldsMenu = observer(({ columns, WrapperComponent, onClick, onReset, sele
         MenuItem(
           {
             key: "none",
-            title: resetTitle ?? "Default",
+            title: resetTitle ?? t("dm.toolbar.default"),
             wrap: false,
           },
           onReset,

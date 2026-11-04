@@ -262,7 +262,7 @@ export const ActionsButton = injector(
           aria-label={t("dm.data_manager.toolbar.actions_button.tasks_actions")}
           {...rest}
         >
-          {selectedCount > 0 ? `${selectedCount} ${recordTypeLabel}${selectedCount > 1 ? "s" : ""}` : "Actions"}
+          {selectedCount > 0 ? `${selectedCount} ${recordTypeLabel}${selectedCount > 1 ? "s" : ""}` : t("dm.toolbar.actions")}
         </Button>
       </Dropdown.Trigger>
     );

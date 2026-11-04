@@ -288,7 +288,7 @@ export const Table = observer(
           <FieldsButton
             className={cn("table-toolbar").elem("customize-button").toClassName()}
             wrapper={FieldsButton.Checkbox}
-            title={"Columns"}
+            title={t("dm.toolbar.columns")}
             size="small"
             trailingIcon={<Icon icon={IconChevronDown} />}
             tooltip={"Customize Columns"}

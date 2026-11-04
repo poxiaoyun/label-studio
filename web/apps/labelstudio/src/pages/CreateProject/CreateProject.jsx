@@ -1,4 +1,4 @@
-import { EnterpriseBadge, Select, Typography } from "@humansignal/ui";
+import { Typography } from "@humansignal/ui";
 import React from "react";
 import { useHistory } from "react-router";
 import { ToggleItems } from "../../components";
@@ -56,33 +56,6 @@ const ProjectName = ({ name, setName, onSaveName, onSubmit, error, description, 
           className="project-description w-full"
         />
       </div>
-      {isFF(FF_LSDV_E_297) && (
-        <div className="w-full flex flex-col gap-2">
-          <label>
-            {t("pages.pages.create_project.create_project.workspace")}
-            <EnterpriseBadge className="ml-tight" />
-          </label>
-          <Select placeholder={t("pages.pages.create_project.create_project.select_an_option")} disabled options={[]} triggerClassName="!flex-1" />
-          <Typography size="small" className="mt-tight mb-wider">
-            {t("pages.pages.create_project.create_project.simplify_project_management_by_organizing")}{" "}
-            <a
-              href={createURL(
-                "https://docs.humansignal.com/guide/manage_projects#Create-workspaces-to-organize-projects",
-                {
-                  experiment: "project_creation_dropdown",
-                  treatment: "simplify_project_management",
-                },
-              )}
-              target="_blank"
-              rel="noreferrer"
-              className="underline hover:no-underline"
-            >
-              {t("pages.pages.create_project.create_project.learn_more")}
-            </a>
-          </Typography>
-          <HeidiTips collection="projectCreation" />
-        </div>
-      )}
     </form>
   );
 

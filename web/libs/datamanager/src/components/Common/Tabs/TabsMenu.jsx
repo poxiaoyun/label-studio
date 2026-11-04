@@ -7,20 +7,20 @@ export const TabsMenu = ({ onClick, editable = true, closable = true, clonable =
     () => [
       {
         key: "edit",
-        title: "Rename",
+        title: t("dm.tabs.rename"),
         enabled: editable && !virtual,
         action: () => onClick("edit"),
       },
       {
         key: "duplicate",
-        title: "Duplicate",
+        title: t("dm.tabs.duplicate"),
         enabled: !virtual && clonable,
         action: () => onClick("duplicate"),
         willLeave: true,
       },
       {
         key: "save",
-        title: "Save",
+        title: t("dm.tabs.save"),
         enabled: virtual,
         action: () => onClick("save"),
         willLeave: true,

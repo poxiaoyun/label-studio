@@ -104,7 +104,8 @@ const TabsSwitch = switchInjector(
                 <TabsItem
                   key={tab.key}
                   tab={tab.key}
-                  title={tab.title}
+                  // [pxs] views created by older builds are stored as "Default"
+                  title={t(tab.title)}
                   onFinishEditing={(title) => {
                     tab.setTitle(title);
                     tab.save();

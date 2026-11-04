@@ -85,7 +85,7 @@ export const instruments = {
       <FieldsButton
         wrapper={FieldsButton.Checkbox}
         trailingIcon={<Icon {...iconProps} />}
-        title={"Columns"}
+        title={t("dm.toolbar.columns")}
         size={size}
         style={style}
         openUpwardForShortViewport={false}

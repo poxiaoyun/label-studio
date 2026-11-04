@@ -1,17 +1,13 @@
 import { createContext, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { StaticContent } from "../../app/StaticContent/StaticContent";
 import {
-  IconBook,
   IconFolder,
   IconHome,
   IconHotkeys,
   IconPeople,
   IconPersonInCircle,
   IconPin,
-  IconTerminal,
   IconDoor,
-  IconGithub,
-  IconSlack,
 } from "@humansignal/icons";
 import { LSLogo } from "../../assets/images";
 import { Button, Userpic, ThemeToggle } from "@humansignal/ui";
@@ -25,7 +21,7 @@ import { Dropdown } from "@humansignal/ui";
 import { Hamburger } from "../Hamburger/Hamburger";
 import { LanguageSwitcher } from "../LanguageSwitcher/LanguageSwitcher"; // [pxs-i18n]
 import { Menu } from "../Menu/Menu";
-import { VersionNotifier, VersionProvider } from "../VersionNotifier/VersionNotifier";
+import { VersionProvider } from "../VersionNotifier/VersionNotifier";
 import "./Menubar.scss";
 import "./MenuContent.scss";
 import "./MenuSidebar.scss";
@@ -189,7 +185,7 @@ export const Menubar = ({ enabled, defaultOpened, defaultPinned, children, onSid
               <Menu>
                 <Menu.Item
                   icon={<IconPersonInCircle />}
-                  label="Account & Settings"
+                  label={t("account.menu_label")}
                   href={pages.AccountSettingsPage.path}
                 />
                 {/* <Menu.Item label="Dark Mode"/> */}
@@ -201,7 +197,7 @@ export const Menubar = ({ enabled, defaultOpened, defaultPinned, children, onSid
                       className={cn("newsletter-menu-item").toClassName()}
                       href={pages.AccountSettingsPage.path}
                     >
-                      <span>Please check new notification settings in the Account & Settings page</span>
+                      <span>{t("account.menu_notice")}</span>
                       <span className={cn("newsletter-menu-badge").toClassName()} />
                     </Menu.Item>
                   </>
@@ -235,41 +231,13 @@ export const Menubar = ({ enabled, defaultOpened, defaultPinned, children, onSid
 
                 <Menu.Spacer />
 
-                <VersionNotifier showNewVersion />
-
-                <Menu.Item
-                  label={t("pages.components.menubar.menubar.api")}
-                  href="https://api.labelstud.io/api-reference/introduction/getting-started"
-                  icon={<IconTerminal />}
-                  target="_blank"
-                />
-                <Menu.Item label={t("pages.components.menubar.menubar.docs")} href="https://labelstud.io/guide" icon={<IconBook />} target="_blank" />
-                <Menu.Item
-                  label={t("pages.components.menubar.menubar.git_hub")}
-                  href="https://github.com/HumanSignal/label-studio"
-                  icon={<IconGithub />}
-                  target="_blank"
-                  rel="noreferrer"
-                />
-                <Menu.Item
-                  label={t("pages.components.menubar.menubar.slack_community")}
-                  href="https://slack.labelstud.io/?source=product-menu"
-                  icon={<IconSlack />}
-                  target="_blank"
-                  rel="noreferrer"
-                />
-
-                <VersionNotifier showCurrentVersion />
-
-                <Menu.Divider />
-
                 <Menu.Item
                   icon={<IconPin />}
                   className={sidebarClass.elem("pin").toClassName()}
                   onClick={sidebarPin}
                   active={sidebarPinned}
                 >
-                  {sidebarPinned ? "Unpin menu" : "Pin menu"}
+                  {sidebarPinned ? t("menu.unpin") : t("menu.pin")}
                 </Menu.Item>
               </Menu>
             </Dropdown>
