@@ -77,8 +77,8 @@ class Command(BaseCommand):
         try:
             with transaction.atomic():
                 user = self._ensure_user(options)
-                self._ensure_api_token(options, user)
                 organization = self._ensure_organization(options, user)
+                self._ensure_api_token(options, user)
                 project = self._ensure_project(options, organization, user, label_config)
                 self._ensure_storage(options, project)
                 if options['dry_run']:
@@ -151,12 +151,17 @@ class Command(BaseCommand):
     def _ensure_organization(self, options, user):
         title = options['org_title'] or 'Label Studio'
         organization = Organization.objects.filter(title=title).first()
+        if organization is None:
+            # ``created_by`` is a one-to-one field: when the title changed between
+            # deploys, reuse the workspace this account already owns instead of
+            # failing on a second create.
+            organization = Organization.objects.filter(created_by=user).first()
 
         if organization is None:
             organization = Organization.create_organization(created_by=user, title=title)
             self._log('workspace %s: created', title)
         else:
-            self._log('workspace %s: exists, skipped', title)
+            self._log('workspace %s: exists as "%s", skipped', title, organization.title)
 
         if not organization.has_user(user):
             organization.add_user(user)
@@ -166,7 +171,18 @@ class Command(BaseCommand):
             user.active_organization = organization
             user.save(update_fields=['active_organization'])
 
+        self._allow_legacy_tokens(organization)
         return organization
+
+    def _allow_legacy_tokens(self, organization):
+        """Keep DRF token auth usable: the install-time sync job authenticates with one."""
+        from jwt_auth.models import JWTSettings
+
+        jwt_settings, _ = JWTSettings.objects.get_or_create(organization=organization)
+        if not jwt_settings.legacy_api_tokens_enabled:
+            jwt_settings.legacy_api_tokens_enabled = True
+            jwt_settings.save(update_fields=['legacy_api_tokens_enabled'])
+            self._log('workspace %s: legacy API tokens enabled', organization.title)
 
     def _ensure_project(self, options, organization, user, label_config):
         title = options['project_title']
